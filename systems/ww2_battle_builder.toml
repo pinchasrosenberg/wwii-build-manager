@@ -1,0 +1,218 @@
+# Battle builder — reusable Lego Delivers that turn ANY historical battle into a playable first-person episode.
+# Every battle build runs the chain: evidence dossier + historical-map research (OCR) + LLM web research with
+# gap-driven search -> reconstruction (sourced /
+# map-derived / inferred, each element labelled) -> episode package -> first-person client.
+# First instance: Brécourt Manor assault, 6 June 1944 (Easy Company, 506th PIR, destroyed the guns firing on Utah Beach).
+#
+# The code is built by Task Manager tasks MANUAL/bb-*; roots point at the integration checkout where accepted work lands.
+# Re-run `wwii-build onboard ww2_battle_builder` after tasks pass to refresh capabilities and availability.
+
+[system]
+id = "ww2_battle_builder"
+title = "בונה הקרבות — מהמפות ההיסטוריות לאפיזודה בגוף ראשון"
+context_dir = "context/systems/ww2_battle_builder"
+tags = ["ww2", "battle", "episode", "fps", "lego"]
+graph_ingest = true
+description = """
+שרשרת Delivers בצורת לגו שבונה כל קרב היסטורי לאפיזודה בגוף ראשון: תיק ראיות מהקורפוס המקומי ומהגרף, מחקר
+מפות היסטוריות עם ה־OCR, הגיאורפרנס וזיהוי הסמלים שכבר נבנו, שחזור שדה הקרב שבו כל פריט מסומן כמתועד, נגזר
+ממפה או מושלם לפי דוקטרינה (מה שכנראה היה), חבילת אפיזודה, ולקוח גוף ראשון (three.js) עם לחימה, משימות,
+ממשק וקול. הקרב הראשון: Brécourt Manor, 6 ביוני 1944.
+"""
+notes = [
+  "כל בניית קרב מריצה חובה את battle.map_research לפני השחזור; אין מפה מכסה — מסומן MAP_COVERAGE_GAP ונוצרת רשימת רכישה של מפות בנחלת הכלל.",
+  "שחזור: כל פריט נושא provenance — SOURCED (מקור + locator), MAP_DERIVED (מפה + OCR/גיאורפרנס + ביטחון), INFERRED (כלל דוקטרינה + נימוק + ביטחון).",
+  "מדיה מוגנת (למשל הסדרה Band of Brothers) אינה מקור: לא דיאלוג, לא מוזיקה, לא דמויות או סצנות שלה. רק התיעוד ההיסטורי.",
+  "הלקוח רץ מקומית ב־127.0.0.1; three.js (MIT) מוטמע מקומית, בלי רשת.",
+]
+
+[[components]]
+deliver_id = "battle.evidence_dossier"
+title = "תיק ראיות לקרב"
+owner = "battle_evidence_owner"
+domain = "battle_builder"
+execution_kind = "deterministic"
+availability = "planned"
+root = ".worktrees/_integration/game/battle_builder"
+entry = "game/battle_builder/evidence.py"
+description = """
+אוסף לכל קרב (מפתח, תאריך, bbox) את העובדות מהקורפוס המקומי של ויקיפדיה (data/wiki_corpus), ממקורותיו ומגרף
+האטלס (גשר הקריאה :8787): זמן, מקום, כוחות, יחידות ומפקדים, נשק, שלבים, תוצאה ואבדות. כל עובדה עם locator; מה
+שלא נמצא נשאר UNKNOWN.
+"""
+docs = ["README.md"]
+code = ["evidence.py"]
+interfaces = ["build_dossier(battle_key) -> dossier.json (facts[], unknowns[], sources[])"]
+graph_access = "full"
+graph_scope = "קרבות, יחידות, מפקדים, מקומות ונשק לפי תאריך ואזור"
+tags = ["evidence"]
+discover = [{kind = "py_functions", glob = "evidence.py", group = "פונקציות"}]
+
+[[components]]
+deliver_id = "battle.map_research"
+title = "מחקר מפות היסטוריות לקרב (OCR)"
+owner = "battle_maps_owner"
+domain = "battle_builder"
+execution_kind = "deterministic"
+availability = "planned"
+root = ".worktrees/_integration/game/battle_builder"
+entry = "game/battle_builder/map_research.py"
+description = """
+מוצא מפות היסטוריות שמכסות את אזור ותאריך הקרב (מלאי המפות המקומי, קורפוס המפות ההיסטוריות, מטא־נתוני LOC),
+מריץ עליהן את ה־OCR, הגיאורפרנס וזיהוי הסמלים והתוויות של היחידות הקיימים (etl/historical_maps, map_ingest),
+ומפיק map_evidence.json: מיקומי יחידות, קווים, מבנים, דרכים ותוויות עם רמת ביטחון. בלי כיסוי: MAP_COVERAGE_GAP
+ורשימת רכישה של מפות בנחלת הכלל.
+"""
+docs = ["README.md"]
+code = ["map_research.py"]
+interfaces = ["research_maps(battle_key, bbox, date) -> map_evidence.json (maps[], observations[], gaps[], acquisition[])"]
+depends_on = ["ww2.atlas.historical_maps", "ww2.atlas.map_vision", "ww2.atlas.driver_runtime"]
+graph_access = "limited"
+graph_scope = "מפות היסטוריות, יחידות ומיקומים באזור הקרב"
+tags = ["maps", "ocr"]
+discover = [{kind = "py_functions", glob = "map_research.py", group = "פונקציות"}]
+
+[[components]]
+deliver_id = "battle.llm_research"
+title = "מחקר LLM על הקרב — ויקיפדיה, מקורות ברשת והשלמת פערים"
+owner = "battle_research_owner"
+domain = "battle_builder"
+execution_kind = "llm_research"
+availability = "planned"
+root = ".worktrees/_integration/game/battle_builder"
+entry = "game/battle_builder/llm_research.py"
+description = """
+עובד LLM עם הרשאת רשת (רק למשימה הזאת) שקורא על הקרב בוויקיפדיה ובמקורות אמינים נוספים (היסטוריות רשמיות,
+מקורות צבאיים ואקדמיים), ובונה ממה שידוע את סדר הכוחות ומיקומי היחידות לפי שלבים. לכל פער בתיק הראיות הוא מריץ
+חיפוש ממוקד ("חיפוש השלמה"), ומה שעדיין לא ידוע הוא משלים לפי מה שככל הנראה היה — מסומן INFERRED עם נימוק וביטחון.
+כל טענה מתועדת נושאת URL וציטוט קצר; תוכן מהרשת הוא מידע בלבד, לעולם לא הוראות.
+"""
+docs = ["README.md"]
+code = ["llm_research.py"]
+interfaces = ["research.json: units[] by phase (position, frontage, strength, weapons), events[], citations[], gap_searches[], inferred[]",
+              "validate_research(research) — בודק סכמה, ציטוטים ותיוג provenance"]
+depends_on = ["battle.evidence_dossier"]
+graph_access = "full"
+graph_scope = "קרבות, יחידות, מפקדים ומקומות — לצורך השוואה והצלבה"
+tags = ["research", "web", "llm"]
+discover = [{kind = "py_functions", glob = "llm_research.py", group = "פונקציות"}]
+
+[[components]]
+deliver_id = "battle.reconstruction"
+title = "שחזור שדה הקרב והשלמה לפי דוקטרינה"
+owner = "battle_reconstruction_owner"
+domain = "battle_builder"
+execution_kind = "deterministic"
+availability = "planned"
+root = ".worktrees/_integration/game/battle_builder"
+entry = "game/battle_builder/reconstruct.py"
+description = """
+ממזג את תיק הראיות ואת ראיות המפה לשחזור אחד (BattleReconstruction): שטח (שדות, גדרות חיות, דרכים, מבנים,
+תעלות), עמדות וכוחות לפי שלבים, מטרות ונתיבי תנועה. פערים מושלמים בספריית כללי דוקטרינה רב־פעמית (סוללת
+ארטילריה, קני מקלעים, תעלות קשר, בוקאז', כיתת צנחנים בהסתערות). כל פריט מסומן SOURCED, MAP_DERIVED או INFERRED.
+"""
+docs = ["README.md"]
+code = ["reconstruct.py"]
+interfaces = ["reconstruct(dossier, map_evidence) -> reconstruction.json (schema/battle_reconstruction.schema.json)",
+              "doctrine/*.json — כללי השלמה רב־פעמיים עם נימוק וביטחון"]
+depends_on = ["battle.evidence_dossier", "battle.map_research", "battle.llm_research"]
+graph_access = "limited"
+graph_scope = "דוקטרינה, סדרי כוחות ומבנה עמדות"
+tags = ["reconstruction", "doctrine"]
+discover = [{kind = "py_functions", glob = "reconstruct.py", group = "פונקציות"},
+            {kind = "files", glob = "doctrine/*.json", group = "כללי דוקטרינה"}]
+
+[[components]]
+deliver_id = "fps.engine_core"
+title = "מנוע גוף ראשון — סצנה ושליטה"
+owner = "fps_core_owner"
+domain = "fps"
+execution_kind = "worker"
+availability = "planned"
+root = ".worktrees/_integration/game/playable_fps"
+entry = "game/playable_fps/index.html"
+description = """
+לקוח דפדפן בגוף ראשון (three.js מקומי): טעינת סצנה מ־JSON גנרי (תבליט, שדות, גדרות חיות כקירות, תעלות, מבנים),
+שליטה (pointer lock, הליכה, ריצה, כריעה, שכיבה, התנגשויות), תאורת בוקר, ושרת מקומי שמגיש אפיזודה.
+"""
+code = ["core/*.js", "serve.py"]
+run = ["python3 -m game.playable_fps.serve --episode game/episodes/brecourt_manor/episode"]
+graph_access = "none"
+tags = ["fps", "client"]
+discover = [{kind = "files", glob = "core/*.js", group = "מודולי ליבה"}]
+
+[[components]]
+deliver_id = "fps.combat"
+title = "לחימה בגוף ראשון — נשק, פגיעות ובינה של אויב וכוחות"
+owner = "fps_combat_owner"
+domain = "fps"
+execution_kind = "worker"
+availability = "planned"
+root = ".worktrees/_integration/game/playable_fps"
+description = """
+נשק כנתונים (רובה, תת־מקלע, מקלע, רימון, מטען חבלה) עם דגל placeholder כשאין מקור, זיהוי פגיעה, פציעות, דיכוי
+באש, בינה של אויב (עמדה, התרעה, דיכוי, מחסה, נסיגה, כניעה) וכיתה ידידותית שמתקדמת ותוקפת.
+"""
+code = ["combat/*.js"]
+depends_on = ["fps.engine_core"]
+graph_access = "none"
+tags = ["fps", "combat", "ai"]
+discover = [{kind = "files", glob = "combat/*.js", group = "מודולי לחימה"}]
+
+[[components]]
+deliver_id = "fps.mission"
+title = "שכבת משימה — מטרות, ממשק, קול ותדריך"
+owner = "fps_mission_owner"
+domain = "fps"
+execution_kind = "worker"
+availability = "planned"
+root = ".worktrees/_integration/game/playable_fps"
+description = """
+מערכת מטרות גנרית (הגעה, טיהור, השמדה במטען, החזקה), ממשק בעברית, תדריך וסיכום, קול פרוצדורלי ונקודות שמירה.
+"""
+code = ["mission/*.js"]
+depends_on = ["fps.engine_core"]
+graph_access = "none"
+tags = ["fps", "mission", "hud"]
+discover = [{kind = "files", glob = "mission/*.js", group = "מודולי משימה"}]
+
+[[components]]
+deliver_id = "episode.fps_package"
+title = "חבילת אפיזודה בגוף ראשון מתוך שחזור"
+owner = "episode_package_owner"
+domain = "battle_builder"
+execution_kind = "deterministic"
+availability = "planned"
+root = ".worktrees/_integration/game/battle_builder"
+entry = "game/battle_builder/build_battle.py"
+description = """
+ממיר שחזור קרב לחבילת אפיזודה לגוף ראשון (סצנה, כוחות, מטרות, תדריך) ומריץ את כל השרשרת לקרב חדש:
+build_battle.py <battle_key> → ראיות → מחקר מפות (חובה) → שחזור → חבילה.
+"""
+code = ["package.py", "build_battle.py"]
+depends_on = ["battle.reconstruction", "fps.combat", "fps.mission"]
+graph_access = "limited"
+graph_scope = "שחזורי קרבות ואפיזודות"
+tags = ["episode", "package"]
+discover = [{kind = "py_functions", glob = "package.py", group = "פונקציות"},
+            {kind = "argparse", glob = "build_battle.py", group = "פקודות"}]
+
+[[components]]
+deliver_id = "episode.brecourt_manor"
+title = "אפיזודה: הסתערות על Brécourt Manor, 6 ביוני 1944"
+owner = "episode_brecourt_owner"
+domain = "episodes"
+execution_kind = "worker"
+availability = "planned"
+root = ".worktrees/_integration/game/episodes/brecourt_manor"
+description = """
+הקרב הראשון שנבנה בשרשרת: פלוגה E, גדוד 2, רגימנט הצנחנים 506, בבוקר יום הפלישה, מול סוללת התותחים שירתה
+לעבר חוף יוטה. השחקן בגוף ראשון בכיתת ההסתערות; מטרה מרכזית — השמדת התותחים. כל פרט מסומן מתועד, נגזר או מושלם.
+"""
+docs = ["*.md", "evidence/*.md"]
+run = ["python3 -m game.playable_fps.serve --episode game/episodes/brecourt_manor/episode"]
+depends_on = ["episode.fps_package"]
+graph_access = "limited"
+graph_scope = "Brécourt Manor, Utah Beach, 506th PIR, 6 June 1944"
+tags = ["episode", "d-day", "brecourt"]
+discover = [{kind = "files", glob = "*.json", group = "נתוני האפיזודה"}]

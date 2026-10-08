@@ -1,0 +1,417 @@
+# WW2 system manifest — everything built so far for the WWII atlas and simulation, as Delivers + RAG context.
+# Apply:  wwii-build onboard ww2_atlas        (idempotent; --dry-run to preview, --no-graph to skip graph ingest)
+# Format: see tools/build_manager/systems/README.md and _template.toml.
+#
+# Where a component exists both inside this repo and elsewhere, the root points at the copy that is developed
+# here (workers can only write inside the repo). External roots are knowledge/reference for workers.
+
+[system]
+id = "ww2_atlas"
+title = "אטלס וסימולציית מלחמת העולם השנייה"
+context_dir = "context/systems/ww2_atlas"
+tags = ["ww2", "atlas"]
+graph_ingest = false
+description = """
+כל מה שנבנה עד היום סביב מלחמת העולם השנייה: אתר המפה ההיסטורית (שלבים 0–8) ומפת ציר הזמן עם השכבות,
+צינור הנתונים הדטרמיניסטי שבונה את גרף Neo4j, גשר הגרף ושרתי ה־MCP, ה־Deliver Runtime שמרכיב תשובות
+מהגרף, ה־Driver Runtime לחילוץ מפות היסטוריות, שכבות הסביבה (מזג אוויר, שלג, תבליט, ניידות), כלי בניית
+השכבות, תוספי הצ'אט, העשרת ויקיפדיה ומסמכי האפיון. משחק הסימולציה עצמו מנוהל כמשימות B00–B09 ברישום.
+"""
+notes = [
+  "צינורות הנתונים דטרמיניסטיים: אפס קריאות למודלי שפה בצינור; הרצה חוזרת על אותם קלטים נותנת אותו פלט.",
+  "עובדה היסטורית נכנסת רק דרך משימת ראיות; אין להמציא נתונים חסרים — לא ידוע נשאר לא ידוע.",
+  "הגרף הציבורי נגיש רק דרך ה־API לקריאה בלבד (wwii-atlas/api); אין חיבור ישיר למסד נתונים.",
+]
+
+[[components]]
+deliver_id = "ww2.atlas.web_map"
+title = "אתר מפת האטלס (שלבים 0–8)"
+owner = "atlas_map_owner"
+domain = "atlas_map"
+execution_kind = "worker"
+availability = "available"
+root = "web"
+entry = "web/index.html"
+description = """
+אתר סטטי בעברית (MapLibre + Deck.gl): ציר זמן 1939–1945, גבולות היסטוריים מ־CShapes, המערכה הימית ונתיבי
+אספקה, מסדרונות, מסילות, מחנות וטרנספורטים, חזיתות, אוכלוסין וסיוע, חיפוש, סיור, ייצוא וקיוסק.
+"""
+docs = ["README.md", "AGENTS.stage.md"]
+code = ["src/*.js", "src/core/*.js", "src/layers/*.js", "src/ui/*.js"]
+run = ["cd web && python3 -m http.server 8000", "cd web && npm test"]
+ports = [8000]
+interfaces = ["רג'יסטר שכבות: כל שכבה נרשמת ב־src/layers ומקבלת תאריך, bbox וזום",
+              "קבצי נתונים מובנים ב־web/data משמשים גיבוי כשאין שרת נתונים"]
+depends_on = ["ww2.atlas.layer_builders"]
+graph_access = "limited"
+graph_scope = "שכבות המפה, קרבות, גבולות, נתיבי אספקה ומחנות לפי תאריך"
+tags = ["map", "frontend"]
+discover = [
+  {kind = "files", glob = "src/layers/*.js", group = "שכבות מפה"},
+  {kind = "files", glob = "src/ui/*.js", group = "רכיבי ממשק"},
+  {kind = "files", glob = "src/core/*.js", group = "ליבת מנוע המפה"},
+]
+
+[[components]]
+deliver_id = "ww2.atlas.timeline_map"
+title = "מפת ציר הזמן ושכבות העל"
+owner = "atlas_map_owner"
+domain = "atlas_map"
+execution_kind = "worker"
+availability = "available"
+root = "../wwii-atlas/graph-pipeline"
+entry = "../wwii-atlas/graph-pipeline/ww2_timeline_map.html"
+description = """
+מפת המלחמה החיה (ww2_timeline_map.html) עם שכבות על: חזיתות, קרבות ואספקה (100 קרבות), ספנות ושיירות,
+אוקיינוס השקט, מפעלים, נוכחות צבאית, סמלים, תבליט, כיסוי שלג, טיסות ונושא כהה. מתחברת לגשר הגרף.
+"""
+docs = ["AGENTS.md"]
+code = ["ww2_*.js", "start_map_8123.command"]
+run = ["bash ../wwii-atlas/graph-pipeline/start_map_8123.command"]
+ports = [8123]
+interfaces = ["כל שכבת על היא קובץ ww2_*_overlay.js עצמאי שנטען מה־HTML",
+              "נתוני שכבות נגזרים מהגרף על ידי כלי הבנייה (ww2.atlas.layer_builders)"]
+depends_on = ["ww2.atlas.graph_bridge", "ww2.atlas.layer_builders"]
+notes = ["הקוד נמצא במאגר הציבורי wwii-atlas תחת graph-pipeline."]
+graph_access = "limited"
+graph_scope = "שכבות מפת ציר הזמן, קרבות, חזיתות, ספנות"
+tags = ["map", "frontend", "overlays"]
+discover = [
+  {kind = "files", glob = "ww2_*overlay*.js", group = "שכבות על"},
+  {kind = "files", glob = "ww2_*.js", group = "נתונים, מנועים ותצוגות", exclude = ["*overlay*"]},
+  {kind = "files", glob = "ww2_*.html", group = "דפי מפה"},
+]
+
+[[components]]
+deliver_id = "ww2.atlas.graph_pipeline"
+title = "צינור הנתונים לגרף Neo4j"
+owner = "atlas_data_owner"
+domain = "atlas_data"
+execution_kind = "deterministic"
+availability = "available"
+root = "../wwii-atlas/graph-pipeline"
+entry = "../wwii-atlas/graph-pipeline/pipeline.py"
+description = """
+צינור ETL דטרמיניסטי: ingest ממקורות (AAF, שיירות, מפעלים, קרבות…), crossref (קרב–עיר, קרב–נהר, אבדות,
+יחידות בקורפוס), נרמול (תאריכים, שמות, עברית, יחידות), בניית גרפים (מסילות, ים, ניתוב), ולידציה וייצוא
+(שכבות web, כרטיסי ישות, אינדקס חיפוש, אריחים, Parquet). כל שלב קורא וכותב למסד.
+"""
+docs = ["README.md", "AGENTS.md"]
+code = ["pipeline.py", "graphs/*.py", "export/*.py", "normalize/*.py", "validate/*.py", "crossref/*.py"]
+run = ["python pipeline.py --db sqlite --skip tiles", "python pipeline.py --stage crossref"]
+interfaces = ["שלב בודד רץ מחדש בלי להריץ את כל הצינור (~90 דקות לבנייה מלאה)",
+              "הפלט הציבורי: קבצים סטטיים (PMTiles + Parquet); המסד הוא תחנת ביניים בזמן build בלבד"]
+notes = ["אפס קריאות למודלי שפה בצינור.", "העתק ב־git: ../wwii-atlas/graph-pipeline."]
+graph_access = "full"
+graph_scope = "סכמת הגרף, מקורות, crossref ובניית צמתים וקשתות"
+tags = ["etl", "neo4j", "data"]
+discover = [
+  {kind = "files", glob = "ingest/*.py", group = "מקורות ingest", exclude = ["__init__.py"]},
+  {kind = "files", glob = "crossref/*.py", group = "שלבי crossref", exclude = ["__init__.py"]},
+  {kind = "files", glob = "normalize/*.py", group = "נרמול", exclude = ["__init__.py"]},
+  {kind = "files", glob = "graphs/*.py", group = "בניית גרפים", exclude = ["__init__.py"]},
+  {kind = "files", glob = "validate/*.py", group = "ולידציה", exclude = ["__init__.py"]},
+  {kind = "files", glob = "export/*.py", group = "ייצוא", exclude = ["__init__.py"]},
+  {kind = "argparse", glob = "pipeline.py", group = "פקודות הצינור"},
+]
+
+[[components]]
+deliver_id = "ww2.atlas.graph_bridge"
+title = "גשר הגרף ושרת ה־MCP של האטלס"
+owner = "atlas_data_owner"
+domain = "atlas_data"
+execution_kind = "deterministic"
+availability = "available"
+root = "../wwii-atlas/graph-pipeline/mcp_server"
+description = """
+גשר HTTP לקריאה בלבד מעל Neo4j (:8787, פרוטוקול ww2-atlas.graph-query.v1) ושרת MCP (atlas_graph): חיפוש
+ישויות, הקשר בקפיצה אחת, שליפה לפי viewport ותאריך, הקשר קרבות וימי, Cypher מוגבל, וחוזה המפה.
+"""
+docs = ["README.md"]
+code = ["*.py"]
+run = ["bash ../wwii-atlas/graph-pipeline/run_graph_bridge.sh",
+       "cd ../wwii-atlas/graph-pipeline && .venv/bin/python -m mcp_server.atlas_graph"]
+ports = [8787]
+interfaces = ["/health, שאילתות Cypher מוגבלות (200 שורות, 15 שניות), endpoints של שכבות וסצנות מפה",
+              "כתיבה ומחיקה כבויות כברירת מחדל"]
+depends_on = ["ww2.atlas.graph_pipeline"]
+graph_access = "full"
+graph_scope = "API הגשר, חוזה המפה, שאילתות גרף"
+tags = ["neo4j", "api", "mcp"]
+discover = [
+  {kind = "mcp_tools", glob = "atlas_graph.py", group = "כלי MCP"},
+  {kind = "http_routes", glob = "*.py", group = "נתיבי HTTP"},
+  {kind = "files", glob = "map_*.py", group = "שירותי מפה"},
+  {kind = "files", glob = "answer_*.py", group = "הרכבת תשובות"},
+]
+
+[[components]]
+deliver_id = "ww2.atlas.deliver_runtime"
+title = "Deliver Runtime — הרכבת תשובות מהגרף"
+owner = "atlas_runtime_owner"
+domain = "atlas_runtime"
+execution_kind = "deterministic"
+availability = "available"
+root = "../wwii-atlas/deliver-runtime"
+description = """
+aggregation_engine: מקבל שאלה מהצ'אט, מזהה כוונה, בוחר Deliver מהקטלוג, מריץ שאילתות על Neo4j ומחזיר
+תשובה מורכבת עם ארטיפקטים. כולל זיכרון (מקומי + Drive), למידה משאלות דומות, GC לאחסון ושרת MCP ל־Codex.
+"""
+docs = ["README.md"]
+code = ["aggregation_engine/*.py"]
+run = ["bash ../wwii-atlas/deliver-runtime/run_server.sh",
+       "python -m aggregation_engine.codex_mcp_server"]
+ports = [8788]
+interfaces = ["/prepare, /bridge/step, /bridge/learn", "קטלוג Delivers מסונכרן ל־Neo4j (deliver_registry, core_registry)"]
+depends_on = ["ww2.atlas.graph_bridge"]
+notes = ["קטלוג ה־Delivers נטען לגרף הציבורי ונקרא דרך ה־API."]
+graph_access = "limited"
+graph_scope = "קטלוג ה־Delivers של האטלס, כוונות ותבניות תשובה"
+tags = ["runtime", "delivers", "mcp"]
+discover = [
+  {kind = "http_routes", glob = "aggregation_engine/*.py", group = "נתיבי HTTP"},
+  {kind = "mcp_tools", glob = "aggregation_engine/codex_mcp_server.py", group = "כלי MCP"},
+  {kind = "argparse", glob = "aggregation_engine/cli.py", group = "פקודות CLI"},
+  {kind = "files", glob = "aggregation_engine/*.py", group = "מודולי ליבה", exclude = ["__init__.py", "server.py", "cli.py", "codex_mcp_server.py"]},
+]
+
+[[components]]
+deliver_id = "ww2.atlas.driver_runtime"
+title = "Driver Runtime — חילוץ וגיאורפרנס של מפות היסטוריות"
+owner = "atlas_runtime_owner"
+domain = "atlas_runtime"
+execution_kind = "deterministic"
+availability = "available"
+root = "etl/driver_runtime"
+description = """
+שרת משימות מקומי מבוקר (:8789) ו־Claude Driver MCP: חיפוש מפות, חילוץ מקומי, גיאורפרנס, זיהוי ישויות
+ויחידות במפה, הקרנה לגרף, אימות מועמדים, השתתפות בקרבות, מדיניות ביצוע ותקציב, וייצוא ל־Drive.
+"""
+docs = ["README.md"]
+code = ["*.py"]
+run = ["bash scripts/run_driver_runtime.sh serve", "bash scripts/run_claude_driver_mcp.sh"]
+ports = [8789]
+interfaces = ["תוסף הדפדפן browser/ww2-atlas-driver-runtime-extension מדבר עם השרת עם bearer token",
+              "מועמדים נשמרים ל־review; אין קידום אוטומטי לעובדה היסטורית"]
+depends_on = ["ww2.atlas.graph_bridge"]
+graph_access = "limited"
+graph_scope = "מפות היסטוריות, יחידות, מיקומים וגיאורפרנס"
+tags = ["etl", "maps", "runtime"]
+discover = [
+  {kind = "files", glob = "*_drivers.py", group = "משפחות Drivers"},
+  {kind = "files", glob = "map_*.py", group = "שלבי עיבוד מפה"},
+  {kind = "http_routes", glob = "*.py", group = "נתיבי HTTP"},
+  {kind = "mcp_tools", glob = "*.py", group = "כלי MCP"},
+  {kind = "argparse", glob = "cli.py", group = "פקודות CLI"},
+  {kind = "files", glob = "*.py", group = "מדיניות, אימות וזיכרון", exclude = ["__init__.py", "*_drivers.py", "map_*.py", "cli.py", "http_server.py"]},
+]
+
+[[components]]
+deliver_id = "ww2.atlas.historical_maps"
+title = "קורפוס המפות ההיסטוריות וכוח אדם"
+owner = "atlas_data_owner"
+domain = "historical_maps"
+execution_kind = "deterministic"
+availability = "available"
+root = "etl/historical_maps"
+description = """
+גילוי מפות היסטוריות, OCR, ניתוב לעובדים מקומיים, מחקר וקליטת מחקר, ונתוני כוח אדם (manpower) עם קליטה
+לגרף. מזין את ה־Driver Runtime ואת שכבות החזיתות.
+"""
+docs = ["README.md"]
+code = ["*.py"]
+run = ["python -m etl.historical_maps.cli --help"]
+depends_on = ["ww2.atlas.graph_pipeline"]
+graph_access = "limited"
+graph_scope = "מקורות מפות, OCR, כוח אדם"
+tags = ["etl", "maps", "research"]
+discover = [
+  {kind = "argparse", glob = "cli.py", group = "פקודות CLI"},
+  {kind = "files", glob = "*.py", group = "שלבי העבודה", exclude = ["__init__.py", "cli.py"]},
+]
+
+[[components]]
+deliver_id = "ww2.atlas.map_vision"
+title = "זיהוי סמלים במפות (Vision) ותיוג זהב"
+owner = "atlas_vision_owner"
+domain = "map_vision"
+execution_kind = "deterministic"
+availability = "prototype"
+root = "../wwii-atlas/graph-pipeline"
+description = """
+map_ingest (georef, OCR, שכבות, מיקום), ml (דאטהסט ואימון גלאי סמלים, זהות סמלים, גיליונות סמלים),
+גלאי YOLO v5 למפות מלחמה ותייג זהב מבוסס Qwen3-VL מקומי.
+"""
+docs = ["ww2-map-detector-v5/README_V5_DETECTOR.md", "ww2-qwen3vl-gold-labeler/README_RUN.md"]
+code = ["map_ingest/*.py", "ml/*.py", "ww2-qwen3vl-gold-labeler/*.py"]
+run = ["bash ../wwii-atlas/graph-pipeline/ww2-map-detector-v5/run_v5_smoke.sh"]
+depends_on = ["ww2.atlas.historical_maps"]
+notes = ["משקלי המודל והדאטהסטים אינם במאגר; הם נשמרים מקומית."]
+graph_access = "none"
+tags = ["ml", "vision", "maps"]
+discover = [
+  {kind = "files", glob = "map_ingest/*.py", group = "שלבי קליטת מפה", exclude = ["__init__.py"]},
+  {kind = "argparse", glob = "map_ingest/cli.py", group = "פקודות קליטה"},
+  {kind = "files", glob = "ml/*.py", group = "למידת מכונה", exclude = ["__init__.py"]},
+]
+
+[[components]]
+deliver_id = "ww2.atlas.environment_layers"
+title = "שכבות סביבה: מזג אוויר, שלג, תבליט וניידות"
+owner = "atlas_environment_owner"
+domain = "environment"
+execution_kind = "deterministic"
+availability = "available"
+root = "../wwii-atlas/graph-pipeline"
+description = """
+סקריפטי בנייה לשכבות הסביבה: ERA5 ומזג אוויר, כיסוי שלג לפי שנה (1940–1945), DEM ותבליט, נהרות וצמחייה,
+גרף ניידות כולל השפעת מזג אוויר, ובדיקות ערוצי מפה. הפלט משמש את מפת ציר הזמן ואת הסימולציה.
+"""
+code = ["run_weather.sh", "run_dem.sh", "run_terrain.sh", "run_ground_and_relief.sh", "run_mobility_*.sh",
+        "run_geo.sh", "ww2_snow_cover.js", "ww2_terrain_overlay.js"]
+run = ["bash ../wwii-atlas/graph-pipeline/run_mobility_refresh_if_needed.sh",
+       "bash ../wwii-atlas/graph-pipeline/run_weather.sh"]
+interfaces = ["נתוני שלג: snow/snow_<year>.json; נוף: landscape/ (rivers.json, צמחייה, ביצות)"]
+depends_on = ["ww2.atlas.graph_pipeline"]
+notes = ["רענון הניידות רץ כ־launchd (com.ww2atlas.mobility-refresh)."]
+graph_access = "limited"
+graph_scope = "מזג אוויר, שלג, תבליט וניידות לפי אזור ותאריך"
+tags = ["environment", "weather", "terrain"]
+discover = [
+  {kind = "files", glob = "run_weather*.sh", group = "סקריפטי בנייה"},
+  {kind = "files", glob = "run_mobility*.sh", group = "סקריפטי בנייה"},
+  {kind = "files", glob = "run_dem.sh", group = "סקריפטי בנייה"},
+  {kind = "files", glob = "run_terrain.sh", group = "סקריפטי בנייה"},
+  {kind = "files", glob = "run_ground_and_relief.sh", group = "סקריפטי בנייה"},
+  {kind = "files", glob = "run_geo.sh", group = "סקריפטי בנייה"},
+  {kind = "files", glob = "snow/*.json", group = "כיסוי שלג לפי שנה"},
+  {kind = "files", glob = "landscape/*.json", group = "נוף ותבליט"},
+]
+
+[[components]]
+deliver_id = "ww2.atlas.layer_builders"
+title = "כלי בניית שכבות ו־snapshots מהגרף"
+owner = "atlas_map_owner"
+domain = "atlas_data"
+execution_kind = "deterministic"
+availability = "available"
+root = "tools"
+description = """
+כלי Node/Python שגוזרים שכבות ונכסים מהגרף: אספקה ל־100 קרבות, צדדים בקרבות, קטלוג מפעלים, רענון
+חזיתות וקווי מתאר, ידע מסלולים, נוכחות צבאית, snapshots של מקור והעשרה, ומניפסט מפות.
+"""
+code = ["*.mjs", "build_*.py", "front_*.py", "materialize_drive_map_archive.py"]
+run = ["node tools/build_battle_supply_100.mjs", "node --test tools/*.test.mjs"]
+depends_on = ["ww2.atlas.graph_bridge"]
+graph_access = "limited"
+graph_scope = "קרבות, אספקה, חזיתות ומפעלים לבניית שכבות"
+tags = ["tools", "layers"]
+discover = [
+  {kind = "files", glob = "build_*.mjs", group = "בוני שכבות (Node)"},
+  {kind = "files", glob = "build_*.py", group = "בוני שכבות (Python)"},
+  {kind = "files", glob = "query_*.mjs", group = "שאילתות ותצוגה"},
+  {kind = "files", glob = "show_*.mjs", group = "שאילתות ותצוגה"},
+  {kind = "files", glob = "*.test.mjs", group = "בדיקות"},
+]
+
+[[components]]
+deliver_id = "ww2.atlas.chat_extensions"
+title = "תוספי הצ'אט: Graph Bridge ו־Driver Runtime"
+owner = "atlas_runtime_owner"
+domain = "chat_bridge"
+execution_kind = "worker"
+availability = "available"
+root = "../wwii-atlas/extensions"
+description = """
+תוספי Chrome לצ'אט: graph-bridge (#גרף, #מחשב — ChatGPT ↔ גרף ומפה, צעדים חתומים, תור LLM לבדיקה) ו־
+driver-runtime (#driver — משימות מקומיות מבוקרות מול :8789). העותק הנבנה כאן: browser/ במאגר.
+"""
+docs = ["graph-bridge/README.md", "driver-runtime/README.md"]
+code = ["graph-bridge/*.js", "driver-runtime/*.js"]
+interfaces = ["פעולות שמשנות קבצים, מריצות ingest או כותבות לגרף דורשות אישור נפרד בדפדפן"]
+depends_on = ["ww2.atlas.graph_bridge", "ww2.atlas.driver_runtime"]
+graph_access = "none"
+tags = ["browser", "extension"]
+capabilities = [
+  {group = "פקודות צ'אט", name = "#גרף", description = "שאלה לגרף ולמפה מתוך ChatGPT דרך Graph Bridge"},
+  {group = "פקודות צ'אט", name = "#מחשב", description = "משימה מקומית חתומה (Local Task Bridge) מול root קבוע, עם אישור בדפדפן"},
+  {group = "פקודות צ'אט", name = "#driver", description = "משימת Driver Runtime מבוקרת מול :8789"},
+  {group = "פקודות צ'אט", name = "#", description = "התחלה או המשך של תור ה־LLM (Passage, identity, תקצירים) ל־review בלבד"},
+]
+discover = [
+  {kind = "files", glob = "graph-bridge/*.js", group = "מודולי Graph Bridge"},
+  {kind = "files", glob = "driver-runtime/*.js", group = "מודולי Driver Runtime"},
+]
+
+[[components]]
+deliver_id = "ww2.atlas.wikipedia_enrichment"
+title = "העשרת הגרף מוויקיפדיה"
+owner = "atlas_data_owner"
+domain = "atlas_data"
+execution_kind = "deterministic"
+availability = "available"
+root = "../wwii-atlas/graph-enrichment/wikipedia-linker"
+description = """
+קישור צמתי קרב לערכי ויקיפדיה, קליטת נתוני קרבות (v2) ונרמול נתוני אבדות (v3/v4), ישירות מול Neo4j.
+"""
+code = ["*.py"]
+depends_on = ["ww2.atlas.graph_pipeline"]
+notes = ["העתק ב־git: ../wwii-atlas/graph-enrichment/wikipedia-linker. מטמון ויקי: wiki_cache/."]
+graph_access = "limited"
+graph_scope = "קרבות, אבדות וקישורי ויקיפדיה"
+tags = ["enrichment", "wikipedia"]
+discover = [{kind = "files", glob = "*.py", group = "סקריפטי העשרה"}]
+
+[[components]]
+deliver_id = "ww2.atlas.research_docs"
+title = "מסמכי אפיון, מחקר ו־runbooks של האטלס"
+owner = "atlas_research_owner"
+domain = "research"
+execution_kind = "llm_research"
+availability = "available"
+root = "../wwii-atlas/docs"
+description = """
+מפרט ה־Driver Runtime, checkpoints ומלאי מפות היסטוריות, runbooks (מיקום יחידות, קורפוס ויקיפדיה),
+אספקה ל־100 קרבות, רענון חזיתות, מיפוי יכולות המפה הישנה ומקורות נתונים ותכנית מחקר.
+"""
+docs = ["*.md"]
+graph_access = "limited"
+graph_scope = "אפיון, מקורות נתונים ותכניות עבודה"
+tags = ["docs", "research"]
+discover = [{kind = "files", glob = "*.md", group = "מסמכים"}]
+
+[[components]]
+deliver_id = "ww2.game.architecture"
+title = "ארכיטקטורת משחק הסימולציה (VR)"
+owner = "game_architecture_owner"
+domain = "game"
+execution_kind = "worker"
+availability = "available"
+root = "docs/game"
+description = """
+מסמכי הארכיטקטורה של משחק הסימולציה: ארכיטקטורה ראשית, Lego, רישום תחומים ובעלות, Episode, נאמנות
+היסטורית, LOD, מוכנות VR, כלכלה ותמחור, חיבור Delivers ורצף המימוש. המשימות עצמן הן B00–B09 ברישום.
+"""
+docs = ["MASTER_ARCHITECTURE.md", "LEGO_ARCHITECTURE.md", "REPO_MAP.md", "IMPLEMENTATION_SEQUENCE.md",
+        "HISTORICAL_FIDELITY.md", "DELIVER_INTEGRATION.md", "EPISODE_SCHEMA.md", "SIMULATION_LOD.md"]
+depends_on = ["B00/contracts"]
+graph_access = "limited"
+graph_scope = "ארכיטקטורת המשחק, חוזים ותחומים"
+tags = ["game", "architecture"]
+discover = [{kind = "files", glob = "*.md", group = "מסמכי ארכיטקטורה"}]
+
+[[components]]
+deliver_id = "ww2.atlas.legacy_atlantic"
+title = "אב־טיפוס מוקדם: קרב האטלנטי (שלב 2)"
+owner = "atlas_map_owner"
+domain = "atlas_map"
+execution_kind = "worker"
+availability = "prototype"
+root = "../wwii-atlas/legacy"
+description = "אב־הטיפוס הראשון של המפה: אירופה והאוקיינוס, סרגל זמן ושלוש שכבות נתונים היסטוריים. למטרות היסטוריה ושימוש חוזר בלבד."
+docs = ["README.md"]
+code = ["src/*.js", "tools/*.py"]
+notes = ["לא בפיתוח פעיל; המפה הנוכחית היא ww2.atlas.web_map."]
+graph_access = "none"
+tags = ["legacy", "map"]
+discover = [{kind = "files", glob = "src/*.js", group = "מודולים"}]

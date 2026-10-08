@@ -1,0 +1,56 @@
+{
+  "scope": "Synthetic M0 contract demonstrations, not historical or playable content",
+  "context": {
+    "tank": {
+      "selected_ids": [
+        "domain",
+        "global",
+        "tank",
+        "task"
+      ],
+      "domains": [
+        "ground_vehicles"
+      ],
+      "estimated_tokens": 886,
+      "usage_quality": "ESTIMATED"
+    },
+    "naval": {
+      "selected_ids": [
+        "domain",
+        "global",
+        "naval_internal",
+        "ship",
+        "task"
+      ],
+      "domains": [
+        "naval"
+      ],
+      "estimated_tokens": 982,
+      "usage_quality": "ESTIMATED"
+    },
+    "tank_with_transport_interface": {
+      "selected_ids": [
+        "domain",
+        "global",
+        "tank",
+        "task",
+        "transport"
+      ],
+      "domains": [
+        "ground_vehicles",
+        "naval"
+      ],
+      "estimated_tokens": 1004,
+      "usage_quality": "ESTIMATED"
+    }
+  },
+  "deliver": {
+    "currency": "TEST_CREDIT",
+    "quoted_price": 100,
+    "buyer_paid": 100,
+    "actual_cost": 130,
+    "provider_profit": -30,
+    "executions": 1,
+    "independent_reviews": 1
+  }
+}

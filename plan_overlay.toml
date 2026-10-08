@@ -1,0 +1,47 @@
+# Plan overlay for the WWII Build Manager.
+#
+# The dispatch graph itself (tasks, owners, dependencies, profiles, lego ids, context
+# entries) is imported from docs/game/LEGO_OWNERSHIP_REGISTRY.json -> dispatch_tasks.
+# Do not duplicate it here. This file only ADDS what the registry does not carry yet:
+#
+#   acceptance        executable acceptance commands (deterministic "did it pass")
+#   extra_write_scope paths a task may write in addition to its lego output_paths
+#   write_scope       full replacement (read-only tasks: where the manager files the report)
+#   evidence          evidence files (EvidenceSlice) inlined into the task's context
+#   required_paths    files that must exist on the integration branch before READY
+#   model_profile     override the registry profile (prefer editing the registry)
+#
+# Placeholders in argv/env: {python} {repo} {worktree} {task_id}
+# Every task also runs [acceptance].default_commands from the config
+# (by default the existing M0 contract tests: game/tests).
+#
+# Tasks without task-specific commands can still pass the built-in checks, but they
+# end in REVIEW_REQUIRED (human approval) instead of auto-passing — tests decide,
+# and there are no task tests for them yet. Add commands here as tasks gain tests.
+
+[tasks."B00/contracts"]
+# BRIEF scope: game/contracts.py and schemas/game/contracts.schema.json by coordinated
+# update only; future host under game/runtime/simulation_runtime/. runtime_core also
+# publishes the versioned ContractLock slices consumers receive.
+extra_write_scope = [
+  "game/contracts.py",
+  "schemas/game/contracts.schema.json",
+  "game/runtime/simulation_runtime/",
+  "context/game/interfaces/",
+]
+acceptance = [
+  { name = "contracts-schema-in-sync", argv = ["/bin/sh", "-c", "PYTHONPATH=\"$WWII_REPO/.runtime-deps/driver-runtime\" \"$WWII_PY\" -m game.contracts | diff -q - schemas/game/contracts.schema.json"], timeout_seconds = 300 },
+]
+
+[tasks."B00/runtime_followup"]
+extra_write_scope = ["game/runtime/simulation_runtime/"]
+
+[tasks."B07/inventory"]
+# read_only_inventory: the worker runs with a read-only sandbox and returns its report
+# in the handoff; the manager files it here and commits it on the task branch.
+write_scope = ["docs/game/reports/B07_inventory/"]
+full_checkout = true   # inventory may need to see existing web/ and data/ assets
+
+[tasks."B09/final_integration"]
+# Integration reads everything but writes only continuity (see BRIEF).
+extra_write_scope = ["game/runtime/simulation_runtime/integration/"]

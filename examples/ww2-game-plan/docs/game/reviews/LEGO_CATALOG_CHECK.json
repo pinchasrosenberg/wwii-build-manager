@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "catalog_count": 158,
+  "owners": 31,
+  "domains": 17,
+  "build_packets": 10,
+  "dispatch_tasks": 28,
+  "checks": [
+    "unique_ids",
+    "unique_proposed_outputs",
+    "valid_owner_domain_profile",
+    "existing_context_entries",
+    "valid_packet_references",
+    "single_owner_task_slices",
+    "all_packet_items_assigned",
+    "acyclic_dispatch_graph"
+  ],
+  "not_tested": [
+    "game_runtime",
+    "historical_accuracy",
+    "assets",
+    "playability",
+    "headset"
+  ]
+}

@@ -1,0 +1,50 @@
+# Template for a new system. Copy to <system_id>.toml, fill in, then:
+#   tools/build_manager/bin/wwii-build onboard <system_id> --dry-run
+#   tools/build_manager/bin/wwii-build onboard <system_id>
+
+[system]
+id = "my_system"                          # lowercase letters, digits, _
+title = "שם המערכת"
+context_dir = "context/systems/my_system" # generated RAG context files (inside the repo)
+tags = ["my_system"]
+graph_ingest = true                       # send changed context files to the graph RAG service
+description = """
+מה המערכת עושה, בשניים־שלושה משפטים.
+"""
+notes = [
+  "עקרונות שכל עובד חייב לדעת (למשל: אין מודל שפה בצינור, שרתים רק ב־127.0.0.1).",
+]
+
+[[components]]
+deliver_id = "my_system.component"        # unique; prefix with the system
+title = "שם הרכיב"
+owner = "component_owner"
+domain = "component_domain"
+execution_kind = "worker"                 # worker | deterministic | llm_research | asset_pipeline
+availability = "available"                # available | prototype | planned
+root = "path/in/repo"                     # repo-relative (writable by workers) or absolute / ~ (reference)
+entry = ""                                # optional main file
+description = """
+מה הרכיב עושה ומה הוא מייצר.
+"""
+docs = ["README.md"]                      # globs under root: heads are included
+code = ["*.py", "src/*.js"]               # globs under root: symbols/docstrings are extracted
+run = ["python -m component"]             # how to run / test it
+ports = []                                # local ports it listens on
+interfaces = ["חוזה או API שרכיבים אחרים משתמשים בו"]
+depends_on = []                           # other deliver_ids (this manifest or the existing catalog)
+notes = []
+tags = []
+graph_access = "limited"                  # none | limited | full
+graph_scope = "על מה הרכיב רשאי לשאול את גרף ה־RAG"
+# Capability discovery: each rule is one capability group; matches become sub-capabilities.
+# kind: files | py_functions | mcp_tools | http_routes | argparse | js_functions
+discover = [
+  {kind = "files", glob = "stages/*.py", group = "שלבי עבודה", exclude = ["__init__.py"]},
+  {kind = "mcp_tools", glob = "mcp_server.py", group = "כלי MCP"},
+  {kind = "http_routes", glob = "*.py", group = "נתיבי HTTP"},
+]
+# Capabilities that cannot be discovered from code:
+capabilities = [
+  {group = "פקודות", name = "#example", description = "מה הפקודה עושה"},
+]

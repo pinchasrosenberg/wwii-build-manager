@@ -1,0 +1,4670 @@
+{
+  "catalog_version": "1.0.0",
+  "as_of": "2026-09-27",
+  "status": "reviewed_build_specification_not_implemented",
+  "scope_he": "אוצר טיפוסים מחייב לגרסת תכנון v1; מופעים ודגמים עתידיים מורכבים ממנו. התנהגות חסרה מתווספת דרך CapabilityGap, בעלים, חוזה וביקורת; אין טענה שהרשימה מכסה כל צורך עתידי.",
+  "domain_registry_source": "docs/game/DOMAIN_REGISTRY.md",
+  "ownership_notes": "docs/game/planning/OWNERSHIP_NOTES.md",
+  "context_paths_status": "DOMAIN.md and roles/<owner>.md entrypoints exist; evidence and versioned interface slices are selected/generated at dispatch, not preloaded or sandbox enforced",
+  "output_paths_status": "proposed_targets_not_claimed_existing",
+  "interface_status": "Named interface proposals; every execution task must map each name to a canonical schema and pin exact versions in ContractLock before implementation. No new parallel contract authority is created by this catalog.",
+  "phase_semantics": {
+    "M1": "Engine + embodied experience spike and future-VR seams; synthetic fixture allowed and explicitly labeled.",
+    "M2": "Research/definition preflight for the first selected historical content; synthetic mechanism work may begin in M1. Not every listed type is required in Episode1.",
+    "M3": "First historical playable vertical slice using only its selected capabilities; minimum implementations, not every catalog extension.",
+    "M4": "Episode #2 composition/reuse proof. Every reused selected capability is revalidated; no need for a new type merely to populate this phase.",
+    "M5": "Long continuity, routines, time acceleration and conservative LOD/scale.",
+    "M6": "Real Deliver protocol adapter and conformance/settlement proof.",
+    "FUTURE": "Scenario-triggered extension outside the committed first slice; no implied schedule or authorization."
+  },
+  "engine_policy": "Godot is the provisional initial host. Portable contracts, local domain modules, physics/navigation ports and future VR seams are required. Rust/FFI is not mandatory.",
+  "promotion_gates": [
+    "HistoricalValidation",
+    "ProvenanceValidation",
+    "SimulationValidation",
+    "IntegrationValidation",
+    "ExperienceReview"
+  ],
+  "owner_roles": {
+    "evidence_sources": {
+      "domain": "historical_evidence",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/historical_evidence/roles/evidence_sources.md",
+      "model_route": {
+        "preferred": "claude-opus-5-5",
+        "effort": "high",
+        "alternative": "gpt-6-astra",
+        "alternative_effort": "high",
+        "available_here": "gpt-6-astra",
+        "here_effort": "high"
+      }
+    },
+    "evidence_claims": {
+      "domain": "historical_evidence",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/historical_evidence/roles/evidence_claims.md",
+      "model_route": {
+        "preferred": "claude-opus-5-5",
+        "effort": "high",
+        "alternative": "gpt-6-astra",
+        "alternative_effort": "high",
+        "available_here": "gpt-6-astra",
+        "here_effort": "high"
+      }
+    },
+    "terrain_world": {
+      "domain": "geospatial_temporal",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "temporal_world": {
+      "domain": "geospatial_temporal",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/temporal_world.md",
+      "model_route": {
+        "preferred": "gpt-6-astra",
+        "effort": "high",
+        "alternative": "claude-opus-5-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-6-astra",
+        "here_effort": "high"
+      }
+    },
+    "ground_powertrain": {
+      "domain": "ground_vehicles",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_powertrain.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "ground_platform": {
+      "domain": "ground_vehicles",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_platform.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "weapons_ballistics": {
+      "domain": "weapons_effects",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "weapons_damage": {
+      "domain": "weapons_effects",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_damage.md",
+      "model_route": {
+        "preferred": "gpt-6-astra",
+        "effort": "high",
+        "alternative": "claude-opus-5-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-6-astra",
+        "here_effort": "high"
+      }
+    },
+    "infantry_actions": {
+      "domain": "infantry",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/infantry/roles/infantry_actions.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "infantry_casualty": {
+      "domain": "infantry",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/infantry/roles/infantry_casualty.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "aviation_platform": {
+      "domain": "aviation",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/aviation/roles/aviation_platform.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "naval_platform": {
+      "domain": "naval",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/naval/roles/naval_platform.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "logistics_supply": {
+      "domain": "logistics",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/logistics/roles/logistics_supply.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "logistics_maintenance": {
+      "domain": "logistics",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/logistics/roles/logistics_maintenance.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "command_structure": {
+      "domain": "command_organization",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/command_organization/roles/command_structure.md",
+      "model_route": {
+        "preferred": "claude-opus-5-5",
+        "effort": "high",
+        "alternative": "gpt-6-astra",
+        "alternative_effort": "high",
+        "available_here": "gpt-6-astra",
+        "here_effort": "high"
+      }
+    },
+    "command_signals": {
+      "domain": "command_organization",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/command_organization/roles/command_signals.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "character_identity": {
+      "domain": "characters",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/characters/roles/character_identity.md",
+      "model_route": {
+        "preferred": "claude-sonnet-5",
+        "effort": "high",
+        "alternative": "gpt-6-sol",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "character_memory": {
+      "domain": "characters",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/characters/roles/character_memory.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "character_social": {
+      "domain": "characters",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/characters/roles/character_social.md",
+      "model_route": {
+        "preferred": "claude-sonnet-5",
+        "effort": "high",
+        "alternative": "gpt-6-sol",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "runtime_core": {
+      "domain": "simulation_runtime",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_core.md",
+      "model_route": {
+        "preferred": "gpt-6-astra",
+        "effort": "high",
+        "alternative": "claude-opus-5-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-6-astra",
+        "here_effort": "high"
+      }
+    },
+    "runtime_continuity": {
+      "domain": "simulation_runtime",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_continuity.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "experience_loop": {
+      "domain": "experience_design",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "model_route": {
+        "preferred": "claude-sonnet-5",
+        "effort": "high",
+        "alternative": "gpt-6-sol",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "experience_interface": {
+      "domain": "experience_design",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/experience_design/roles/experience_interface.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "weather_system": {
+      "domain": "weather",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weather/roles/weather_system.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "assets_visual": {
+      "domain": "asset_pipeline",
+      "suggested_model_profile": "VISUAL",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_visual.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high",
+        "note": "tool pipeline and technical art; model alone does not produce a licensed rigged 3D asset"
+      }
+    },
+    "assets_motion": {
+      "domain": "asset_pipeline",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_motion.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "assets_audio": {
+      "domain": "asset_pipeline",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_audio.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "ai_perception": {
+      "domain": "ai_navigation",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ai_navigation/roles/ai_perception.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "ai_decision": {
+      "domain": "ai_navigation",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ai_navigation/roles/ai_decision.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "economy_provider": {
+      "domain": "economy_deliver",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/economy_deliver/roles/economy_provider.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    },
+    "context_router": {
+      "domain": "context_orchestration",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/context_orchestration/roles/context_router.md",
+      "model_route": {
+        "preferred": "gpt-6-sol",
+        "effort": "high",
+        "alternative": "claude-sonnet-5",
+        "alternative_effort": "high",
+        "available_here": "gpt-5.6-sol",
+        "here_effort": "high"
+      }
+    }
+  },
+  "items": [
+    {
+      "lego_id": "evidence.source",
+      "kind": "primitive",
+      "domain": "historical_evidence",
+      "owner_agent": "evidence_sources",
+      "purpose_he": "רשומת מקור: ארכיון, מחבר, תאריך, גרסה ורישיון; ללא הסקת אמיתות מעצם קיום המקור.",
+      "context_pack": "context/game/domains/historical_evidence/",
+      "dependency_interfaces": [
+        "StableIdentity",
+        "ContentLicense"
+      ],
+      "output_path": "capabilities/historical_evidence/sources/",
+      "acceptance_he": "אפשר לאתר את המהדורה שנקראה ואת מגבלות השימוש; מקור חסר מוחזר כחוסר מפורש.",
+      "phase": "M2",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/historical_evidence/roles/evidence_sources.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "evidence.locator",
+      "kind": "primitive",
+      "domain": "historical_evidence",
+      "owner_agent": "evidence_sources",
+      "purpose_he": "מיקום מדויק של ראיה בעמוד, פסקה, מפה או קטע קול.",
+      "context_pack": "context/game/domains/historical_evidence/",
+      "dependency_interfaces": [
+        "SourceRecord",
+        "CoordinateTime"
+      ],
+      "output_path": "capabilities/historical_evidence/locators/",
+      "acceptance_he": "הפניה חוזרת לאותה נקודה במקור והחילוץ שומר שפה, יחידות ואי־ודאות.",
+      "phase": "M2",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/historical_evidence/roles/evidence_sources.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "evidence.snapshot",
+      "kind": "assembly",
+      "domain": "historical_evidence",
+      "owner_agent": "evidence_sources",
+      "purpose_he": "חבילת ראיות נעולה עבור מקום, זמן וזהויות מוגדרים.",
+      "context_pack": "context/game/domains/historical_evidence/",
+      "dependency_interfaces": [
+        "ReviewedClaim",
+        "ContentHash",
+        "ScopeGrant"
+      ],
+      "output_path": "capabilities/historical_evidence/snapshots/",
+      "acceptance_he": "תוכן החבילה משוחזר לפי hash; עדכון מקור יוצר גרסה חדשה ולא משנה save פעיל.",
+      "phase": "M2",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/historical_evidence/roles/evidence_sources.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "evidence.claim",
+      "kind": "primitive",
+      "domain": "historical_evidence",
+      "owner_agent": "evidence_claims",
+      "purpose_he": "טענה ברמת שדה עם מקור, תחולה, מידת ודאות ומצב ביקורת נפרדים.",
+      "context_pack": "context/game/domains/historical_evidence/",
+      "dependency_interfaces": [
+        "SourceLocator",
+        "StableIdentity",
+        "CoordinateTime"
+      ],
+      "output_path": "capabilities/historical_evidence/claims/",
+      "acceptance_he": "טענה מועמדת אינה הופכת לאמת ללא החלטת סוקר בלתי תלוי; זמן ווריאנט שגויים נדחים.",
+      "phase": "M2",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/historical_evidence/roles/evidence_claims.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "evidence.contradiction",
+      "kind": "service",
+      "domain": "historical_evidence",
+      "owner_agent": "evidence_claims",
+      "purpose_he": "רישום מחלוקות בין מקורות והצגת חלופות ללא הכרעה אוטומטית.",
+      "context_pack": "context/game/domains/historical_evidence/",
+      "dependency_interfaces": [
+        "EvidenceClaim",
+        "SourceLocator"
+      ],
+      "output_path": "capabilities/historical_evidence/contradictions/",
+      "acceptance_he": "שתי הגרסאות והיקף הסתירה נשמרים; היעדר הכרעה אינו מקבל תווית VERIFIED.",
+      "phase": "M2",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/historical_evidence/roles/evidence_claims.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "evidence.reconstruction",
+      "kind": "service",
+      "domain": "historical_evidence",
+      "owner_agent": "evidence_claims",
+      "purpose_he": "הצהרת הנחות, שיטה וטווח תוקף לפרטים שהמקורות אינם מכריעים.",
+      "context_pack": "context/game/domains/historical_evidence/",
+      "dependency_interfaces": [
+        "ReviewedClaim",
+        "ReconstructionPolicy"
+      ],
+      "output_path": "capabilities/historical_evidence/reconstruction/",
+      "acceptance_he": "כל ערך משוחזר מזוהה כשחזור; איכות חזותית או schema תקין אינם משנים את סמכותו.",
+      "phase": "M2",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/historical_evidence/roles/evidence_claims.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.terrain",
+      "kind": "primitive",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "תבליט וגאומטריית קרקע מקומית לשימוש בתנועה, תצוגה וכיסוי.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "CoordinateTransform",
+        "EvidenceSnapshot"
+      ],
+      "output_path": "capabilities/geospatial_temporal/terrain/",
+      "acceptance_he": "גובה, שיפוע והתנגשות עקביים במטרים; פירוט שאינו נתמך מסומן כשחזור.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.surface_material",
+      "kind": "primitive",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "סוג פני שטח המספק חיכוך, התנגדות ותכונות פיזיקליות תחומות.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "EvidenceClaim",
+        "ReconstructionRecord"
+      ],
+      "output_path": "capabilities/geospatial_temporal/surface_materials/",
+      "acceptance_he": "דגימה מספקת יחידות, שיטת קירוב וטווח תקפות; בוץ חזותי ותגובה מכנית אינם סותרים.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.water_body",
+      "kind": "primitive",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "נהר, אגם או אזור ים עם תחום מים, עומק וגובה ידועים או משוחזרים.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "CoordinateTransform",
+        "EvidenceSnapshot"
+      ],
+      "output_path": "capabilities/geospatial_temporal/water_bodies/",
+      "acceptance_he": "עומק לא ידוע נשאר לא ידוע; חוף, קו מים ומעברי יבשה משתמשים באותה גאומטריה.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.hydrology",
+      "kind": "capability",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "זרימה, הצפה ועבירות מים במודל מוגבל לסביבה שנבחרה.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "WaterBody",
+        "WeatherSample",
+        "TerrainSample"
+      ],
+      "output_path": "capabilities/geospatial_temporal/hydrology/",
+      "acceptance_he": "שינוי מפלס מתורגם לעבירות לפי מודל מוצהר; אין טענה לסימולציית נוזלים מלאה.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.building",
+      "kind": "primitive",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "מבנה בעל נפח, פתחים, קומות ותמיכות הנחוצות למשחק.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "TerrainSample",
+        "SurfaceMaterial",
+        "EvidenceSnapshot"
+      ],
+      "output_path": "capabilities/geospatial_temporal/buildings/",
+      "acceptance_he": "פתחים וקומות תואמים התנגשות וניווט; אין שיוך בניין היסטורי ללא ראיה מתאימה.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.wall",
+      "kind": "primitive",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "קיר כמקטע גאומטרי בעל חומר, עובי, פתחים וכיסוי.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "SurfaceMaterial",
+        "CoordinateTransform"
+      ],
+      "output_path": "capabilities/geospatial_temporal/walls/",
+      "acceptance_he": "עקבות ראייה, תנועה ופגיעות משתמשים באותו מיקום; עובי חסר אינו מקבל דיוק מומצא.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.bridge",
+      "kind": "assembly",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "גשר המחבר מקטעי דרך מעל מכשול עם מגבלת מעבר ועומס.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "RoadSegment",
+        "WaterBody",
+        "SurfaceMaterial",
+        "EvidenceClaim"
+      ],
+      "output_path": "capabilities/geospatial_temporal/bridges/",
+      "acceptance_he": "כלי שאינו עומד במגבלת המעבר נדחה; מקור, קירוב או חוסר של מגבלת עומס גלויים.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.tree",
+      "kind": "primitive",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "עץ או צמחייה עם נפח מעבר, הסתרה וזהות סביבתית.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "TerrainSample",
+        "SurfaceMaterial",
+        "EvidenceSnapshot"
+      ],
+      "output_path": "capabilities/geospatial_temporal/trees/",
+      "acceptance_he": "הסתרה אינה שקולה אוטומטית להגנה בליסטית; collision וה־LOD שומרים על מעבר מאושר.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.road",
+      "kind": "primitive",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "מקטע דרך עם חיבוריות, רוחב, משטח ומצב שימוש.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "TerrainSample",
+        "SurfaceMaterial",
+        "CoordinateTime"
+      ],
+      "output_path": "capabilities/geospatial_temporal/roads/",
+      "acceptance_he": "מסלול יכול להבחין בין דרך קיימת לדרך חסומה; זמן תחולה וגאומטריה נעולים.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.trench",
+      "kind": "assembly",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "תעלה עם חתך, כניסות, כיסוי ומגבלות תנועה.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "TerrainSample",
+        "SurfaceMaterial",
+        "EvidenceSnapshot"
+      ],
+      "output_path": "capabilities/geospatial_temporal/trenches/",
+      "acceptance_he": "לוחם יכול להיכנס ולצאת רק בחיבור מאושר; גובה המצלמה אינו משנה כיסוי מכני.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.locality",
+      "kind": "assembly",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "הרכבת שטח מוגבל, מבנים ותשתיות סביב לוקאליות היסטורית אחת.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "TerrainSample",
+        "BuildingDefinition",
+        "RoadSegment",
+        "WaterBody",
+        "EvidenceSnapshot"
+      ],
+      "output_path": "capabilities/geospatial_temporal/localities/",
+      "acceptance_he": "חבילה נטענת ללא קוד אפיזודה; כל רכיב שומר זהות, קואורדינטות ומקור/שחזור.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.coordinate_transform",
+      "kind": "service",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "המרת קואורדינטות עולם מדויקות למסגרת מקומית במטרים.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "CoordinateTime",
+        "StableIdentity"
+      ],
+      "output_path": "game/runtime/geospatial_temporal/coordinates/",
+      "acceptance_he": "המרה הלוך וחזור ו־origin shift שומרים זהות ומרחק יחסי בתחום שגיאה מוצהר.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.temporal_applicability",
+      "kind": "service",
+      "domain": "geospatial_temporal",
+      "owner_agent": "temporal_world",
+      "purpose_he": "ייצוג תאריכים, טווחים, דיוק זמן ותחולה גאוגרפית בלי דיוק מדומה.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "CoordinateTime",
+        "EvidenceClaim"
+      ],
+      "output_path": "capabilities/geospatial_temporal/temporal_applicability/",
+      "acceptance_he": "יום אינו מומר לשעה מומצאת; חפיפה לא ידועה או סותרת נשארת מפורשת.",
+      "phase": "M2",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/temporal_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.historical_anchor",
+      "kind": "primitive",
+      "domain": "geospatial_temporal",
+      "owner_agent": "temporal_world",
+      "purpose_he": "אילוץ היסטורי מתוארך ותחום עם מדיניות קונפליקט לבחירה מקומית.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "dependency_interfaces": [
+        "ReviewedClaim",
+        "TemporalApplicability",
+        "EpisodeEnvelope"
+      ],
+      "output_path": "capabilities/geospatial_temporal/historical_anchors/",
+      "acceptance_he": "גבול היסטורי אינו כופה מוות מוסתר או מאפס מלאי; קונפליקט מפיק החלטה רשומה.",
+      "phase": "M2",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/temporal_world.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.engine",
+      "kind": "primitive",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_powertrain",
+      "purpose_he": "ליבת מנוע משותפת: אספקת הספק לציר, צריכת משאב ומצב תקינות; פרמטרים לפי וריאנט.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "Units",
+        "ResourceAccount",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/ground_vehicles/primitives/engine/",
+      "acceptance_he": "אותו חוזה מקבל מנוע קרקעי ונתוני מתאם מאושרים; אינו ממציא עקומת ביצועים למטוס או אונייה.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_powertrain.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.transmission",
+      "kind": "primitive",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_powertrain",
+      "purpose_he": "יחסי העברה וכיוון בין מקור הספק להינע במודל מוצהר.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "ShaftPower",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/ground_vehicles/primitives/transmission/",
+      "acceptance_he": "הילוך, כיוון ואובדן הספק נרשמים; יחס חסר אינו מוצג כנתון היסטורי.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_powertrain.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.wheel",
+      "kind": "primitive",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_powertrain",
+      "purpose_he": "גלגל בעל מידה, חומר ומגע המשמש כלי רכב ויישומים נוספים.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "SurfaceMaterial",
+        "ContactSample",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/ground_vehicles/primitives/wheel/",
+      "acceptance_he": "הרדיוס במטרים תואם גאומטריה; החלקה וקירוב מגע מתועדים לפי רמת פירוט.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_powertrain.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.track",
+      "kind": "primitive",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_powertrain",
+      "purpose_he": "זחל עם תחום מגע, מצב תקינות וממשק העברת כוח.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "SurfaceMaterial",
+        "ContactSample",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/ground_vehicles/primitives/track/",
+      "acceptance_he": "זחל פגוע משנה ניידות; כמות חוליות חזותית אינה מגדירה לבדה את מודל התנועה.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_powertrain.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.suspension",
+      "kind": "primitive",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_powertrain",
+      "purpose_he": "מענה עומס ומגע של מתלה עבור הרכב שנבחר.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "ContactSample",
+        "MassProperties",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/ground_vehicles/primitives/suspension/",
+      "acceptance_he": "נסיעה על מדרגה נשארת בתחום היציבות שנבדק; קירוב קשיח מסומן אם אין מודל מפורט.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_powertrain.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "mobility.tracked",
+      "kind": "capability",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_powertrain",
+      "purpose_he": "תנועה קרקעית באמצעות זוג זחלים או תצורה מאושרת אחרת.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "TerrainSample",
+        "MobilityEnvelope",
+        "ShaftPower",
+        "TrackState",
+        "AcceptedPhysicsOutcome",
+        "SurfaceState"
+      ],
+      "output_path": "game/runtime/ground_vehicles/tracked_mobility/",
+      "acceptance_he": "פנייה, שיפוע, דלק וזחל פגוע משנים תוצאה עקבית; עמידה או LOD אינם יוצרים מרחק חינם.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_powertrain.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "mobility.wheeled",
+      "kind": "capability",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_powertrain",
+      "purpose_he": "תנועה קרקעית גלגלית לפי אחיזה, עומס ומעטפת כלי הרכב.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "TerrainSample",
+        "MobilityEnvelope",
+        "ShaftPower",
+        "WheelState",
+        "AcceptedPhysicsOutcome",
+        "SurfaceState"
+      ],
+      "output_path": "game/runtime/ground_vehicles/wheeled_mobility/",
+      "acceptance_he": "עומס ודלק מחויבים; תוואי לא עביר אינו נעשה עביר עקב מסלול אנימציה.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_powertrain.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.chassis",
+      "kind": "primitive",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_platform",
+      "purpose_he": "שלדה עם מסה, מידות ונקודות חיבור למרכיבי הרכב.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "MassProperties",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/ground_vehicles/primitives/chassis/",
+      "acceptance_he": "מסה ומידות נושאות מקור ויחידות; חיבורים מזהים רכיבים במפורש ולא לפי שמות mesh.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.armor_plate",
+      "kind": "primitive",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_platform",
+      "purpose_he": "לוח מיגון בעל גאומטריה, חומר ועובי לפי מקור או קירוב מוצהר.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "SurfaceMaterial",
+        "VariantEvidence",
+        "CoordinateTransform"
+      ],
+      "output_path": "capabilities/ground_vehicles/primitives/armor_plate/",
+      "acceptance_he": "זווית ועובי נשמרים ביחידות תקינות; תוצאת חדירה שייכת ל־weapons_effects ולא ללוח עצמו.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.turret",
+      "kind": "assembly",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_platform",
+      "purpose_he": "צריח עם טבעת חיבור, מגבלות צידוד והגבהה, תושבות ועמדות צוות.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "WeaponMount",
+        "ArmorGeometry",
+        "CrewStation",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/ground_vehicles/assemblies/turret/",
+      "acceptance_he": "תותח אינו מכוון מעבר למגבלה; צריח מושבת אינו מוצג כפועל.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.fuel_tank",
+      "kind": "primitive",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_platform",
+      "purpose_he": "מכל דלק עם קיבולת, סוג חומר, מיקום ומצב דליפה.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "ResourceAccount",
+        "FuelCompatibility",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/ground_vehicles/primitives/fuel_tank/",
+      "acceptance_he": "אין תדלוק מעל קיבולת או בחומר בלתי תואם; דליפה עוברת דרך ledger ולא מעלימה מלאי.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.crew_station",
+      "kind": "primitive",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_platform",
+      "purpose_he": "עמדת נהג, תותחן או איש צוות עם תפוסה, גישה ושדה עבודה. כולל קישור לפתח, נקודות כניסה/יציאה, מבט, ישיבה, אחיזה וגישה פנימית.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "ActorIdentity",
+        "InteractionAffordance",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/ground_vehicles/primitives/crew_station/",
+      "acceptance_he": "תפקיד ותפוסה מקנים רק פעולות מורשות; שינוי מצלמה אינו ממלא עמדה ריקה.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.ground_vehicle",
+      "kind": "assembly",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_platform",
+      "purpose_he": "הרכבת וריאנט ו־instance של טנק, משאית או רכב אחר מרכיבים נעולים.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "MobilityEnvelope",
+        "WeaponMount",
+        "ArmorGeometry",
+        "CrewStation",
+        "ResourceAccount",
+        "AssetBinding"
+      ],
+      "output_path": "capabilities/ground_vehicles/assemblies/ground_vehicle/",
+      "acceptance_he": "זהות חזותית, ציוד, צוות ונזק מסכימים; כשל מנוע/נשק נשמר בלי health כללי יחיד.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.gun",
+      "kind": "assembly",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "הגדרת כלי ירייה עם קנה, תושבת, הזנה ומאפייני וריאנט.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "WeaponMount",
+        "AmmunitionCompatibility",
+        "BarrelDefinition",
+        "BreechDefinition",
+        "FeedDefinition",
+        "StockDefinition",
+        "WeaponActionDefinition"
+      ],
+      "output_path": "capabilities/weapons_effects/assemblies/gun/",
+      "acceptance_he": "שני מתכוני דגם נטענים באותו loader; קנה/בית בליעה/הזנה/תחמושת או נכס לא תואמים נדחים; אין המצאת נתונים בגלל mesh דומה.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.projectile",
+      "kind": "primitive",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "קליע או פגז עם מסה, ממדים, סוג ופרמטרי השפעה מבוססים.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "Units",
+        "SurfaceMaterial"
+      ],
+      "output_path": "capabilities/weapons_effects/primitives/projectile/",
+      "acceptance_he": "טיפוס, וריאנט ויחידות נשמרים; מקור חלקי אינו מאשר טבלת חדירה מלאה.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.optic",
+      "kind": "primitive",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "כוונת או מכשיר אופטי עם מגבלות שדה ראייה, הגדלה ויישור.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "SensorEnvelope",
+        "WeaponMount"
+      ],
+      "output_path": "capabilities/weapons_effects/primitives/optic/",
+      "acceptance_he": "המצלמה מציגה רק מידע שנצפה דרך מעטפת מאושרת; הגדלה אינה חושפת אויב נסתר.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "weapons.ammunition_compatibility",
+      "kind": "service",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "התאמת תחמושת, מטען, הזנה ותושבת לווריאנט נשק.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "GunDefinition",
+        "ProjectileDefinition",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/weapons_effects/ammunition_compatibility/",
+      "acceptance_he": "קוטר זהה בלבד אינו מספיק; אי־התאמה או חוסר מידע מפיקים שגיאה מפורשת.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "weapons.firing_reload",
+      "kind": "capability",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "מצב טעינה, ירי, טעינה מחדש והפרעה לפעולה של נשק קטן או תותח.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "AmmunitionCompatibility",
+        "InventoryTransfer",
+        "ActorAction",
+        "WeaponMount"
+      ],
+      "output_path": "game/runtime/weapons_effects/firing_reload/",
+      "acceptance_he": "ירייה מחייבת מלאי ומצב תקין; reload שהופרע אינו מסתיים בגלל אנימציה.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "weapons.ballistics",
+      "kind": "capability",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "מסלול קליע ופתרון פגיעה בתחום מרחק ומהירות שהמודל תומך בו.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "ShotRequest",
+        "WeatherSample",
+        "CollisionQuery",
+        "ProjectileDefinition"
+      ],
+      "output_path": "game/runtime/weapons_effects/ballistics/",
+      "acceptance_he": "אותו קלט נותן תוצאה בתחום determinism המוצהר; מעבר לטווח התקפות מחזיר unsupported.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "effects.armor_interaction",
+      "kind": "capability",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_damage",
+      "purpose_he": "השפעת פגיעה על לוח וחלק פנימי לפי תחמושת, זווית ומודל מוצהר.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "ShotImpact",
+        "ArmorGeometry",
+        "SurfaceMaterial",
+        "ProjectileDefinition"
+      ],
+      "output_path": "game/runtime/weapons_effects/armor_interaction/",
+      "acceptance_he": "חדירה, אי־חדירה או unknown ניתנים לבדיקה; אין דיוק מספרי ללא בסיס וכיול.",
+      "phase": "M3",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_damage.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "effects.blast",
+      "kind": "capability",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_damage",
+      "purpose_he": "השפעת הדף ורסיסים במעטפת מקומית עם כיסוי ומגבלות קירוב.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "ExplosionRequest",
+        "CollisionQuery",
+        "SurfaceMaterial",
+        "DamageTarget"
+      ],
+      "output_path": "game/runtime/weapons_effects/blast/",
+      "acceptance_he": "כיסוי ומרחק משנים השפעה בתוך המודל; אירוע יחיד אינו מוחל פעמיים.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_damage.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "effects.fire",
+      "kind": "capability",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_damage",
+      "purpose_he": "הצתה, בעירה ודעיכה בתחומים נתמכים עם צריכת חומר ונזק מוצהר.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "FuelState",
+        "SurfaceMaterial",
+        "WeatherSample",
+        "DamageTarget",
+        "ResourceAccount"
+      ],
+      "output_path": "game/runtime/weapons_effects/fire/",
+      "acceptance_he": "בעירה אינה יוצרת דלק; מעבר LOD שומר תוצאה וחומר נצרך ומסמן קירובים.",
+      "phase": "M3",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_damage.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "effects.suppression",
+      "kind": "capability",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_damage",
+      "purpose_he": "המרת אש קרובה וגירויים מאושרים לאירוע דיכוי זמני של פעילות.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "ShotTrace",
+        "ActorObservation",
+        "SuppressionPolicy"
+      ],
+      "output_path": "game/runtime/weapons_effects/suppression/",
+      "acceptance_he": "אש קרובה יכולה להפריע בלי ליצור פציעה; אירוע נגזר מחשיפה מורשית ולא מידע אויב נסתר.",
+      "phase": "M3",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_damage.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.barrel",
+      "kind": "primitive",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "קנה נשק בעל אורך, קדח, מסה ונקודות חיבור לפי וריאנט.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "WeaponMount",
+        "AmmunitionCompatibility",
+        "AttachmentBinding"
+      ],
+      "output_path": "capabilities/weapons_effects/primitives/barrel/",
+      "acceptance_he": "אורך וקליבר תואמים ההגדרה והחזות; קנה חלופי אינו מקנה ביצועים חדשים ללא מודל מאושר.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.breech",
+      "kind": "primitive",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "מכלול סגירה ותפעול של בית הבליעה, ידני או אוטומטי, לפי תצורה נתונית.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "WeaponMount",
+        "AmmunitionCompatibility",
+        "AttachmentBinding"
+      ],
+      "output_path": "capabilities/weapons_effects/primitives/breech/",
+      "acceptance_he": "רובה בריח ורובה בטעינה עצמית בוחרים state model נתמך; נתון לא ידוע נשאר חוסר.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.feed_system",
+      "kind": "primitive",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "מחסנית, חגורה או הזנה אחרת עם קיבולת, תאימות ומצב נוכחי.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "WeaponMount",
+        "AmmunitionCompatibility",
+        "AttachmentBinding"
+      ],
+      "output_path": "capabilities/weapons_effects/primitives/feed_system/",
+      "acceptance_he": "תחמושת מחויבת מחשבון מלאי אחד; החלפת מחסנית אינה משכפלת יתרה וציוד לא תואם נדחה.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.weapon_stock",
+      "kind": "primitive",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "קת ומשטחי אחיזה הנקשרים למעטפת נשק ול־anchors אנושיים.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "WeaponMount",
+        "AmmunitionCompatibility",
+        "AttachmentBinding"
+      ],
+      "output_path": "capabilities/weapons_effects/primitives/weapon_stock/",
+      "acceptance_he": "גרסה, מידות ואחיזה תואמים מקור או שחזור; hand IK מציג את האחיזה ואינו משנה בליסטיקה.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "actor.human",
+      "kind": "primitive",
+      "domain": "infantry",
+      "owner_agent": "infantry_actions",
+      "purpose_he": "גוף אדם סימולטיבי בעל זהות יציבה, ממדים, מצב פעולה ויכולות בסיס.",
+      "context_pack": "context/game/domains/infantry/",
+      "dependency_interfaces": [
+        "CharacterIdentity",
+        "BodyEnvelope",
+        "InjuryState"
+      ],
+      "output_path": "capabilities/infantry/primitives/human/",
+      "acceptance_he": "זהות הגוף נשמרת בין rigs ו־LOD; אדם מת אינו ממשיך לבצע פעולות חיים.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/infantry/roles/infantry_actions.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "infantry.carried_equipment",
+      "kind": "assembly",
+      "domain": "infantry",
+      "owner_agent": "infantry_actions",
+      "purpose_he": "לבוש, ציוד אישי ונשק נישא התואמים יחידה, תפקיד, מקום וזמן.",
+      "context_pack": "context/game/domains/infantry/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "InventoryView",
+        "AttachmentBinding"
+      ],
+      "output_path": "capabilities/infantry/assemblies/carried_equipment/",
+      "acceptance_he": "הפריט המוצג הוא הפריט במלאי; משקל והשמטה עוברים דרך ledger.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/infantry/roles/infantry_actions.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "infantry.locomotion",
+      "kind": "capability",
+      "domain": "infantry",
+      "owner_agent": "infantry_actions",
+      "purpose_he": "הליכה, פנייה, כריעה ומעבר בסיסי מול מעטפת גוף ומשטח.",
+      "context_pack": "context/game/domains/infantry/",
+      "dependency_interfaces": [
+        "TerrainSample",
+        "Traversability",
+        "BodyEnvelope",
+        "AcceptedPhysicsOutcome"
+      ],
+      "output_path": "game/runtime/infantry/locomotion/",
+      "acceptance_he": "עמידה וכריעה משנות collision וכיסוי בעקביות; input אינו עוקף מגבלת תנועה.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/infantry/roles/infantry_actions.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "infantry.squad_formation",
+      "kind": "capability",
+      "domain": "infantry",
+      "owner_agent": "infantry_actions",
+      "purpose_he": "תנועה, המתנה והתקבצות של חוליה עם מרחקים ותפקידים.",
+      "context_pack": "context/game/domains/infantry/",
+      "dependency_interfaces": [
+        "OrderDelivery",
+        "NavigationPath",
+        "ActorAction",
+        "RoleAssignment"
+      ],
+      "output_path": "game/runtime/infantry/squad_formation/",
+      "acceptance_he": "חבר מופרד נשאר מופרד עד מסלול ממשי; אין teleport או ידיעה גלובלית.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/infantry/roles/infantry_actions.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "infantry.injury",
+      "kind": "capability",
+      "domain": "infantry",
+      "owner_agent": "infantry_casualty",
+      "purpose_he": "פציעה, אובדן יכולת ומוות כמצבים מתמידים בעלי סיבה וזמן.",
+      "context_pack": "context/game/domains/infantry/",
+      "dependency_interfaces": [
+        "DamageEffect",
+        "HumanBody",
+        "AcceptedEvent"
+      ],
+      "output_path": "game/runtime/infantry/injury/",
+      "acceptance_he": "פציעה ומוות נשמרים ב־save וב־LOD; דיכוי ומורל אינם מחליפים את מצב הפציעה.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/infantry/roles/infantry_casualty.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "infantry.care",
+      "kind": "capability",
+      "domain": "infantry",
+      "owner_agent": "infantry_casualty",
+      "purpose_he": "פעולת סיוע מוגבלת שמחייבת אדם מתאים, זמן ומשאבים.",
+      "context_pack": "context/game/domains/infantry/",
+      "dependency_interfaces": [
+        "InjuryState",
+        "InventoryTransfer",
+        "ActorAction",
+        "InteractionEligibility"
+      ],
+      "output_path": "game/runtime/infantry/care/",
+      "acceptance_he": "סיוע נקטע ומחודש לפי חוזה; זמן וציוד נגבים ואין ריפוי ללא פעולה מאושרת.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/infantry/roles/infantry_casualty.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.aircraft",
+      "kind": "assembly",
+      "domain": "aviation",
+      "owner_agent": "aviation_platform",
+      "purpose_he": "תצורת מטוס הכוללת גוף, כנפיים, עמדות, מטען ונתוני וריאנט.",
+      "context_pack": "context/game/domains/aviation/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "MassProperties",
+        "WeaponMount",
+        "AssetBinding"
+      ],
+      "output_path": "capabilities/aviation/assemblies/aircraft/",
+      "acceptance_he": "זהות המטוס וגרסתו תואמות מקורות ונכסים; הופעה היסטורית דורשת ראיית נוכחות נפרדת.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/aviation/roles/aviation_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "aviation.propulsion_adapter",
+      "kind": "capability",
+      "domain": "aviation",
+      "owner_agent": "aviation_platform",
+      "purpose_he": "התאמת מנוע צירי או הנעה ייעודית לדחף אווירי ולתנאי הטיסה.",
+      "context_pack": "context/game/domains/aviation/",
+      "dependency_interfaces": [
+        "ShaftPower",
+        "FuelCompatibility",
+        "AirState",
+        "VariantEvidence"
+      ],
+      "output_path": "game/runtime/aviation/propulsion/",
+      "acceptance_he": "ליבת המנוע המשותפת אינה קובעת עקומת דחף; המתאם מכייל ומצהיר על מעטפתו.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/aviation/roles/aviation_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "aviation.flight",
+      "kind": "capability",
+      "domain": "aviation",
+      "owner_agent": "aviation_platform",
+      "purpose_he": "מצב טיסה ותנועה במעטפת אווירודינמית שנבחרה במפורש.",
+      "context_pack": "context/game/domains/aviation/",
+      "dependency_interfaces": [
+        "AirframeDefinition",
+        "PropulsionOutput",
+        "WeatherSample",
+        "AcceptedPhysicsOutcome"
+      ],
+      "output_path": "game/runtime/aviation/flight/",
+      "acceptance_he": "מהירות, גובה ומטען נבדקים בתחום המודל; אין שימוש בנתוני טנק או כלי שיט.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/aviation/roles/aviation_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "aviation.sortie",
+      "kind": "capability",
+      "domain": "aviation",
+      "owner_agent": "aviation_platform",
+      "purpose_he": "תכנון וביצוע גיחה עם זמן, טווח, מטען ודיווח תצפית שנמסר.",
+      "context_pack": "context/game/domains/aviation/",
+      "dependency_interfaces": [
+        "FlightEnvelope",
+        "SupplyTransfer",
+        "OrderDelivery",
+        "ObservationDelivery"
+      ],
+      "output_path": "game/runtime/aviation/sortie/",
+      "acceptance_he": "הגעה וצריכה נשמרות; תצפית אינה זמינה לפני מסירה ולא מוכיחה היסטוריה.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/aviation/roles/aviation_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.ship",
+      "kind": "assembly",
+      "domain": "naval",
+      "owner_agent": "naval_platform",
+      "purpose_he": "כלי שיט עם גוף צף, מדורים, סיפון, מטען ומערכות ייעודיות.",
+      "context_pack": "context/game/domains/naval/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "MassProperties",
+        "WeaponMount",
+        "AssetBinding"
+      ],
+      "output_path": "capabilities/naval/assemblies/ship/",
+      "acceptance_he": "גבולות עומס ומידות תואמים וריאנט; מדורי אונייה אינם מיובאים ממודל רכב קרקעי.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/naval/roles/naval_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "naval.propulsion_adapter",
+      "kind": "capability",
+      "domain": "naval",
+      "owner_agent": "naval_platform",
+      "purpose_he": "המרת הספק למערכת הנעה ימית ותצרוכת לפי תצורת כלי השיט.",
+      "context_pack": "context/game/domains/naval/",
+      "dependency_interfaces": [
+        "ShaftPower",
+        "FuelCompatibility",
+        "WaterSample",
+        "VariantEvidence"
+      ],
+      "output_path": "game/runtime/naval/propulsion/",
+      "acceptance_he": "עקומת דחף/גרר ימית בעלת מקור או הנחה; חוזה משותף אינו מעניק גישה למסמכי קרקע.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/naval/roles/naval_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "naval.movement",
+      "kind": "capability",
+      "domain": "naval",
+      "owner_agent": "naval_platform",
+      "purpose_he": "תנועה ימית ותמרון לפי עומק, חוף, זרם ומעטפת כלי שיט.",
+      "context_pack": "context/game/domains/naval/",
+      "dependency_interfaces": [
+        "WaterSample",
+        "SeaRoute",
+        "PropulsionOutput",
+        "WeatherSample",
+        "AcceptedPhysicsOutcome"
+      ],
+      "output_path": "game/runtime/naval/movement/",
+      "acceptance_he": "נתיב בעל עומק חסר אינו מאושר בוודאות; מטען ומהירות משפיעים לפי מודל מוצהר.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/naval/roles/naval_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "naval.transport_operation",
+      "kind": "capability",
+      "domain": "naval",
+      "owner_agent": "naval_platform",
+      "purpose_he": "הובלה, העלאה והורדה של אנשים ומטען במתקן מורשה.",
+      "context_pack": "context/game/domains/naval/",
+      "dependency_interfaces": [
+        "VesselCapacity",
+        "PortAccess",
+        "SupplyTransfer",
+        "ActorTransfer",
+        "OrderDelivery"
+      ],
+      "output_path": "game/runtime/naval/transport_operations/",
+      "acceptance_he": "אין שכפול מטען או אדם בשתי פלטפורמות; זמן ומגבלות העברה נרשמים.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/naval/roles/naval_platform.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "logistics.stock",
+      "kind": "primitive",
+      "domain": "logistics",
+      "owner_agent": "logistics_supply",
+      "purpose_he": "חשבון מלאי בעל סוג, כמות, יחידה, בעלים ומיקום.",
+      "context_pack": "context/game/domains/logistics/",
+      "dependency_interfaces": [
+        "StableIdentity",
+        "Units",
+        "AcceptedEvent"
+      ],
+      "output_path": "capabilities/logistics/stock/",
+      "acceptance_he": "יתרה לעולם אינה נוצרת מקרבה למחסן; כל שינוי מקושר לאירוע והיחידות תואמות.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/logistics/roles/logistics_supply.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "logistics.transfer",
+      "kind": "capability",
+      "domain": "logistics",
+      "owner_agent": "logistics_supply",
+      "purpose_he": "העברת אספקה אטומית בין מלאים עם קיבולת, אובדן וזמן.",
+      "context_pack": "context/game/domains/logistics/",
+      "dependency_interfaces": [
+        "ResourceAccount",
+        "LoadEnvelope",
+        "AcceptedEvent"
+      ],
+      "output_path": "game/runtime/logistics/transfers/",
+      "acceptance_he": "העברה חוזרת אינה מכפילה חומר; מקור ויעד מתאזנים או אובדן מתועד.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/logistics/roles/logistics_supply.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "logistics.supply_route",
+      "kind": "capability",
+      "domain": "logistics",
+      "owner_agent": "logistics_supply",
+      "purpose_he": "הקצאת תובלה ודרך למענה על ביקוש בעל deadline.",
+      "context_pack": "context/game/domains/logistics/",
+      "dependency_interfaces": [
+        "DemandRequest",
+        "TransportCapacity",
+        "RouteAvailability",
+        "OrderDelivery"
+      ],
+      "output_path": "game/runtime/logistics/supply_routes/",
+      "acceptance_he": "דרך זמינה אינה אספקה שהגיעה; הגעה, צריכה ואיחור נובעים מאירועים ממשיים.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/logistics/roles/logistics_supply.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "logistics.maintenance",
+      "kind": "capability",
+      "domain": "logistics",
+      "owner_agent": "logistics_maintenance",
+      "purpose_he": "בדיקה ותחזוקה מתוכננת לפי ציוד, זמן, כשירות וחלקים.",
+      "context_pack": "context/game/domains/logistics/",
+      "dependency_interfaces": [
+        "ComponentCondition",
+        "WorkOrder",
+        "ResourceAccount",
+        "ActorAction"
+      ],
+      "output_path": "game/runtime/logistics/maintenance/",
+      "acceptance_he": "פעולת תחזוקה משנה מצב רק אחרי משך ומשאבים מתאימים; אפשר להפסיקה.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/logistics/roles/logistics_maintenance.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "logistics.repair",
+      "kind": "capability",
+      "domain": "logistics",
+      "owner_agent": "logistics_maintenance",
+      "purpose_he": "תיקון כשל רכיב באמצעות יכולת איש צוות, גישה וחלקי חילוף.",
+      "context_pack": "context/game/domains/logistics/",
+      "dependency_interfaces": [
+        "ComponentCondition",
+        "RepairEnvelope",
+        "SupplyTransfer",
+        "ActorAction"
+      ],
+      "output_path": "game/runtime/logistics/repair/",
+      "acceptance_he": "תיקון לא נתמך מחזיר חוסר; אין החזרת כלי שלם לתפקוד באמצעות תיקון קוסמטי.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/logistics/roles/logistics_maintenance.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "command.organization",
+      "kind": "assembly",
+      "domain": "command_organization",
+      "owner_agent": "command_structure",
+      "purpose_he": "מבנה יחידות, תפקידים ושיוכים בעלי תחולה בזמן.",
+      "context_pack": "context/game/domains/command_organization/",
+      "dependency_interfaces": [
+        "ReviewedClaim",
+        "TemporalApplicability",
+        "CharacterIdentity"
+      ],
+      "output_path": "capabilities/command_organization/organization/",
+      "acceptance_he": "שייכות ל־OOB אינה מוכיחה נוכחות טקטית; שינוי שיוך מתוארך ובעל מקור.",
+      "phase": "M2",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/command_organization/roles/command_structure.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "command.authority",
+      "kind": "service",
+      "domain": "command_organization",
+      "owner_agent": "command_structure",
+      "purpose_he": "בדיקת סמכות לפי תפקיד, יחידה, זמן ומצב תקשורת.",
+      "context_pack": "context/game/domains/command_organization/",
+      "dependency_interfaces": [
+        "DatedOrganization",
+        "RoleAssignment",
+        "ActorKnowledge"
+      ],
+      "output_path": "game/runtime/command_organization/authority/",
+      "acceptance_he": "פקודה שלא הונפקה בסמכות נדחית; תפקיד חסר אינו ניחוש אוטומטי.",
+      "phase": "M3",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/command_organization/roles/command_structure.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "command.orders",
+      "kind": "capability",
+      "domain": "command_organization",
+      "owner_agent": "command_structure",
+      "purpose_he": "יצירה, מסירה, אישור, עדכון וביטול של פקודה גרסתית.",
+      "context_pack": "context/game/domains/command_organization/",
+      "dependency_interfaces": [
+        "CommandAuthority",
+        "OrderDelivery",
+        "ActorKnowledge",
+        "AcceptedEvent"
+      ],
+      "output_path": "game/runtime/command_organization/orders/",
+      "acceptance_he": "מקבל פועל רק אחרי מסירה; ביטול ואישור אינם נעלמים ב־save או בהחלפת LOD.",
+      "phase": "M3",
+      "suggested_model_profile": "RESEARCH",
+      "context_entry": "context/game/domains/command_organization/roles/command_structure.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.radio",
+      "kind": "primitive",
+      "domain": "command_organization",
+      "owner_agent": "command_signals",
+      "purpose_he": "מכשיר קשר עם תאימות, ערוץ, טווח שימוש, הספק ומצב תפעולי.",
+      "context_pack": "context/game/domains/command_organization/",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "ResourceAccount",
+        "CommunicationEnvelope"
+      ],
+      "output_path": "capabilities/command_organization/primitives/radio/",
+      "acceptance_he": "קשר תואם וריאנט ומצב מלאי; אין קליטה אוטומטית בגלל שייכות לאותה יחידה.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/command_organization/roles/command_signals.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "command.communications",
+      "kind": "capability",
+      "domain": "command_organization",
+      "owner_agent": "command_signals",
+      "purpose_he": "מסירת קשר רדיו, קול או שליח עם עיכוב, תקלות ואישור.",
+      "context_pack": "context/game/domains/command_organization/",
+      "dependency_interfaces": [
+        "CommunicationEnvelope",
+        "TerrainSample",
+        "WeatherSample",
+        "ActorTransfer",
+        "AcceptedEvent"
+      ],
+      "output_path": "game/runtime/command_organization/communications/",
+      "acceptance_he": "מסר שלא הגיע אינו ידע; ידיעת השולח אינה מעניקה למקבל זיכרונות פרטיים.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/command_organization/roles/command_signals.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "character.identity",
+      "kind": "primitive",
+      "domain": "characters",
+      "owner_agent": "character_identity",
+      "purpose_he": "CharacterId רציף עם שם, רקע, מעמד אמיתי או סינתטי ומקורות מפורשים.",
+      "context_pack": "context/game/domains/characters/",
+      "dependency_interfaces": [
+        "StableIdentity",
+        "ReviewedClaim",
+        "RoleAssignment"
+      ],
+      "output_path": "capabilities/characters/identity/",
+      "acceptance_he": "החלפת לבוש, render ו־LOD אינה מחליפה אדם; ביוגרפיה מומצאת אינה מיוחסת כאמת לאדם אמיתי.",
+      "phase": "M2",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/characters/roles/character_identity.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "character.commitments",
+      "kind": "capability",
+      "domain": "characters",
+      "owner_agent": "character_identity",
+      "purpose_he": "מחויבויות, תפקידים והבטחות מתמשכות של אדם לאורך זמן.",
+      "context_pack": "context/game/domains/characters/",
+      "dependency_interfaces": [
+        "OrderDelivery",
+        "AcceptedInteraction",
+        "CharacterIdentity"
+      ],
+      "output_path": "game/runtime/characters/commitments/",
+      "acceptance_he": "הבטחה נשמרת אחרי טעינה; משימה מנוגדת דורשת עדכון או קונפליקט גלוי.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/characters/roles/character_identity.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "character.memory",
+      "kind": "capability",
+      "domain": "characters",
+      "owner_agent": "character_memory",
+      "purpose_he": "זיכרון מתמיד של אירוע נתפס, עדים, זמן ומקור הידיעה.",
+      "context_pack": "context/game/domains/characters/",
+      "dependency_interfaces": [
+        "ActorObservation",
+        "AcceptedInteraction",
+        "AcceptedEvent"
+      ],
+      "output_path": "game/runtime/characters/memory/",
+      "acceptance_he": "אדם זוכר רק אירוע שהיה עד לו או שנמסר לו; הזיכרון אינו חי רק בחלון LLM.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/characters/roles/character_memory.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "character.knowledge",
+      "kind": "service",
+      "domain": "characters",
+      "owner_agent": "character_memory",
+      "purpose_he": "מאגר אמונות וידיעות של אדם עם מקור, זמן מסירה ואפשרות לטעות.",
+      "context_pack": "context/game/domains/characters/",
+      "dependency_interfaces": [
+        "ObservationDelivery",
+        "OrderDelivery",
+        "MemoryRecord"
+      ],
+      "output_path": "game/runtime/characters/knowledge/",
+      "acceptance_he": "שמועה נשארת אמונה בעלת מקור; אין קריאה ישירה לעולם האמת או לעתיד.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/characters/roles/character_memory.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "character.relationship",
+      "kind": "capability",
+      "domain": "characters",
+      "owner_agent": "character_social",
+      "purpose_he": "קשר מכוון בין אנשים המשתנה בעקבות פעולות שנחוו.",
+      "context_pack": "context/game/domains/characters/",
+      "dependency_interfaces": [
+        "CharacterIdentity",
+        "AcceptedInteraction",
+        "MemoryRecord"
+      ],
+      "output_path": "game/runtime/characters/relationships/",
+      "acceptance_he": "עזרה שעלותה זמן או ציוד יכולה לשנות קשר; השינוי נשמר ומכבד כיוון ופרטיות.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/characters/roles/character_social.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "character.dialogue",
+      "kind": "capability",
+      "domain": "characters",
+      "owner_agent": "character_social",
+      "purpose_he": "דיבור ותגובות דרך הצעה תחומה, תנאי זכאות ובדיקת ידע. בסיס M3 הוא תוכן מוגבל ומתוסרט; הרחבת שיחת LLM מתמשכת עתידית ואינה תנאי לפרוסה.",
+      "context_pack": "context/game/domains/characters/",
+      "dependency_interfaces": [
+        "ActorKnowledge",
+        "InteractionProposal",
+        "RelationshipView"
+      ],
+      "output_path": "game/runtime/characters/dialogue/",
+      "acceptance_he": "דיאלוג מקומי פועל ללא מודל רשת; טקסט אינו יוצר תחמושת, ידיעה או פעולה שלא אושרו.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/characters/roles/character_social.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "character.routines",
+      "kind": "capability",
+      "domain": "characters",
+      "owner_agent": "character_social",
+      "purpose_he": "לוח פעילויות של שינה, אוכל, שמירה, עבודה ופנאי עם הפרעות.",
+      "context_pack": "context/game/domains/characters/",
+      "dependency_interfaces": [
+        "ActivityIntent",
+        "ResourceAccount",
+        "OrderDelivery",
+        "FatigueState"
+      ],
+      "output_path": "game/runtime/characters/routines/",
+      "acceptance_he": "אזעקה ופקודה קוטעות פעילות לפי מדיניות; זמן, עייפות וקשר נשמרים גם מחוץ למסך.",
+      "phase": "M5",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/characters/roles/character_social.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "runtime.ecs",
+      "kind": "service",
+      "domain": "simulation_runtime",
+      "owner_agent": "runtime_core",
+      "purpose_he": "רישום רכיבים וזהויות עם בעלות כתיבה מפורשת ומבטים מורשים.",
+      "context_pack": "context/game/domains/simulation_runtime/",
+      "dependency_interfaces": [
+        "StableIdentity",
+        "ComponentSchema",
+        "StateTransition"
+      ],
+      "output_path": "game/runtime/simulation_runtime/ecs/",
+      "acceptance_he": "לכל שדה כותב מורשה; רכיב או schema לא מוכר נדחים במקום הוספה שקטה.",
+      "phase": "M1",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_core.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "runtime.schedule",
+      "kind": "service",
+      "domain": "simulation_runtime",
+      "owner_agent": "runtime_core",
+      "purpose_he": "תזמון tick קבוע, סדר מערכות ושעונים מקומיים מוכרזים.",
+      "context_pack": "context/game/domains/simulation_runtime/",
+      "dependency_interfaces": [
+        "TickClock",
+        "SystemDeclaration",
+        "SeededRandom"
+      ],
+      "output_path": "game/runtime/simulation_runtime/schedule/",
+      "acceptance_he": "סדר ריצה קבוע ומוכח; אין מחקר, רשת או תשלום ב־tick.",
+      "phase": "M1",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_core.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "runtime.physics_port",
+      "kind": "service",
+      "domain": "simulation_runtime",
+      "owner_agent": "runtime_core",
+      "purpose_he": "גבול physics/navigation המקבל פקודות ומחזיר תוצאות מאושרות מה־backend הנעול.",
+      "context_pack": "context/game/domains/simulation_runtime/",
+      "dependency_interfaces": [
+        "PhysicsRequest",
+        "NavigationRequest",
+        "AcceptedPhysicsOutcome"
+      ],
+      "output_path": "game/runtime/simulation_runtime/physics_port/",
+      "acceptance_he": "live-headless מפעיל את אותו backend; recorded outcomes מסומנים כמסלול replay נפרד.",
+      "phase": "M1",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_core.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "runtime.events",
+      "kind": "service",
+      "domain": "simulation_runtime",
+      "owner_agent": "runtime_core",
+      "purpose_he": "סדר אירועים, סיבות, ייחודיות ו־RNG בתחום determinism מפורש.",
+      "context_pack": "context/game/domains/simulation_runtime/",
+      "dependency_interfaces": [
+        "AcceptedCommand",
+        "StateTransition",
+        "EventIdentity"
+      ],
+      "output_path": "game/runtime/simulation_runtime/events/",
+      "acceptance_he": "אירוע חוזר אינו מיושם פעמיים; hash משוחזר לפי lock וסדר קלט מוגדרים.",
+      "phase": "M1",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_core.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "runtime.actor_projection",
+      "kind": "service",
+      "domain": "simulation_runtime",
+      "owner_agent": "runtime_core",
+      "purpose_he": "סינון מצב עולם למבט שחקן או NPC על בסיס מידע שנמסר בלבד.",
+      "context_pack": "context/game/domains/simulation_runtime/",
+      "dependency_interfaces": [
+        "ObservationDelivery",
+        "ActorKnowledge",
+        "VisibilityPolicy"
+      ],
+      "output_path": "game/runtime/simulation_runtime/actor_projection/",
+      "acceptance_he": "זהות של אויב נסתר אינה דולפת דרך UI, path או debug; פרטי אמת חסומים לפני מסירה.",
+      "phase": "M3",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_core.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "runtime.episode_loader",
+      "kind": "service",
+      "domain": "simulation_runtime",
+      "owner_agent": "runtime_core",
+      "purpose_he": "טעינת EpisodeSpec, רכיבים ונכסים לפי גרסאות, hashes והתקנות מורשות.",
+      "context_pack": "context/game/domains/simulation_runtime/",
+      "dependency_interfaces": [
+        "EpisodeSpec",
+        "CapabilityLock",
+        "AssetManifest",
+        "ValidationReceipt"
+      ],
+      "output_path": "game/runtime/simulation_runtime/episode_loader/",
+      "acceptance_he": "אפיזודה שנייה נטענת מנתונים באותו build; חבילה אינה מתקינה קוד או משנה schedules.",
+      "phase": "M1",
+      "suggested_model_profile": "DEEP",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_core.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "runtime.lod",
+      "kind": "capability",
+      "domain": "simulation_runtime",
+      "owner_agent": "runtime_continuity",
+      "purpose_he": "מעבר בין רמות סימולציה ושמירת מצב של יחידים וקבוצות.",
+      "context_pack": "context/game/domains/simulation_runtime/",
+      "dependency_interfaces": [
+        "StateSnapshot",
+        "AggregateState",
+        "ResourceAccount",
+        "ActorContinuity"
+      ],
+      "output_path": "game/runtime/simulation_runtime/lod/",
+      "acceptance_he": "מעבר הלוך וחזור שומר אנשים, פציעות, מלאי, פקודות וקשרים לפי קירוב מוצהר.",
+      "phase": "M5",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_continuity.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "runtime.save",
+      "kind": "service",
+      "domain": "simulation_runtime",
+      "owner_agent": "runtime_continuity",
+      "purpose_he": "צילום מצב וטעינה עם נעילת תוכן ו־schema ומיגרציה מפורשת.",
+      "context_pack": "context/game/domains/simulation_runtime/",
+      "dependency_interfaces": [
+        "StateSnapshot",
+        "EpisodeLock",
+        "ContentHash",
+        "MigrationPlan"
+      ],
+      "output_path": "game/runtime/simulation_runtime/save/",
+      "acceptance_he": "שמירה נטענת באותו lock; מקור או plugin חדשים אינם משנים משחק קיים בשקט.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_continuity.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "runtime.replay",
+      "kind": "service",
+      "domain": "simulation_runtime",
+      "owner_agent": "runtime_continuity",
+      "purpose_he": "בדיקת שחזור החלטות לפי פקודות ותוצאות קודמות, ובנפרד הרצה פיזיקלית חוזרת.",
+      "context_pack": "context/game/domains/simulation_runtime/",
+      "dependency_interfaces": [
+        "AcceptedCommand",
+        "AcceptedPhysicsOutcome",
+        "EventLog",
+        "EpisodeLock"
+      ],
+      "output_path": "game/runtime/simulation_runtime/replay/",
+      "acceptance_he": "שני סוגי ההוכחה מדווחים בנפרד; hash זהה במסלול מוקלט אינו הוכחת determinism של physics.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_continuity.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "runtime.time_acceleration",
+      "kind": "capability",
+      "domain": "simulation_runtime",
+      "owner_agent": "runtime_continuity",
+      "purpose_he": "קידום זמן מוסכם עם עצירה לפני אירוע מקומי משמעותי ועיבוד אילוצים.",
+      "context_pack": "context/game/domains/simulation_runtime/",
+      "dependency_interfaces": [
+        "TickClock",
+        "HistoricalAnchor",
+        "ActivitySchedule",
+        "PendingOrder"
+      ],
+      "output_path": "game/runtime/simulation_runtime/time_acceleration/",
+      "acceptance_he": "אין דילוג על אירוע היסטורי או מחיקה של חוב אספקה; פעולה דורשת בקשת שחקן.",
+      "phase": "M5",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_continuity.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "experience.interaction",
+      "kind": "capability",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "פעולה תחומה בעלת תנאי זכאות, אפשרויות, זמן, מחיר ותוצאה נתפסת.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "InteractionProposal",
+        "ActorAction",
+        "SupplyTransfer",
+        "RelationshipEvent"
+      ],
+      "output_path": "capabilities/experience_design/interactions/",
+      "acceptance_he": "עזרה, בדיקת ציוד או שיתוף אספקה משנים מצב ממשי; ההדגמה כוללת לפחות שתי פעילויות שקטות.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "experience.pacing",
+      "kind": "capability",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "בחירת הזדמנויות משחק ושקט לפי המצב הנוכחי ומטרת החוויה.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "EligibleInteraction",
+        "AuthorizedPlayerView",
+        "EpisodeEnvelope"
+      ],
+      "output_path": "game/runtime/experience_design/pacing/",
+      "acceptance_he": "הבמאי אינו מייצר אויב, תחמושת או החייאה; אם אין פעולה מתאימה נשמר שקט.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "experience.profiles",
+      "kind": "service",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "מדיניות עזרה, נגישות וקושי שנפרדת מנאמנות היסטורית ופירוט מודל.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "GameplayModifier",
+        "AccessibilityPreference",
+        "EpisodeEnvelope"
+      ],
+      "output_path": "capabilities/experience_design/profiles/",
+      "acceptance_he": "אותן זהויות ואותן ראיות בכל פרופיל; שינוי קושי נרשם ואינו מוחק נפגעים מהיומן.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "player.desktop_input",
+      "kind": "capability",
+      "domain": "experience_design",
+      "owner_agent": "experience_interface",
+      "purpose_he": "מיפוי מקלדת, עכבר ובקר לפעולות משמעותיות הניתנות לשינוי.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "SemanticAction",
+        "ActionValidation",
+        "AuthorizedPlayerView"
+      ],
+      "output_path": "game/runtime/experience_design/desktop_input/",
+      "acceptance_he": "אותה פעולה עוברת validator זהה מ־desktop ומ־replay; remapping ומצבי hold/toggle פועלים.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/experience_design/roles/experience_interface.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "player.vr_boundary",
+      "kind": "capability",
+      "domain": "experience_design",
+      "owner_agent": "experience_interface",
+      "purpose_he": "חוזה נפרד לראש/ידיים/גוף ולפעולות עם מתאם OpenXR ל־spike; בדיקת מכשיר ויציאת VR הן gates נפרדים.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "SemanticAction",
+        "PoseSample",
+        "ActionValidation",
+        "AvatarState"
+      ],
+      "output_path": "game/runtime/experience_design/vr_adapter/",
+      "acceptance_he": "אובדן tracking מבטל input לא תקף; simulated XR מוכיח seam בלבד; אין דיווח על תאימות, נוחות או ביצועים בלי בדיקת headset.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/experience_design/roles/experience_interface.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "player.comfort",
+      "kind": "service",
+      "domain": "experience_design",
+      "owner_agent": "experience_interface",
+      "purpose_he": "מדיניות מצלמה, תנועה, recenter, pause ונוחות בישיבה או בעמידה.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "ViewPose",
+        "LocomotionIntent",
+        "SessionLifecycle",
+        "AccessibilityPreference"
+      ],
+      "output_path": "game/runtime/experience_design/comfort/",
+      "acceptance_he": "אין תנועת מצלמה כפויה ב־VR; pause ויציאה נגישים ואינם משנים עובדות היסטוריות.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/experience_design/roles/experience_interface.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "player.interface",
+      "kind": "capability",
+      "domain": "experience_design",
+      "owner_agent": "experience_interface",
+      "purpose_he": "הוראות, כתוביות, משוב ויומן במבט מורשה עם מסלול מסכי ומרחבי.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "AuthorizedPlayerView",
+        "SemanticAction",
+        "SubtitleCue"
+      ],
+      "output_path": "game/runtime/experience_design/interface/",
+      "acceptance_he": "עברית ו־RTL, ניגודיות וגודל קריאים; מידע נסתר אינו דולף דרך UI או כתוביות.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/experience_design/roles/experience_interface.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "player.evidence_inspector",
+      "kind": "capability",
+      "domain": "experience_design",
+      "owner_agent": "experience_interface",
+      "purpose_he": "הצגת מקור, שחזור וזהות סינתטית לפי בקשת השחקן ובתחום המותר.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "InspectableEvidence",
+        "AuthorizedPlayerView",
+        "ContentLicense"
+      ],
+      "output_path": "game/runtime/experience_design/evidence_inspector/",
+      "acceptance_he": "אפשר לשחק בלי לפתוח אטלס; בדיקה אינה חושפת פקודות עתידיות או זיכרון פרטי.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/experience_design/roles/experience_interface.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "battle.template",
+      "kind": "assembly",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "תבנית קרב נתונית הניתנת לשימוש חוזר: סיור, הגנה, התקפה או ליווי נבחרים בהרכבה מפורשת.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "BattleObjective",
+        "ForceRole",
+        "DeploymentRule",
+        "BattlePhase",
+        "HistoricalAnchor"
+      ],
+      "output_path": "capabilities/experience_design/battle_data/template/",
+      "acceptance_he": "תבנית שנייה נטענת באותו loader וללא script אפיזודה; בחירת תבנית אינה טענה שאירוע כזה התרחש.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "battle.objective",
+      "kind": "primitive",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "יעד קרב מוגדר עם גורם אחראי, תנאי הצלחה/כישלון וחלופות מקומיות.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "ActorAuthority",
+        "WorldCondition",
+        "OutcomePolicy"
+      ],
+      "output_path": "capabilities/experience_design/battle_data/objective/",
+      "acceptance_he": "הצלחה נבחנת ממצב מאושר; הפסד אינו מאפס מלאי, פציעות או זמן באופן נסתר.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "battle.condition",
+      "kind": "primitive",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "תנאי ו־trigger הצהרתי מוגבל על זמן, מקום, פקודה או מצב מאושר.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "AuthorizedPredicate",
+        "TickClock",
+        "AcceptedEvent"
+      ],
+      "output_path": "capabilities/experience_design/battle_data/condition/",
+      "acceptance_he": "חבילה אינה מריצה קוד; predicate לא מוכר נדחה והתנאי אינו קורא ידע אסור.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "battle.force_role",
+      "kind": "primitive",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "תפקיד כוח כמו מגן, סייר, עתודה או מלווה עם שיוך יחידה ותחום סמכות.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "DatedOrganization",
+        "RoleAssignment",
+        "EvidenceSnapshot"
+      ],
+      "output_path": "capabilities/experience_design/battle_data/force_role/",
+      "acceptance_he": "צד ותפקיד אינם ממציאים נוכחות יחידה; התנהגות משתמשת באותן יכולות command ו־AI.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "battle.deployment",
+      "kind": "primitive",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "נתוני מיקום התחלתי והגעה של כוחות בעלי חלון זמן, מקור ומדיניות reinforcement.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "CoordinateTransform",
+        "TemporalApplicability",
+        "ActorTransfer",
+        "HistoricalAnchor"
+      ],
+      "output_path": "capabilities/experience_design/battle_data/deployment/",
+      "acceptance_he": "אין teleport תוך כדי משחק או יצירת אדם כפול; הגעה חסרת ראיה מסומנת כשחזור/סימולציה.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "battle.phase",
+      "kind": "primitive",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "שלב טקטי עם תנאי כניסה/יציאה, משימות מותרות וקשר לשלבים הבאים.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "WorldCondition",
+        "BattleObjective",
+        "OrderDelivery"
+      ],
+      "output_path": "capabilities/experience_design/battle_data/phase/",
+      "acceptance_he": "התקדמות שלב אינה מכריחה תוצאה היסטורית או מחליפה מצב עולם; שקט מותר אם התנאים לא התקיימו.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "battle.anchor_policy",
+      "kind": "primitive",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "מדיניות תחומה לפתרון התנגשות בין אילוץ היסטורי לתוצאות מקומיות.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "HistoricalAnchor",
+        "EpisodeEnvelope",
+        "LocalConsequence"
+      ],
+      "output_path": "capabilities/experience_design/battle_data/anchor_policy/",
+      "acceptance_he": "קונפליקט מייצר החלטה מפורשת; אין הרג כפוי, החייאה או תיקון עבר שקט.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "battle.outcome",
+      "kind": "primitive",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "תוצאה מקומית של קרב עם שינויים במצב, מקורות ותנאי סיום.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "AcceptedEvent",
+        "ResourceAccount",
+        "CasualtyState",
+        "RelationshipEvent"
+      ],
+      "output_path": "capabilities/experience_design/battle_data/outcome/",
+      "acceptance_he": "תוצאה שומרת נפגעים ומלאי; תוצאת משחק אינה נכתבת בחזרה ל־HistoricalTruth.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "battle.difficulty_overlay",
+      "kind": "primitive",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "שכבת עזרה וחוויית שחקן מעל תבנית קרב, ללא שינוי הגדרות היסטוריות.",
+      "context_pack": "context/game/domains/experience_design/",
+      "dependency_interfaces": [
+        "GameplayModifier",
+        "AccessibilityPreference",
+        "BattleTemplate"
+      ],
+      "output_path": "capabilities/experience_design/battle_data/difficulty_overlay/",
+      "acceptance_he": "Easy ו־High Fidelity חולקים ציוד וזהויות; שינויים בפגיעה/רמזים נרשמים באופן גלוי.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "weather.sample",
+      "kind": "primitive",
+      "domain": "weather",
+      "owner_agent": "weather_system",
+      "purpose_he": "מצב מקומי מתוארך של רוח, משקעים, טמפרטורה וראות עם אי־ודאות.",
+      "context_pack": "context/game/domains/weather/",
+      "dependency_interfaces": [
+        "EvidenceSnapshot",
+        "TemporalApplicability",
+        "CoordinateTransform"
+      ],
+      "output_path": "capabilities/weather/samples/",
+      "acceptance_he": "מזג אוויר שלא תועד מוצג כשחזור; זמן ומקום שאינם תואמים נדחים.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weather/roles/weather_system.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "weather.effects",
+      "kind": "capability",
+      "domain": "weather",
+      "owner_agent": "weather_system",
+      "purpose_he": "הפקת modifiers מוגבלים של ראות, קול וחשיפה עקב מזג האוויר; אין כתיבה ישירה למצב השייך לקרקע, לאדם או ל־renderer.",
+      "context_pack": "context/game/domains/weather/",
+      "dependency_interfaces": [
+        "WeatherSample",
+        "SurfaceMaterial",
+        "VisibilityEnvelope",
+        "AcousticEnvelope"
+      ],
+      "output_path": "game/runtime/weather/effects/",
+      "acceptance_he": "הצרכנים מחילים modifiers פעם אחת; תצוגה ותפיסה מקבלות אותה דגימה; שינוי רטיבות נשמר בבעלות terrain_world.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/weather/roles/weather_system.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.mesh",
+      "kind": "service",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_visual",
+      "purpose_he": "בניית מודל גוף, מבנה או ציוד התואם וריאנט עם scale, collision ו־LOD.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "dependency_interfaces": [
+        "VariantDefinition",
+        "HistoricalIdentityFeatures",
+        "GeometryEnvelope"
+      ],
+      "output_path": "capabilities/asset_pipeline/meshes/",
+      "acceptance_he": "silhouette, קנה מידה ונקודות חיבור תואמים הגדרה מאושרת; placeholder מסומן ואינו עובר promotion.",
+      "phase": "M3",
+      "suggested_model_profile": "VISUAL",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_visual.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.material",
+      "kind": "service",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_visual",
+      "purpose_he": "חומרים וטקסטורות תואמי דגם עם profile desktop ותקציבי VR עתידיים.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "dependency_interfaces": [
+        "SurfaceMaterial",
+        "WeatherSample",
+        "AssetProfile",
+        "SurfaceState"
+      ],
+      "output_path": "capabilities/asset_pipeline/materials/",
+      "acceptance_he": "ב־desktop נשמרות זהות ויחידות; בדיקת stereo ושתי עיניים היא gate נפרד על מכשיר לפני טענת תמיכה ב־VR.",
+      "phase": "M3",
+      "suggested_model_profile": "VISUAL",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_visual.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.import_manifest",
+      "kind": "service",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_visual",
+      "purpose_he": "נעילת תוכן, רישיון, מקור, פורמט והגדרות ייבוא ל־Godot.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "dependency_interfaces": [
+        "ContentHash",
+        "ContentLicense",
+        "VariantBinding",
+        "AssetProfile"
+      ],
+      "output_path": "capabilities/asset_pipeline/import_manifests/",
+      "acceptance_he": "URL לבדו אינו lock; קובץ glTF ומקור נשמרים, יחידות ו־hash נבדקים לפני טעינה.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_visual.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.rig",
+      "kind": "service",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_motion",
+      "purpose_he": "שלד, anchors לידיים ואחיזה וקישור גוף למלבוש או ציוד.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "dependency_interfaces": [
+        "BodyEnvelope",
+        "AttachmentBinding",
+        "GripAnchor"
+      ],
+      "output_path": "capabilities/asset_pipeline/rigs/",
+      "acceptance_he": "האחיזה במטרים; pose מוסק מסומן ככזה וראש NPC אינו משתלט על מבט משתמש VR.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_motion.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.animation",
+      "kind": "capability",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_motion",
+      "purpose_he": "לוקומוציה, מחוות, מבט ופעולות המחשה הנגזרות ממצב פעולה מאושר.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "dependency_interfaces": [
+        "AnimationActionView",
+        "AvatarState",
+        "AcceptedEvent"
+      ],
+      "output_path": "game/runtime/asset_pipeline/animation/",
+      "acceptance_he": "אנימציה אינה משלימה reload או סיוע בעצמה; גוף מת/פצוע מציג את מצבו בפועל.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_motion.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.spatial_audio",
+      "kind": "capability",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_audio",
+      "purpose_he": "קול סביבתי, נשק, צעדים ומקורות קול במיקום עולם עם תקציבי ביצוע.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "dependency_interfaces": [
+        "AcousticEvent",
+        "AuthorizedListenerView",
+        "WeatherSample"
+      ],
+      "output_path": "game/runtime/asset_pipeline/spatial_audio/",
+      "acceptance_he": "כיוון ומרחק עקביים עם עולם; איכות HRTF דורשת בדיקה ואינה מוסקת מעצם קיום panning.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_audio.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.voice_subtitles",
+      "kind": "service",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_audio",
+      "purpose_he": "תוכן קולי וכתוביות שפה עם תזמון, זכויות וזיקה להצעת דיבור מאושרת.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "dependency_interfaces": [
+        "ValidatedSpeechProposal",
+        "ContentLicense",
+        "SubtitleCue"
+      ],
+      "output_path": "capabilities/asset_pipeline/voice_subtitles/",
+      "acceptance_he": "הקול אינו מוסיף עובדות או דובר חסר; כתוביות מסונכרנות וקריאות כולל RTL.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_audio.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "perception.vision",
+      "kind": "capability",
+      "domain": "ai_navigation",
+      "owner_agent": "ai_perception",
+      "purpose_he": "תצפית חזותית תחומה לפי כיוון, חסימות, אור, מזג אוויר וחיישן.",
+      "context_pack": "context/game/domains/ai_navigation/",
+      "dependency_interfaces": [
+        "SensorEnvelope",
+        "CollisionQuery",
+        "WeatherSample",
+        "ActorPose",
+        "ObscurantState",
+        "DayNightSample",
+        "VisibilityEnvelope"
+      ],
+      "output_path": "game/runtime/ai_navigation/vision/",
+      "acceptance_he": "חסימה מונעת תצפית; יש הבדל בין זיהוי עצם, זיהוי צד וזיהוי זהות.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ai_navigation/roles/ai_perception.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "perception.hearing",
+      "kind": "capability",
+      "domain": "ai_navigation",
+      "owner_agent": "ai_perception",
+      "purpose_he": "אירוע שמיעה מקומי עם כיוון, עוצמה ואי־ודאות, בלי גישה למקור נסתר בשלמותו.",
+      "context_pack": "context/game/domains/ai_navigation/",
+      "dependency_interfaces": [
+        "AcousticEvent",
+        "SurfaceMaterial",
+        "WeatherSample",
+        "ActorPose"
+      ],
+      "output_path": "game/runtime/ai_navigation/hearing/",
+      "acceptance_he": "שמיעת ירייה אינה מעניקה שם ותפקיד היורה; גבולות זמן וטווח נאכפים.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ai_navigation/roles/ai_perception.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "perception.observation",
+      "kind": "service",
+      "domain": "ai_navigation",
+      "owner_agent": "ai_perception",
+      "purpose_he": "איחוד חיישנים לתצפית חתומה בזמן ובמקור שנמסרת לשחקן או ל־NPC.",
+      "context_pack": "context/game/domains/ai_navigation/",
+      "dependency_interfaces": [
+        "VisionObservation",
+        "HearingObservation",
+        "ActorKnowledge"
+      ],
+      "output_path": "game/runtime/ai_navigation/observation/",
+      "acceptance_he": "תצפית מסופקת דרך projection; ביטחון חיישן אינו שווה לוודאות היסטורית.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ai_navigation/roles/ai_perception.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "ai.navigation",
+      "kind": "capability",
+      "domain": "ai_navigation",
+      "owner_agent": "ai_decision",
+      "purpose_he": "נתיב מקומי ותיקון נתיב לפי עבירות, מעטפת גוף וידיעה מותרת.",
+      "context_pack": "context/game/domains/ai_navigation/",
+      "dependency_interfaces": [
+        "Traversability",
+        "NavigationRequest",
+        "MobilityEnvelope",
+        "ActorObservation"
+      ],
+      "output_path": "game/runtime/ai_navigation/navigation/",
+      "acceptance_he": "אין מסלול דרך מעבר בלתי עביר; מידע על סכנה נסתרת אינו מוזרק דרך העלות.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ai_navigation/roles/ai_decision.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "ai.cognition",
+      "kind": "capability",
+      "domain": "ai_navigation",
+      "owner_agent": "ai_decision",
+      "purpose_he": "בחירת כוונה בעץ מצבים או utility planner מתוך ידע, תפקיד ומשימה.",
+      "context_pack": "context/game/domains/ai_navigation/",
+      "dependency_interfaces": [
+        "ActorKnowledge",
+        "OrderDelivery",
+        "ActivityIntent",
+        "InteractionEligibility"
+      ],
+      "output_path": "game/runtime/ai_navigation/cognition/",
+      "acceptance_he": "follow, wait, cover, task ו־aid עובדים ללא LLM ברשת; כוונה נבדקת לפני שינוי מצב.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ai_navigation/roles/ai_decision.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "ai.morale",
+      "kind": "capability",
+      "domain": "ai_navigation",
+      "owner_agent": "ai_decision",
+      "purpose_he": "נכונות והתמדה בפעולה המושפעות מפחד, עייפות, קשר וחשיפה נתפסת.",
+      "context_pack": "context/game/domains/ai_navigation/",
+      "dependency_interfaces": [
+        "SuppressionEvent",
+        "FatigueState",
+        "RelationshipView",
+        "ActorKnowledge"
+      ],
+      "output_path": "game/runtime/ai_navigation/morale/",
+      "acceptance_he": "מורל ודיכוי זמני נפרדים מפציעה; התנהגות ניתנת לשחזור ואין הסקת אמת ממנה.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/ai_navigation/roles/ai_decision.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "build.capability_provider",
+      "kind": "service",
+      "domain": "economy_deliver",
+      "owner_agent": "economy_provider",
+      "purpose_he": "אותו חוזה ביצוע מקומי או adapter ל־Deliver עבור משימת בנייה מחוץ ל־runtime.",
+      "context_pack": "context/game/domains/economy_deliver/",
+      "dependency_interfaces": [
+        "CapabilityRequest",
+        "CapabilityResult",
+        "ScopeGrant"
+      ],
+      "output_path": "capabilities/economy_deliver/provider/",
+      "acceptance_he": "builder מקומי מייצר תוצר בלי Deliver ובלי רשת; תקלה חיצונית אינה תלות של tick.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/economy_deliver/roles/economy_provider.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "build.quote_reservation",
+      "kind": "service",
+      "domain": "economy_deliver",
+      "owner_agent": "economy_provider",
+      "purpose_he": "quote מאושר ורזרבה לפני פעולה בתשלום עם זהות בקשה יציבה.",
+      "context_pack": "context/game/domains/economy_deliver/",
+      "dependency_interfaces": [
+        "CapabilityRequest",
+        "PriceQuote",
+        "BudgetAccount"
+      ],
+      "output_path": "capabilities/economy_deliver/quotes/",
+      "acceptance_he": "אין ביצוע בתשלום לפני quote; retry עם אותו input אינו קונה אותה עבודה שוב.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/economy_deliver/roles/economy_provider.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "build.investment",
+      "kind": "service",
+      "domain": "economy_deliver",
+      "owner_agent": "economy_provider",
+      "purpose_he": "בחירת השקעת fidelity לפי חוסר היסטורי, תרומה לחוויה, עלות ושימוש חוזר.",
+      "context_pack": "context/game/domains/economy_deliver/",
+      "dependency_interfaces": [
+        "QualityVector",
+        "CapabilityGap",
+        "PriceQuote",
+        "ExperienceFinding"
+      ],
+      "output_path": "capabilities/economy_deliver/investments/",
+      "acceptance_he": "תקציב חזותי אינו עוקף gate היסטורי; מדד לא נמדד נשאר null ולא ציון מומצא.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/economy_deliver/roles/economy_provider.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "build.settlement",
+      "kind": "service",
+      "domain": "economy_deliver",
+      "owner_agent": "economy_provider",
+      "purpose_he": "קבלה, reconciliation וסגירת עלות ספק מול תוצר ו־quote.",
+      "context_pack": "context/game/domains/economy_deliver/",
+      "dependency_interfaces": [
+        "CapabilityResult",
+        "AcceptedQuote",
+        "ArtifactReceipt"
+      ],
+      "output_path": "capabilities/economy_deliver/settlement/",
+      "acceptance_he": "מחיר מוסכם אינו עולה בשל חריגת ספק; סטטוס לא ודאי נשאר reconcile עד בדיקה.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/economy_deliver/roles/economy_provider.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "build.deliver_adapter",
+      "kind": "service",
+      "domain": "economy_deliver",
+      "owner_agent": "economy_provider",
+      "purpose_he": "מתאם פרוטוקול Deliver אמיתי מאחורי חוזה ספק קיים ללא זליגת internals למשחק.",
+      "context_pack": "context/game/domains/economy_deliver/",
+      "dependency_interfaces": [
+        "CapabilityRequest",
+        "AcceptedQuote",
+        "CapabilityResult",
+        "SettlementReceipt"
+      ],
+      "output_path": "capabilities/economy_deliver/deliver_adapter/",
+      "acceptance_he": "conformance ותקלות נבדקים מול פרוטוקול שנלכד בפועל; provider מקומי וחיצוני משתמשים באותו builder.",
+      "phase": "M6",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/economy_deliver/roles/economy_provider.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "context.policy",
+      "kind": "service",
+      "domain": "context_orchestration",
+      "owner_agent": "context_router",
+      "purpose_he": "רישום בעלות, הרשאות ומרחבי הקשר עם חסימה לפני דירוג תוצאות.",
+      "context_pack": "context/game/domains/context_orchestration/",
+      "dependency_interfaces": [
+        "DomainRegistry",
+        "TaskScope",
+        "ScopeGrant"
+      ],
+      "output_path": "capabilities/context_orchestration/policies/",
+      "acceptance_he": "בקשת טנק אינה קוראת מסמכי צי גם אם יש מילים משותפות; בעלות לא ידועה נכשלת סגור.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/context_orchestration/roles/context_router.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "context.retrieval",
+      "kind": "service",
+      "domain": "context_orchestration",
+      "owner_agent": "context_router",
+      "purpose_he": "בחירת חבילת הקשר מצומצמת ומניפסט מקורות לגרסת משימה.",
+      "context_pack": "context/game/domains/context_orchestration/",
+      "dependency_interfaces": [
+        "ContextPolicy",
+        "ContextIndex",
+        "ScopeGrant"
+      ],
+      "output_path": "capabilities/context_orchestration/retrieval/",
+      "acceptance_he": "מסמך אסור אינו נכנס לסיכום או ranking; הרחבה דורשת החלטה רשומה ונפרדת.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/context_orchestration/roles/context_router.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "context.resolver",
+      "kind": "service",
+      "domain": "context_orchestration",
+      "owner_agent": "context_router",
+      "purpose_he": "פירוק חוסרים ליכולות מוכנות לפי תלות, חשיבות, תקציב ו־deadline.",
+      "context_pack": "context/game/domains/context_orchestration/",
+      "dependency_interfaces": [
+        "CapabilityRegistry",
+        "CapabilityGap",
+        "CapabilityLock",
+        "TaskScope"
+      ],
+      "output_path": "capabilities/context_orchestration/resolver/",
+      "acceptance_he": "אין שרשרת NEXT קשיחה; מחזור תלות מגיע ל־fixture, גרסה קודמת או blocker תחום.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/context_orchestration/roles/context_router.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "context.handoff",
+      "kind": "service",
+      "domain": "context_orchestration",
+      "owner_agent": "context_router",
+      "purpose_he": "מסירת עבודה עם תפקיד, read/write scope, חוזים, ראיות ותוצאות בדיקה.",
+      "context_pack": "context/game/domains/context_orchestration/",
+      "dependency_interfaces": [
+        "ContextManifest",
+        "ArtifactReceipt",
+        "ContractLock",
+        "ScopeGrant"
+      ],
+      "output_path": "capabilities/context_orchestration/handoffs/",
+      "acceptance_he": "תוצר עובר עם חוסרים וגרסאות; מסירה אינה מעניקה גישה טרנזיטיבית לתחום שלם.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/context_orchestration/roles/context_router.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "build.episode_builder",
+      "kind": "service",
+      "domain": "context_orchestration",
+      "owner_agent": "context_router",
+      "purpose_he": "הרכבת דרישת אפיזודה למניפסט נעול דרך חוסרים, בקשות יכולת וקבלות ביקורת.",
+      "context_pack": "context/game/domains/context_orchestration/",
+      "dependency_interfaces": [
+        "EpisodeIntent",
+        "CapabilityRegistry",
+        "CapabilityResult",
+        "EvidenceSnapshot",
+        "AssetManifest",
+        "ValidationReceipt"
+      ],
+      "output_path": "capabilities/context_orchestration/episode_builder/",
+      "acceptance_he": "אפיזודה נוצרת מנתונים ויכולות מותקנות; העדר רכיב חובה מחזיר CapabilityGap ולא הצלחה מדומה.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "context_entry": "context/game/domains/context_orchestration/roles/context_router.md",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.access_port",
+      "kind": "primitive",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_platform",
+      "purpose_he": "פתח/דלת/מדף של כלי רכב עם מצב, תנאי גישה ונקודות כניסה/יציאה.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_platform.md",
+      "dependency_interfaces": [
+        "CrewStation",
+        "InteractionAffordance",
+        "AttachmentBinding"
+      ],
+      "output_path": "capabilities/ground_vehicles/equipment/access_port/",
+      "acceptance_he": "מעבר בין חוץ לפנים שומר אדם יחיד ותפוסה; דלת סגורה אינה מעבר; grip/seat במטרים.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.stowage",
+      "kind": "primitive",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_platform",
+      "purpose_he": "מכל אחסון דלק, תחמושת או מטען עם קיבולת, משקל וגישה.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_platform.md",
+      "dependency_interfaces": [
+        "ResourceAccount",
+        "SupplyTransfer",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/ground_vehicles/equipment/stowage/",
+      "acceptance_he": "העברה אטומית; container בעל סמכות אחת; אין שכפול מלאי בהעברת רכב או שמירה.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "mobility.hybrid",
+      "kind": "capability",
+      "domain": "ground_vehicles",
+      "owner_agent": "ground_powertrain",
+      "purpose_he": "הרכבת ניידות גלגלים וזחלים לרכב חצי־זחלי בלי fork נפרד של מנוע.",
+      "context_pack": "context/game/domains/ground_vehicles/",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_powertrain.md",
+      "dependency_interfaces": [
+        "WheelContact",
+        "TrackContact",
+        "MobilityCommand",
+        "TerrainSample"
+      ],
+      "output_path": "capabilities/ground_vehicles/mobility/hybrid/",
+      "acceptance_he": "תצורת מגע מוצהרת; fixture משותף בודק פניות/אחיזה ללא תלות בשם דגם.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.weapon_action",
+      "kind": "primitive",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "הגדרת משפחת מנגנון בריחי/ידני, חצי־אוטומטי או אוטומטי ופעולותיו.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "dependency_interfaces": [
+        "FeedDefinition",
+        "AmmunitionCompatibility",
+        "WeaponAction"
+      ],
+      "output_path": "capabilities/weapons_effects/equipment/weapon_action/",
+      "acceptance_he": "מעברים לא חוקיים נדחים; מצב טעינה נשמר; כל ירייה צורכת משאב פעם אחת.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.weapon_mount",
+      "kind": "primitive",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "הגדרת חיבור נשק מקומי לאחיזה, חצובה או פלטפורמה. platform מחזיק transform עולמי ומצב צירי צריח; הנשק צורך אותם.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "dependency_interfaces": [
+        "MountTransform",
+        "VariantEvidence",
+        "GripAnchor"
+      ],
+      "output_path": "capabilities/weapons_effects/equipment/weapon_mount/",
+      "acceptance_he": "אותו מכלול נשק צורך mount contract; שינוי פלטפורמה אינו מעתיק קוד ירי.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "equipment.throwable",
+      "kind": "assembly",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_ballistics",
+      "purpose_he": "פריט משחק נזרק המורכב מפעולה, מטען, תנועה ואפקט; ללא פרטי בנייה בעולם האמיתי.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "dependency_interfaces": [
+        "WeaponAction",
+        "ProjectileDefinition",
+        "DamageEffect"
+      ],
+      "output_path": "capabilities/weapons_effects/equipment/throwable/",
+      "acceptance_he": "אירוע אחד, בעלות מלאי וזהות נשמרים; תצורה לא תואמת נדחית.",
+      "phase": "FUTURE",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "effects.obscurant",
+      "kind": "capability",
+      "domain": "weapons_effects",
+      "owner_agent": "weapons_damage",
+      "purpose_he": "נפח עשן/אבק שמשפיע על ראות לאורך זמן ומפיק מצב להצגה.",
+      "context_pack": "context/game/domains/weapons_effects/",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_damage.md",
+      "dependency_interfaces": [
+        "WeatherSample",
+        "VisibilityEnvelope",
+        "AcceptedEvent"
+      ],
+      "output_path": "capabilities/weapons_effects/effects/obscurant/",
+      "acceptance_he": "AI ו־renderer צורכים אותו נפח/צפיפות בגבולות fidelity מוצהרים; אין עשן קוסמטי שמסתיר רק מהשחקן.",
+      "phase": "M3",
+      "suggested_model_profile": "DEEP",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.surface_state",
+      "kind": "capability",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "מצב רטיבות, בוץ, שלג/קרח ועקבות על חומר קרקע; הצטברות ושינוי עם הזמן.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "dependency_interfaces": [
+        "SurfaceMaterial",
+        "WeatherModifier",
+        "TickClock"
+      ],
+      "output_path": "capabilities/geospatial_temporal/world/surface_state/",
+      "acceptance_he": "גשם מוביל לאותו מצב קרקע שממנו ניידות ו־material קוראים; שמירה משחזרת אותו.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.fortification",
+      "kind": "assembly",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "הרכבת מחפורת, עמדת מגן, שקי חול ומחסה מחלקי מבנה וחומר.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "dependency_interfaces": [
+        "BuildingEnvelope",
+        "SurfaceMaterial",
+        "TerrainSample"
+      ],
+      "output_path": "capabilities/geospatial_temporal/world/fortification/",
+      "acceptance_he": "collision, מעבר וקו ראייה תואמים גאומטריה; שייכות היסטורית דורשת מקור.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.obstacle",
+      "kind": "primitive",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "מכשול מעבר כגון גדר, מחסום או הריסות עם מעטפת פיזית ויכולת הסרה.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "dependency_interfaces": [
+        "TerrainSample",
+        "InteractionAffordance",
+        "AcceptedEvent"
+      ],
+      "output_path": "capabilities/geospatial_temporal/world/obstacle/",
+      "acceptance_he": "ניווט ותנועה מסכימים על חסימה; שינוי מצב מייצר אירוע ועדכון מסלול.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.structure_state",
+      "kind": "capability",
+      "domain": "geospatial_temporal",
+      "owner_agent": "terrain_world",
+      "purpose_he": "דלתות ופתחים, נזק למבנה והריסות ברמת פירוט מוגדרת.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "dependency_interfaces": [
+        "DamageEffect",
+        "BuildingEnvelope",
+        "NavigationUpdate"
+      ],
+      "output_path": "capabilities/geospatial_temporal/world/structure_state/",
+      "acceptance_he": "נזק משנה גם מעבר וגם תצוגה; אין צורך בסימולציית התמוטטות מלאה בגרסה הראשונה.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "infantry.condition",
+      "kind": "capability",
+      "domain": "infantry",
+      "owner_agent": "infantry_casualty",
+      "purpose_he": "עייפות, מאמץ, שינה, רעב/צמא וחשיפה כמודל משחק מוצהר; נפרד מפציעה.",
+      "context_pack": "context/game/domains/infantry/",
+      "context_entry": "context/game/domains/infantry/roles/infantry_casualty.md",
+      "dependency_interfaces": [
+        "WeatherModifier",
+        "SupplyTransfer",
+        "ActivityEvent",
+        "TickClock"
+      ],
+      "output_path": "capabilities/infantry/infantry/condition/",
+      "acceptance_he": "FatigueState מופק כאן בלבד; שינה/ארוחה/מזג אוויר משפיעים; save ו־LOD משמרים מצב.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "infantry.wearable",
+      "kind": "assembly",
+      "domain": "infantry",
+      "owner_agent": "infantry_actions",
+      "purpose_he": "מדים, קסדה, נעליים, תיק וציוד אישי עם תוקף דגם, slots ומשקל.",
+      "context_pack": "context/game/domains/infantry/",
+      "context_entry": "context/game/domains/infantry/roles/infantry_actions.md",
+      "dependency_interfaces": [
+        "VariantEvidence",
+        "AttachmentBinding",
+        "ResourceAccount"
+      ],
+      "output_path": "capabilities/infantry/infantry/wearable/",
+      "acceptance_he": "פריט נראה תואם למלאי ולזהות ההיסטורית; החלפת LOD אינה משנה ציוד.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "logistics.resource_definition",
+      "kind": "primitive",
+      "domain": "logistics",
+      "owner_agent": "logistics_supply",
+      "purpose_he": "זהות וכמות של מזון, מים, דלק, תחמושת וחלפים עם יחידות ותאימות.",
+      "context_pack": "context/game/domains/logistics/",
+      "context_entry": "context/game/domains/logistics/roles/logistics_supply.md",
+      "dependency_interfaces": [
+        "SIQuantity",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/logistics/logistics/resource_definition/",
+      "acceptance_he": "אי אפשר לחבר יחידות/פריטים שונים באותו חשבון; חוסר אספקה אינו אפס לא מסומן.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "weather.timeline",
+      "kind": "assembly",
+      "domain": "weather",
+      "owner_agent": "weather_system",
+      "purpose_he": "סדרת תנאים מרחבית/מתוארכת עם מדיניות אינטרפולציה והפרדת מקור משחזור.",
+      "context_pack": "context/game/domains/weather/",
+      "context_entry": "context/game/domains/weather/roles/weather_system.md",
+      "dependency_interfaces": [
+        "WeatherSample",
+        "TemporalApplicability",
+        "CoordinateTransform"
+      ],
+      "output_path": "capabilities/weather/weather/timeline/",
+      "acceptance_he": "מעבר זמן ושמירה נותנים אותה דגימה; יצירת רצף מנתון יחיד מסומנת כשחזור.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "weather.precipitation",
+      "kind": "primitive",
+      "domain": "weather",
+      "owner_agent": "weather_system",
+      "purpose_he": "הגדרת משקעים: גשם/שלג/ללא משקעים, עוצמה וטווח אי־ודאות.",
+      "context_pack": "context/game/domains/weather/",
+      "context_entry": "context/game/domains/weather/roles/weather_system.md",
+      "dependency_interfaces": [
+        "WeatherSample",
+        "VariantEvidence"
+      ],
+      "output_path": "capabilities/weather/weather/precipitation/",
+      "acceptance_he": "מצב לא ידוע אינו שמיים בהירים; הצטברות קרקע נעשית אצל terrain_world.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "weather.wind",
+      "kind": "primitive",
+      "domain": "weather",
+      "owner_agent": "weather_system",
+      "purpose_he": "שדה רוח או דגימה מקומית עם יחידות, כיוון ושיטת קירוב.",
+      "context_pack": "context/game/domains/weather/",
+      "context_entry": "context/game/domains/weather/roles/weather_system.md",
+      "dependency_interfaces": [
+        "WeatherSample",
+        "CoordinateTransform"
+      ],
+      "output_path": "capabilities/weather/weather/wind/",
+      "acceptance_he": "עשן, קול ופני מים מקבלים אותה מסגרת צירים וזמן; gaps נשמרים.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "weather.visibility_cloud",
+      "kind": "primitive",
+      "domain": "weather",
+      "owner_agent": "weather_system",
+      "purpose_he": "עננות, ערפל ומעטפת ראות שאינם תלויים במצלמה.",
+      "context_pack": "context/game/domains/weather/",
+      "context_entry": "context/game/domains/weather/roles/weather_system.md",
+      "dependency_interfaces": [
+        "WeatherSample",
+        "VisibilityEnvelope"
+      ],
+      "output_path": "capabilities/weather/weather/visibility_cloud/",
+      "acceptance_he": "תצוגה ו־perception משתמשות באותה דגימה; profile חזותי זול לא מעניק ידיעה עודפת ל־AI.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "weather.thermal",
+      "kind": "primitive",
+      "domain": "weather",
+      "owner_agent": "weather_system",
+      "purpose_he": "טמפרטורה ולחות כאשר קיימות ראיות או שחזור מוצהר.",
+      "context_pack": "context/game/domains/weather/",
+      "context_entry": "context/game/domains/weather/roles/weather_system.md",
+      "dependency_interfaces": [
+        "WeatherSample",
+        "EvidenceSnapshot"
+      ],
+      "output_path": "capabilities/weather/weather/thermal/",
+      "acceptance_he": "השפעת חשיפה מחושבת בידי בעל מצב האדם; לא מומצא נתון מדידה היסטורי.",
+      "phase": "M2",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "world.day_night",
+      "kind": "capability",
+      "domain": "geospatial_temporal",
+      "owner_agent": "temporal_world",
+      "purpose_he": "שעה, מיקום ומצב שמש/לילה כקלט לתאורה ולשגרה.",
+      "context_pack": "context/game/domains/geospatial_temporal/",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/temporal_world.md",
+      "dependency_interfaces": [
+        "CoordinateTransform",
+        "TickClock",
+        "TemporalApplicability"
+      ],
+      "output_path": "capabilities/geospatial_temporal/world/day_night/",
+      "acceptance_he": "מזג אוויר ותאורה קוראים אותו שעון; האצת זמן אינה משנה תאריך מקור.",
+      "phase": "M3",
+      "suggested_model_profile": "DEEP",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.visual_binding",
+      "kind": "primitive",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_visual",
+      "purpose_he": "קישור מפורש בין VariantId, חלקים, sockets, mesh, חומר ו־LOD.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_visual.md",
+      "dependency_interfaces": [
+        "VariantDefinition",
+        "AttachmentBinding",
+        "ContentHash"
+      ],
+      "output_path": "capabilities/asset_pipeline/asset/visual_binding/",
+      "acceptance_he": "אי התאמה בין turret/hull/weapon/asset נדחית; אין החלפה אסתטית סמויה של תת־דגם.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.vfx",
+      "kind": "capability",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_visual",
+      "purpose_he": "אפקטים חזותיים לאירוע ירי/פגיעה, עשן, אבק, אש ומשקעים.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_visual.md",
+      "dependency_interfaces": [
+        "AcceptedEvent",
+        "WeatherSample",
+        "ObscurantState",
+        "AssetProfile"
+      ],
+      "output_path": "capabilities/asset_pipeline/asset/vfx/",
+      "acceptance_he": "נגזר רק מאירוע/מצב מוסמך; אפקט אינו פוגע, מייצר תחמושת או משנה תפיסה בעצמו.",
+      "phase": "M3",
+      "suggested_model_profile": "VISUAL",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.environment_light",
+      "kind": "capability",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_visual",
+      "purpose_he": "שמיים, שמש, תאורת פנים/חוץ, פנסים וחשיפה אסתטית לפי מצב עולם.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_visual.md",
+      "dependency_interfaces": [
+        "DayNightSample",
+        "WeatherSample",
+        "AssetProfile"
+      ],
+      "output_path": "capabilities/asset_pipeline/asset/environment_light/",
+      "acceptance_he": "החלפת renderer/profile שומרת אירועי זמן וראות; ביצועים נמדדים; VR stereo נבדק בשער מכשיר.",
+      "phase": "M3",
+      "suggested_model_profile": "VISUAL",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.decals",
+      "kind": "service",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_visual",
+      "purpose_he": "סימני בוץ, עקבות, שחיקה ופגיעות, מוגבלים בתקציב ומשך חיים.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_visual.md",
+      "dependency_interfaces": [
+        "SurfaceState",
+        "AcceptedEvent",
+        "AssetProfile"
+      ],
+      "output_path": "capabilities/asset_pipeline/asset/decals/",
+      "acceptance_he": "סימן קוסמטי אינו ראיה היסטורית או מקור נזק; LOD מפחית אותו בלי לאבד מצב מוסמך.",
+      "phase": "M3",
+      "suggested_model_profile": "VISUAL",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "player.body",
+      "kind": "capability",
+      "domain": "experience_design",
+      "owner_agent": "experience_interface",
+      "purpose_he": "ייצוג וקלט של גוף, ראש וידיים; מפיק כוונת יציבה/תנועה/ישיבה בלבד. infantry_actions מחזיק תנועה ויציבה מוסמכות; ground_platform מחזיק תפוסת עמדה.",
+      "context_pack": "context/game/domains/experience_design/",
+      "context_entry": "context/game/domains/experience_design/roles/experience_interface.md",
+      "dependency_interfaces": [
+        "AvatarState",
+        "PoseSample",
+        "CrewStation",
+        "ActionValidation"
+      ],
+      "output_path": "capabilities/experience_design/player/body/",
+      "acceptance_he": "הראש אינו חייב לשנות כיוון גוף; semantic actions מאומתות אצל בעל המצב; כניסה לרכב אינה משכפלת אדם או משנה תפוסה מצד renderer.",
+      "phase": "M1",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "experience.activity",
+      "kind": "assembly",
+      "domain": "experience_design",
+      "owner_agent": "experience_loop",
+      "purpose_he": "מתכון פעילות: אכילה, תחזוקה, שמירה, אימון, מכתב או עזרה, עם משך וחברה.",
+      "context_pack": "context/game/domains/experience_design/",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "dependency_interfaces": [
+        "InteractionProposal",
+        "FatigueState",
+        "RelationshipEvent",
+        "SupplyTransfer"
+      ],
+      "output_path": "capabilities/experience_design/experience/activity/",
+      "acceptance_he": "פעילות שקטה משנה צורך/יחס/משאב או ידע מורשה; אפשר להבין מה לעשות בלי הרצאה.",
+      "phase": "M3",
+      "suggested_model_profile": "DESIGN",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "runtime.battle_evaluator",
+      "kind": "capability",
+      "domain": "simulation_runtime",
+      "owner_agent": "runtime_core",
+      "purpose_he": "הערכת תנאים ושלבי תבנית נתונית בסדר אירועים מוגדר, בלי קוד אפיזודה שרירותי.",
+      "context_pack": "context/game/domains/simulation_runtime/",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_core.md",
+      "dependency_interfaces": [
+        "BattleTemplate",
+        "AuthorizedPredicate",
+        "AcceptedEvent",
+        "TickClock"
+      ],
+      "output_path": "capabilities/simulation_runtime/runtime/battle_evaluator/",
+      "acceptance_he": "predicate לא מוכר או מחזור ללא גבול נדחים; replay משמר תוצאה; runtime אינו ממציא טענה היסטורית.",
+      "phase": "M3",
+      "suggested_model_profile": "DEEP",
+      "implementation_status": "not_implemented_by_this_catalog"
+    },
+    {
+      "lego_id": "asset.catalog_preview",
+      "kind": "service",
+      "domain": "asset_pipeline",
+      "owner_agent": "assets_visual",
+      "purpose_he": "כלי פיתוח לקטלוג, בדיקת רכיבים, variant inspector ותצוגת sandbox.",
+      "context_pack": "context/game/domains/asset_pipeline/",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_visual.md",
+      "dependency_interfaces": [
+        "VariantDefinition",
+        "ContentHash",
+        "AssetProfile"
+      ],
+      "output_path": "capabilities/asset_pipeline/asset/catalog_preview/",
+      "acceptance_he": "מסך טוען manifest אמיתי ומסמן חסרים; אינו מוצג כחלק חובה של חוויית השחקן.",
+      "phase": "M3",
+      "suggested_model_profile": "IMPLEMENT",
+      "implementation_status": "not_implemented_by_this_catalog"
+    }
+  ],
+  "phase_field_meaning": "Earliest owning implementation/content milestone for the bounded definition; does not require activating every row in that milestone. Detailed mechanics and named variants require their own scoped backlog.",
+  "count": 158,
+  "inventory_source": "docs/game/planning/LEGO_INVENTORY.json is a frozen research draft; this registry is the canonical enriched build catalog",
+  "primary_document": "docs/game/LEGO_BUILD_CATALOG_HE.md",
+  "model_profiles": {
+    "ORCHESTRATE": {
+      "preferred": "gpt-6-astra",
+      "effort": "high",
+      "alternative": "claude-opus-5-5",
+      "alternative_effort": "high",
+      "available_here": "gpt-6-astra",
+      "here_effort": "high"
+    },
+    "DEEP": {
+      "preferred": "gpt-6-astra",
+      "effort": "high",
+      "alternative": "claude-opus-5-5",
+      "alternative_effort": "high",
+      "available_here": "gpt-6-astra",
+      "here_effort": "high"
+    },
+    "IMPLEMENT": {
+      "preferred": "gpt-6-sol",
+      "effort": "high",
+      "alternative": "claude-sonnet-5",
+      "alternative_effort": "high",
+      "available_here": "gpt-5.6-sol",
+      "here_effort": "high"
+    },
+    "RESEARCH": {
+      "preferred": "claude-opus-5-5",
+      "effort": "high",
+      "alternative": "gpt-6-astra",
+      "alternative_effort": "high",
+      "available_here": "gpt-6-astra",
+      "here_effort": "high"
+    },
+    "DESIGN": {
+      "preferred": "claude-sonnet-5",
+      "effort": "high",
+      "alternative": "gpt-6-sol",
+      "alternative_effort": "high",
+      "available_here": "gpt-5.6-sol",
+      "here_effort": "high"
+    },
+    "VISUAL": {
+      "preferred": "gpt-6-sol",
+      "effort": "high",
+      "alternative": "claude-sonnet-5",
+      "alternative_effort": "high",
+      "available_here": "gpt-5.6-sol",
+      "here_effort": "high",
+      "note": "tool pipeline and technical art; model alone does not produce a licensed rigged 3D asset"
+    },
+    "EXTRACT": {
+      "preferred": "gpt-6-luna",
+      "effort": "low",
+      "alternative": "claude-haiku-4-5-20251001",
+      "alternative_effort": null,
+      "available_here": "gpt-5.6-luna",
+      "here_effort": "low",
+      "note": "deterministic parser first; extracted claims need independent validation"
+    },
+    "REVIEW": {
+      "preferred": "claude-opus-5-5",
+      "effort": "high",
+      "alternative": "gpt-6-astra",
+      "alternative_effort": "high",
+      "available_here": "gpt-6-astra",
+      "here_effort": "high",
+      "note": "separate reviewer assignment; human playtest needed for experience"
+    }
+  },
+  "model_availability_note": "Recommendations verified in official docs 2026-09-27; availability_here is current collaboration allowlist only. No paid calls, Claude execution or model switches were performed.",
+  "profile_policy": "owner_roles profile is default; item.suggested_model_profile overrides for the named task, never changes ownership",
+  "m0_existing_note": "Earlier Python contract/context/local-provider proofs exist. Status here concerns these proposed runtime/content Lego types, not a claim that all code in the repository is absent.",
+  "domain_titles_he": {
+    "ground_vehicles": "רכב וטנקים",
+    "weapons_effects": "נשק, תחמושת ואפקטים",
+    "weather": "מזג אוויר",
+    "geospatial_temporal": "קרקע, מבנים, זמן ועוגנים",
+    "experience_design": "קרבות, פעילויות וחוויית שחקן",
+    "infantry": "חיילים וציוד אישי",
+    "characters": "אנשים, זיכרון ויחסים",
+    "command_organization": "יחידות, פקודות וקשר",
+    "logistics": "אספקה ותחזוקה",
+    "asset_pipeline": "מראה, הנפשה, קול וכלי תצוגה",
+    "ai_navigation": "תפיסה, החלטה וניווט",
+    "aviation": "תעופה — הרחבה לפי צורך",
+    "naval": "ים — הרחבה לפי צורך",
+    "simulation_runtime": "מנוע, הרכבה והתמדה",
+    "historical_evidence": "מקורות, טענות ואי־ודאות",
+    "economy_deliver": "בנייה, ספקים ועלויות",
+    "context_orchestration": "קונטקסט וניתוב משימות"
+  },
+  "build_packets": [
+    {
+      "id": "B00",
+      "title": "חוזים משותפים ו־host קטן",
+      "owners": [
+        "runtime_core"
+      ],
+      "deps": [],
+      "goal": "הקפא את הממשקים הנדרשים לרכב, נשק, מזג אוויר ופעולת שחקן. ספק יחידות, גרסאות, semantics ו־fixtures; בנה host סינתטי headless קטן לאחר אישור התכנון הפנימי. חלק את הביצוע: תחילה B00/contracts; לאחר נתוני העיצוב B05/design, בצע B00/runtime_followup עבור actor_projection ו־battle_evaluator. השלמת העיצוב אינה ממתינה ל־evaluator.",
+      "read": [
+        "game/contracts.py",
+        "game/README.md",
+        "docs/game/STACK_EVALUATION.md",
+        "context/game/interfaces/README.md"
+      ],
+      "outputs": [
+        "ContractLock לחיבור ראשון, schemas/semantics ומיפוי לחוזי Python קיימים",
+        "adapter typed GDScript עם boundaries ובדיקת loading/headless; בלי Rust/FFI כברירת מחדל",
+        "רשימת migration ושדות חסרים; shared contracts בעריכה סריאלית",
+        "TaskSlice המשך ל־runtime.actor_projection ול־runtime.battle_evaluator, בבעלות runtime_core, לאחר עיצוב B05; שומר ידע מורשה ומעריך תבניות נתוניות."
+      ],
+      "accept": [
+        "שמות/יחידות/צירים/סדר tick/זמן/IDs מוגדרים; אין שני חוזים מתחרים לאותו מושג",
+        "fixture רכב/נשק/סביבה עובר חיבור; גרסה לא תואמת נדחית",
+        "תכנון Presentation/PlayerAction נפרד מליבת הסימולציה"
+      ],
+      "scope": "game/contracts.py ו־schemas/game/contracts.schema.json רק בעדכון מתואם; תיקיית host עתידית תחת game/runtime/simulation_runtime/; אין שינוי בקוד Atlas/Deliver.",
+      "context_files": [
+        "context/game/global/INVARIANTS.md",
+        "context/game/domains/simulation_runtime/DOMAIN.md",
+        "context/game/domains/simulation_runtime/roles/runtime_core.md",
+        "game/contracts.py",
+        "game/README.md",
+        "docs/game/STACK_EVALUATION.md",
+        "context/game/interfaces/README.md"
+      ],
+      "brief_path": "context/game/build_packets/B00/BRIEF.md",
+      "model_profile": "DEEP",
+      "lego_ids": [
+        "runtime.ecs",
+        "runtime.schedule",
+        "runtime.physics_port",
+        "runtime.events",
+        "runtime.episode_loader",
+        "runtime.actor_projection",
+        "runtime.battle_evaluator"
+      ]
+    },
+    {
+      "id": "B01",
+      "title": "טנק ורכב כהרכבה חוזרת",
+      "owners": [
+        "ground_platform",
+        "ground_powertrain"
+      ],
+      "deps": [
+        "B00"
+      ],
+      "goal": "בנה קודם tracked vehicle סינתטי עם גוף, תנועה, צריח ריק ועמדת צוות. חבר נשק דרך חוזה B02 בלי לשכתב ירי. הוסף מתכון שני עם נתונים שונים להוכחת reuse; נתוני טנק אמיתי רק אחרי B03.",
+      "read": [
+        "docs/game/LEGO_ARCHITECTURE.md"
+      ],
+      "outputs": [
+        "מנגנון ניידות והרכבת פלטפורמה בשתי משימות כתיבה נפרדות",
+        "שני מתכוני fixture סינתטיים, manifest, test scene ותמונת preview אם כלי renderer זמין",
+        "חיבורי mount, crew, hatch, stowage, damage ו־VisualBinding עם gaps מפורשים"
+      ],
+      "accept": [
+        "אותו loader לשתי תצורות; אין if לפי שם קרב או יצרן",
+        "רטיבות/מדרון נצרכים מ־TerrainSample; נשק מצורף דרך mount",
+        "save שומר דלק, תחמושת, פגיעות, תפוסת צוות ו־VariantId",
+        "טנק שנראה כדגם אחר נדחה לפני promotion"
+      ],
+      "scope": "רק נתיבי ground_vehicles של LegoIds שהוקצו; powertrain ו־platform בקבוצות קבצים נפרדות. אין כתיבה ל־weapons_effects, characters או terrain.",
+      "context_files": [
+        "context/game/global/INVARIANTS.md",
+        "context/game/domains/ground_vehicles/DOMAIN.md",
+        "context/game/domains/ground_vehicles/roles/ground_platform.md",
+        "context/game/domains/ground_vehicles/roles/ground_powertrain.md",
+        "docs/game/LEGO_ARCHITECTURE.md"
+      ],
+      "brief_path": "context/game/build_packets/B01/BRIEF.md",
+      "model_profile": "IMPLEMENT",
+      "lego_ids": [
+        "equipment.engine",
+        "equipment.transmission",
+        "equipment.wheel",
+        "equipment.track",
+        "equipment.suspension",
+        "mobility.tracked",
+        "mobility.wheeled",
+        "equipment.chassis",
+        "equipment.armor_plate",
+        "equipment.turret",
+        "equipment.fuel_tank",
+        "equipment.crew_station",
+        "equipment.ground_vehicle",
+        "equipment.access_port",
+        "equipment.stowage"
+      ]
+    },
+    {
+      "id": "B02",
+      "title": "נשק, פעולות ירי ואפקטים",
+      "owners": [
+        "weapons_ballistics",
+        "weapons_damage"
+      ],
+      "deps": [
+        "B00"
+      ],
+      "goal": "בנה מכלול נשק מנתונים, feed/chamber/action ומחזור reload עם סמכות אחת לתחמושת. ראשית שני fixtures עם מנגנון משותף; לאחר מכן דגם אחד ורכיב מקלע הדרושים לפרוסה, לפי B03.",
+      "read": [
+        "docs/game/LEGO_ARCHITECTURE.md"
+      ],
+      "outputs": [
+        "מכלול נשק/רכיבי קנה, בית בליעה, הזנה, קת ותחמושת; action state machine",
+        "מודול אפקטי משחק במשימה נפרדת בבעלות weapons_damage, אחרי סקירת DEEP",
+        "סצנת בדיקה, חוזה כוונה/פגיעה, אירועים לתצוגה וחיבור לרכב/חייל"
+      ],
+      "accept": [
+        "ירי/טעינה/ביטול לא משכפלים תחמושת; פעולה לא תקפה נדחית",
+        "תחמושת/mesh/part שאינם שייכים לווריאנט נדחים",
+        "אפקט מוחל פעם אחת בידי בעל מצב הנפגע; אנימציה אינה מקור לנזק",
+        "two-variant reuse, save במהלך reload ותצוגת עשן מול perception נבדקים"
+      ],
+      "scope": "רק weapons_effects; ballistics כותב נשק/תחמושת/מסלול; damage כותב solver של אפקטים. רכיבי barrel/breech/feed/stock נבחרים מתוך הרישום לפני שיגור.",
+      "context_files": [
+        "context/game/global/INVARIANTS.md",
+        "context/game/domains/weapons_effects/DOMAIN.md",
+        "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+        "context/game/domains/weapons_effects/roles/weapons_damage.md",
+        "docs/game/LEGO_ARCHITECTURE.md"
+      ],
+      "brief_path": "context/game/build_packets/B02/BRIEF.md",
+      "model_profile": "IMPLEMENT",
+      "lego_ids": [
+        "equipment.gun",
+        "equipment.projectile",
+        "equipment.optic",
+        "weapons.ammunition_compatibility",
+        "weapons.firing_reload",
+        "weapons.ballistics",
+        "effects.armor_interaction",
+        "effects.fire",
+        "effects.suppression",
+        "equipment.weapon_action",
+        "equipment.weapon_mount",
+        "effects.obscurant",
+        "equipment.barrel",
+        "equipment.breech",
+        "equipment.feed_system",
+        "equipment.weapon_stock"
+      ]
+    },
+    {
+      "id": "B03",
+      "title": "מחקר דגם וראיות היסטוריות",
+      "owners": [
+        "evidence_sources",
+        "evidence_claims"
+      ],
+      "deps": [],
+      "goal": "הכן dossier של דגם אחד שנבחר לפי פרוסת המשחק, או dossier זהות ראשוני אם Episode1 טרם נבחר. הבחֵן בין מפרט דגם, תת־דגם, שינויים במהלך שירות והוכחת נוכחות ביחידה.",
+      "read": [
+        "docs/game/HISTORICAL_FIDELITY.md",
+        "docs/game/REPO_MAP.md"
+      ],
+      "outputs": [
+        "טבלת שדות candidate עם source/locator, תוקף, יחידות, סתירות וחוסרים",
+        "הפניות/קטעים מורשים; אין צורך להעתיק ספרים שלמים",
+        "חבילת handoff ל־ground_platform/weapons_ballistics; בעל ההרכבה כותב את הגדרת הדגם",
+        "ביקורת טענות במשימה נפרדת; אין שדרוג אוטומטי של legacy Atlas facts"
+      ],
+      "accept": [
+        "כל שדה משמעותי ניתן לאיתור במקור; unknown אינו מספר מומצא",
+        "שם משפחה עמום אינו VariantId מאושר",
+        "הפרדה בין evidence, reconstruction ו־gameplay; נוכחות ב־OOB מאומתת בנפרד"
+      ],
+      "scope": "מקורות/claims/snapshots ייעודיים תחת historical_evidence; אין שינוי בגרף חי, בקוד סימולציה או בנתוני דגם סופיים.",
+      "context_files": [
+        "context/game/global/INVARIANTS.md",
+        "context/game/domains/historical_evidence/DOMAIN.md",
+        "context/game/domains/historical_evidence/roles/evidence_sources.md",
+        "context/game/domains/historical_evidence/roles/evidence_claims.md",
+        "docs/game/HISTORICAL_FIDELITY.md",
+        "docs/game/REPO_MAP.md"
+      ],
+      "brief_path": "context/game/build_packets/B03/BRIEF.md",
+      "model_profile": "RESEARCH",
+      "lego_ids": [
+        "evidence.source",
+        "evidence.locator",
+        "evidence.snapshot",
+        "evidence.claim",
+        "evidence.contradiction",
+        "evidence.reconstruction"
+      ]
+    },
+    {
+      "id": "B04",
+      "title": "מזג אוויר, קרקע והשפעות",
+      "owners": [
+        "weather_system",
+        "terrain_world"
+      ],
+      "deps": [
+        "B00"
+      ],
+      "goal": "בנה דגימת סביבה אחת שממנה נובעים גשם/רוח/ראות, מצב קרקע ותצוגה. הדגם הסינתטי הראשון כולל מעבר מיבש לרטוב ושינוי ראות; בלי להציגו כמזג אוויר היסטורי.",
+      "read": [
+        "docs/game/HISTORICAL_FIDELITY.md"
+      ],
+      "outputs": [
+        "WeatherSample/timeline ו־modifiers בבעלות weather_system",
+        "SurfaceState המתעדכן אצל terrain_world; fixture לחיכוך/מעבר וראות",
+        "חוזה לצרכני רכב/אדם/AI/נכסים; אין כתיבה ישירה במצב שלהם"
+      ],
+      "accept": [
+        "שמירה וחידוש משחזרים דגימה ורטיבות",
+        "renderer ו־AI מקבלים אותו מקור ראות; חלקיקי גשם לבדם אינם השלמה",
+        "רכב מגיב למשטח; שינוי difficulty אינו משנה HistoricalTruth",
+        "פער במדידת מזג אוויר נשמר כפער/שחזור"
+      ],
+      "scope": "weather ומקטע surface_state/terrain שהוקצה בלבד; תיקוני צרכנים נעשים בידי בעליהם.",
+      "context_files": [
+        "context/game/global/INVARIANTS.md",
+        "context/game/domains/weather/DOMAIN.md",
+        "context/game/domains/weather/roles/weather_system.md",
+        "context/game/domains/geospatial_temporal/DOMAIN.md",
+        "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+        "docs/game/HISTORICAL_FIDELITY.md"
+      ],
+      "brief_path": "context/game/build_packets/B04/BRIEF.md",
+      "model_profile": "IMPLEMENT",
+      "lego_ids": [
+        "weather.sample",
+        "weather.timeline",
+        "weather.precipitation",
+        "weather.wind",
+        "weather.visibility_cloud",
+        "weather.thermal",
+        "weather.effects",
+        "world.terrain",
+        "world.surface_material",
+        "world.surface_state"
+      ]
+    },
+    {
+      "id": "B05",
+      "title": "תבנית קרב ופעילויות מעניינות",
+      "owners": [
+        "experience_loop"
+      ],
+      "deps": [
+        "B00"
+      ],
+      "goal": "כתוב תבנית סיור/הגנה קטנה ותבנית שנייה שמורכבות מאותן פעולות. ספק תפקיד שחקן ברור, בן יחידה מוכר, פעילות שקטה ובחירה מקומית. תכנן לפי מה שכדאי לחוות, עם היסטוריה כגבול.",
+      "read": [
+        "docs/game/EXPERIENCE_DESIGN.md",
+        "docs/game/EPISODE_SCHEMA.md"
+      ],
+      "outputs": [
+        "תבניות data ו־activity recipes; אפיון תנאים למימוש B00/runtime.battle_evaluator",
+        "רשימת feedback/player affordances, branches מותרים ו־anchor conflicts",
+        "תוכנית playtest ותצפיות נדרשות; כל שמות היסטוריים חסרי מקור מסומנים fixture"
+      ],
+      "accept": [
+        "לא נדרש script מיוחד לכל Episode; אין eval בנתונים",
+        "שקט כולל אפשרות משמעותית/ציפייה/יחס; לא מילוי זמן מלאכותי",
+        "אי הצלחה שומרת אובדן ומלאי; העוגן אינו מחייב teleport או החייאה",
+        "מבחן אנושי בודק הבנת תפקיד ורצון להמשיך; ביקורת LLM אינה מחליפה אותו"
+      ],
+      "scope": "רק experience_design data; runtime_core כותב evaluator, command/AI ממשיכים להיות בעליהם של ארגון והחלטות.",
+      "context_files": [
+        "context/game/global/INVARIANTS.md",
+        "context/game/domains/experience_design/DOMAIN.md",
+        "context/game/domains/experience_design/roles/experience_loop.md",
+        "docs/game/EXPERIENCE_DESIGN.md",
+        "docs/game/EPISODE_SCHEMA.md"
+      ],
+      "brief_path": "context/game/build_packets/B05/BRIEF.md",
+      "model_profile": "DESIGN",
+      "lego_ids": [
+        "battle.template",
+        "battle.objective",
+        "battle.condition",
+        "battle.force_role",
+        "battle.deployment",
+        "battle.phase",
+        "battle.anchor_policy",
+        "battle.outcome",
+        "battle.difficulty_overlay",
+        "experience.interaction",
+        "experience.activity",
+        "experience.pacing",
+        "experience.profiles"
+      ]
+    },
+    {
+      "id": "B06",
+      "title": "אנשים, יחידה ותפיסה",
+      "owners": [
+        "infantry_actions",
+        "infantry_casualty",
+        "character_identity",
+        "character_memory",
+        "character_social",
+        "ai_perception",
+        "ai_decision",
+        "command_signals",
+        "command_structure",
+        "logistics_supply"
+      ],
+      "deps": [
+        "B00"
+      ],
+      "goal": "פצל למשימות קצרות ובנה כמה חברי יחידה בעלי זהות מתמשכת, הליכה, תפיסה, משימה מקומית ושיחה מתוסרטת מוגבלת. אין LLM חובה בזמן tick; memories כוללים רק אירועים שנמסרו. הקצה משימות נפרדות ל־logistics_supply עבור מלאי והעברות, ל־command_structure עבור סמכות/פקודות ול־character_memory עבור ידע. character.dialogue נבנה תחילה כשיחה מוגבלת ומתוסרטת; שיחת LLM מתמשכת היא הרחבה עתידית.",
+      "read": [
+        "docs/game/EXPERIENCE_DESIGN.md",
+        "docs/game/SIMULATION_LOD.md"
+      ],
+      "outputs": [
+        "avatar/actions ותנאי אדם; identity ומצב שנשמרים",
+        "perception→delivered observation→decision; ידיעה מתעכבת",
+        "פעולת עזרה/שיתוף ושיחה קצרה מאושרת; social text יכול להיות משימת Sonnet נפרדת"
+      ],
+      "accept": [
+        "חבר מוכר נשאר אותו אדם אחרי save/יציאה מטווח; פצוע אינו חוזר לבריאות ללא תהליך",
+        "fog/occlusion מגבילים תפיסה; NPC אינו יודע אירוע עתידי",
+        "אין אותו state field בשתי סמכויות; identity אינו מוחזק ב־renderer"
+      ],
+      "scope": "כל ריצה מקבלת בעל אחד ונתיבי אותו תפקיד בלבד; הרשימה הארוכה היא תור משימות, לא worker שקורא שמונה תחומים.",
+      "context_files": [
+        "context/game/global/INVARIANTS.md",
+        "context/game/domains/infantry/DOMAIN.md",
+        "context/game/domains/infantry/roles/infantry_actions.md",
+        "context/game/domains/infantry/roles/infantry_casualty.md",
+        "context/game/domains/characters/DOMAIN.md",
+        "context/game/domains/characters/roles/character_identity.md",
+        "context/game/domains/characters/roles/character_memory.md",
+        "context/game/domains/characters/roles/character_social.md",
+        "context/game/domains/ai_navigation/DOMAIN.md",
+        "context/game/domains/ai_navigation/roles/ai_perception.md",
+        "context/game/domains/ai_navigation/roles/ai_decision.md",
+        "context/game/domains/command_organization/DOMAIN.md",
+        "context/game/domains/command_organization/roles/command_signals.md",
+        "context/game/domains/command_organization/roles/command_structure.md",
+        "context/game/domains/logistics/DOMAIN.md",
+        "context/game/domains/logistics/roles/logistics_supply.md",
+        "docs/game/EXPERIENCE_DESIGN.md",
+        "docs/game/SIMULATION_LOD.md"
+      ],
+      "brief_path": "context/game/build_packets/B06/BRIEF.md",
+      "model_profile": "IMPLEMENT",
+      "lego_ids": [
+        "actor.human",
+        "infantry.locomotion",
+        "infantry.condition",
+        "infantry.injury",
+        "infantry.carried_equipment",
+        "character.identity",
+        "character.memory",
+        "character.relationship",
+        "perception.vision",
+        "perception.hearing",
+        "perception.observation",
+        "ai.cognition",
+        "ai.navigation",
+        "command.communications",
+        "infantry.care",
+        "character.dialogue",
+        "character.knowledge",
+        "command.organization",
+        "command.authority",
+        "command.orders",
+        "logistics.stock",
+        "logistics.transfer",
+        "logistics.resource_definition"
+      ]
+    },
+    {
+      "id": "B07",
+      "title": "נכסים, ריג, קול וכלי preview",
+      "owners": [
+        "assets_visual",
+        "assets_motion",
+        "assets_audio"
+      ],
+      "deps": [
+        "B00"
+      ],
+      "goal": "ראשית רשום נכסים/כלים קיימים, פורמטים ורישיונות. לאחר החוזים חבר asset אחד לדגם/fixture, סצנת preview, אחיזות ואנימציית פעולה אחת. ודא שהרכב/נשק הנראה הוא אותו variant שמסומלץ.",
+      "read": [
+        "docs/game/VR_READINESS.md"
+      ],
+      "outputs": [
+        "מקור editable ככל שרישיון מתיר, glTF/GLB או משאב Godot, textures, manifest ו־hash",
+        "ריג/anchors/action mapping בנפרד מגאומטריה; audio cues וקבצים מורשים בנפרד",
+        "preview וקובץ מגבלות/placeholder; אין טענה שנוצר 3D רק מפני שנכתבה תמונת concept"
+      ],
+      "accept": [
+        "יחידות/צירים/scale/VariantId נכונים; שינוי LOD שומר silhouette חיוני",
+        "animation/VFX/audio מקבלים אירוע מוסמך; לא צורכים ammo או קובעים hit",
+        "נכס בלי זכויות שימוש מתאימות נשאר gap; VR stereo/device gate נפרד"
+      ],
+      "scope": "asset_pipeline בלבד; לכל mesh/rig/audio owner קבצים נפרדים. אם כלי 3D אינו זמין אפשר להחזיר pipeline/placeholder מפורש, לא asset גמור.",
+      "context_files": [
+        "context/game/global/INVARIANTS.md",
+        "context/game/domains/asset_pipeline/DOMAIN.md",
+        "context/game/domains/asset_pipeline/roles/assets_visual.md",
+        "context/game/domains/asset_pipeline/roles/assets_motion.md",
+        "context/game/domains/asset_pipeline/roles/assets_audio.md",
+        "docs/game/VR_READINESS.md"
+      ],
+      "brief_path": "context/game/build_packets/B07/BRIEF.md",
+      "model_profile": "VISUAL",
+      "lego_ids": [
+        "asset.mesh",
+        "asset.material",
+        "asset.import_manifest",
+        "asset.rig",
+        "asset.animation",
+        "asset.spatial_audio",
+        "asset.voice_subtitles",
+        "asset.visual_binding",
+        "asset.vfx",
+        "asset.environment_light",
+        "asset.decals",
+        "asset.catalog_preview"
+      ]
+    },
+    {
+      "id": "B08",
+      "title": "גוף, מצלמה, קלט ומסלול VR",
+      "owners": [
+        "experience_interface"
+      ],
+      "deps": [
+        "B00"
+      ],
+      "goal": "בנה embodiment playable ב־desktop דרך semantic actions עם הפרדה בין גוף/ראש/ידיים. הכן mock tracked pose וממשק OpenXR, נגישות ומעבר למושב רכב. שמור את חוויית המשחק העיקרית קריאה ללא מסך מידע.",
+      "read": [
+        "docs/game/VR_READINESS.md",
+        "docs/game/EXPERIENCE_DESIGN.md"
+      ],
+      "outputs": [
+        "מתאם desktop, action validator integration, camera/body/hand separation",
+        "ממשק tracking loss/pose ו־seated/standing; checklist ניסוי מכשיר",
+        "UI/כתוביות/הוראות עם RTL, contrast ו־remapping"
+      ],
+      "accept": [
+        "אותה פעולה דרך replay ו־desktop נותנת אותה תוצאה",
+        "אין שליטה כפויה בראש ה־VR; כניסה/יציאה מרכב לא מכפילה avatar",
+        "synthetic tracking אינו דיווח על headset נתמך; מדידות נוחות/קצב רק על מכשיר"
+      ],
+      "scope": "נתיבי experience_interface בלבד; אין תלות gameplay ב־mouse position או שינוי core בשביל כל אמצעי קלט.",
+      "context_files": [
+        "context/game/global/INVARIANTS.md",
+        "context/game/domains/experience_design/DOMAIN.md",
+        "context/game/domains/experience_design/roles/experience_interface.md",
+        "docs/game/VR_READINESS.md",
+        "docs/game/EXPERIENCE_DESIGN.md"
+      ],
+      "brief_path": "context/game/build_packets/B08/BRIEF.md",
+      "model_profile": "IMPLEMENT",
+      "lego_ids": [
+        "player.desktop_input",
+        "player.vr_boundary",
+        "player.comfort",
+        "player.interface",
+        "player.body"
+      ]
+    },
+    {
+      "id": "B09",
+      "title": "שילוב, שמירה וביקורת עצמאית",
+      "owners": [
+        "runtime_continuity"
+      ],
+      "deps": [
+        "B00"
+      ],
+      "goal": "פצל לשתי ריצות בבעלות runtime_continuity: B09/continuity_seam מתחיל אחרי B00/contracts ובונה snapshot/save/replay עם fixtures; B09/final_integration מחבר רכב, נשק, אנשים ומזג אוויר רק לאחר חבילות B01/B02/B04/B05/B06/B07/B08. בדיקות הרכיבים לפני השילוב משתמשות בחוזה snapshot וב־test double, ואינן ממתינות לשילוב הסופי. לאחר מכן בצע save/load אמיתי במהלך פעולה והזמן ביקורת עצמאית.",
+      "read": [
+        "docs/game/IMPLEMENTATION_SEQUENCE.md",
+        "docs/game/VALIDATION_REPORT.md"
+      ],
+      "outputs": [
+        "שלב מוקדם: snapshot contract ו־fixture save/replay. שלב מאוחר: save/replay משולב על כל המודולים; אלה שתי TaskSlices ולא שתי חבילות נוספות.",
+        "סצנה/מניפסט שילוב, save/replay, הוראות הרצה ותוצאות ביצועים על hardware מזוהה",
+        "review נפרד: historical, provenance, simulation/integration, experience",
+        "רשימת פערים למעבר M1→M2→M3; VR status לפי המכשיר שנבדק"
+      ],
+      "accept": [
+        "אין אובדן ID, ammo, fuel, casualty, relationship או variant בעת save",
+        "שני דגמים ושתי תבניות נטענים באותו loader; שינוי קוד נדרש מנומק כיכולת כללית",
+        "בדיקה אנושית של משחקיות; null לכל מדד שלא נמדד",
+        "כותב המודול אינו מאשר לבדו את קבלתו"
+      ],
+      "scope": "runtime_continuity לשמירה; תיקוני שילוב בבקשות לבעלי הקוד. reviewer מקבל read-only evidence/diff, לא write-all.",
+      "context_files": [
+        "context/game/global/INVARIANTS.md",
+        "context/game/domains/simulation_runtime/DOMAIN.md",
+        "context/game/domains/simulation_runtime/roles/runtime_continuity.md",
+        "docs/game/IMPLEMENTATION_SEQUENCE.md",
+        "docs/game/VALIDATION_REPORT.md"
+      ],
+      "brief_path": "context/game/build_packets/B09/BRIEF.md",
+      "integration_dependencies": [
+        "B01",
+        "B02",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08"
+      ],
+      "model_profile": "IMPLEMENT",
+      "lego_ids": [
+        "runtime.save",
+        "runtime.replay"
+      ]
+    }
+  ],
+  "dispatch_tasks": [
+    {
+      "task_id": "B00/contracts",
+      "packet": "B00",
+      "owner": "runtime_core",
+      "lego_ids": [
+        "runtime.ecs",
+        "runtime.schedule",
+        "runtime.physics_port",
+        "runtime.events",
+        "runtime.episode_loader"
+      ],
+      "depends_on": [],
+      "mode": "build",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_core.md",
+      "model_profile": "DEEP",
+      "note_he": "קודם חוזים ו־fixtures; בעלים אחרים מקבלים API נעול בלבד."
+    },
+    {
+      "task_id": "B07/inventory",
+      "packet": "B07",
+      "owner": "assets_visual",
+      "lego_ids": [],
+      "depends_on": [],
+      "mode": "read_only_inventory",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_visual.md",
+      "model_profile": "VISUAL",
+      "note_he": "מלאי נכסים/כלים/רישיונות בלבד; אין תלות בחוזים לבירור זה."
+    },
+    {
+      "task_id": "B01/ground_platform",
+      "packet": "B01",
+      "owner": "ground_platform",
+      "lego_ids": [
+        "equipment.chassis",
+        "equipment.armor_plate",
+        "equipment.turret",
+        "equipment.fuel_tank",
+        "equipment.crew_station",
+        "equipment.ground_vehicle",
+        "equipment.access_port",
+        "equipment.stowage"
+      ],
+      "depends_on": [
+        "B00/contracts",
+        "B01/ground_powertrain"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_platform.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B01/ground_powertrain",
+      "packet": "B01",
+      "owner": "ground_powertrain",
+      "lego_ids": [
+        "equipment.engine",
+        "equipment.transmission",
+        "equipment.wheel",
+        "equipment.track",
+        "equipment.suspension",
+        "mobility.tracked",
+        "mobility.wheeled"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/ground_vehicles/roles/ground_powertrain.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B02/weapons_ballistics",
+      "packet": "B02",
+      "owner": "weapons_ballistics",
+      "lego_ids": [
+        "equipment.gun",
+        "equipment.projectile",
+        "equipment.optic",
+        "weapons.ammunition_compatibility",
+        "weapons.firing_reload",
+        "weapons.ballistics",
+        "equipment.weapon_action",
+        "equipment.weapon_mount",
+        "equipment.barrel",
+        "equipment.breech",
+        "equipment.feed_system",
+        "equipment.weapon_stock"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_ballistics.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B02/weapons_damage",
+      "packet": "B02",
+      "owner": "weapons_damage",
+      "lego_ids": [
+        "effects.armor_interaction",
+        "effects.fire",
+        "effects.suppression",
+        "effects.obscurant"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/weapons_effects/roles/weapons_damage.md",
+      "model_profile": "DEEP",
+      "note_he": ""
+    },
+    {
+      "task_id": "B03/evidence_sources",
+      "packet": "B03",
+      "owner": "evidence_sources",
+      "lego_ids": [
+        "evidence.source",
+        "evidence.locator",
+        "evidence.snapshot"
+      ],
+      "depends_on": [],
+      "mode": "build",
+      "context_entry": "context/game/domains/historical_evidence/roles/evidence_sources.md",
+      "model_profile": "RESEARCH",
+      "note_he": ""
+    },
+    {
+      "task_id": "B03/evidence_claims",
+      "packet": "B03",
+      "owner": "evidence_claims",
+      "lego_ids": [
+        "evidence.claim",
+        "evidence.contradiction",
+        "evidence.reconstruction"
+      ],
+      "depends_on": [
+        "B03/evidence_sources"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/historical_evidence/roles/evidence_claims.md",
+      "model_profile": "RESEARCH",
+      "note_he": ""
+    },
+    {
+      "task_id": "B04/weather_system",
+      "packet": "B04",
+      "owner": "weather_system",
+      "lego_ids": [
+        "weather.sample",
+        "weather.timeline",
+        "weather.precipitation",
+        "weather.wind",
+        "weather.visibility_cloud",
+        "weather.thermal",
+        "weather.effects"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/weather/roles/weather_system.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B04/terrain_world",
+      "packet": "B04",
+      "owner": "terrain_world",
+      "lego_ids": [
+        "world.terrain",
+        "world.surface_material",
+        "world.surface_state"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/geospatial_temporal/roles/terrain_world.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B05/experience_loop",
+      "packet": "B05",
+      "owner": "experience_loop",
+      "lego_ids": [
+        "battle.template",
+        "battle.objective",
+        "battle.condition",
+        "battle.force_role",
+        "battle.deployment",
+        "battle.phase",
+        "battle.anchor_policy",
+        "battle.outcome",
+        "battle.difficulty_overlay",
+        "experience.interaction",
+        "experience.activity",
+        "experience.pacing",
+        "experience.profiles"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/experience_design/roles/experience_loop.md",
+      "model_profile": "DESIGN",
+      "note_he": "עיצוב תבניות/פעילויות ו־data fixtures תחילה; acceptance אינטגרטיבי נבדק ב־B09/final_integration, לא תנאי לסיום שלב העיצוב."
+    },
+    {
+      "task_id": "B06/infantry_actions",
+      "packet": "B06",
+      "owner": "infantry_actions",
+      "lego_ids": [
+        "actor.human",
+        "infantry.locomotion",
+        "infantry.carried_equipment"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/infantry/roles/infantry_actions.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B06/infantry_casualty",
+      "packet": "B06",
+      "owner": "infantry_casualty",
+      "lego_ids": [
+        "infantry.condition",
+        "infantry.injury",
+        "infantry.care"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/infantry/roles/infantry_casualty.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B06/character_identity",
+      "packet": "B06",
+      "owner": "character_identity",
+      "lego_ids": [
+        "character.identity"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/characters/roles/character_identity.md",
+      "model_profile": "DESIGN",
+      "note_he": ""
+    },
+    {
+      "task_id": "B06/character_memory",
+      "packet": "B06",
+      "owner": "character_memory",
+      "lego_ids": [
+        "character.memory",
+        "character.knowledge"
+      ],
+      "depends_on": [
+        "B00/contracts",
+        "B06/character_identity",
+        "B00/runtime_followup"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/characters/roles/character_memory.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B06/character_social",
+      "packet": "B06",
+      "owner": "character_social",
+      "lego_ids": [
+        "character.relationship",
+        "character.dialogue"
+      ],
+      "depends_on": [
+        "B00/contracts",
+        "B06/character_memory",
+        "B05/experience_loop"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/characters/roles/character_social.md",
+      "model_profile": "DESIGN",
+      "note_he": "שיחה מוגבלת ומתוסרטת בלבד בפרוסה; אין חובה ל־LLM בזמן משחק."
+    },
+    {
+      "task_id": "B06/ai_perception",
+      "packet": "B06",
+      "owner": "ai_perception",
+      "lego_ids": [
+        "perception.vision",
+        "perception.hearing",
+        "perception.observation"
+      ],
+      "depends_on": [
+        "B00/contracts",
+        "B04/weather_system",
+        "B04/terrain_world",
+        "B00/runtime_followup"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/ai_navigation/roles/ai_perception.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B06/ai_decision",
+      "packet": "B06",
+      "owner": "ai_decision",
+      "lego_ids": [
+        "ai.cognition",
+        "ai.navigation"
+      ],
+      "depends_on": [
+        "B00/contracts",
+        "B06/ai_perception",
+        "B06/infantry_actions"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/ai_navigation/roles/ai_decision.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B06/command_signals",
+      "packet": "B06",
+      "owner": "command_signals",
+      "lego_ids": [
+        "command.communications"
+      ],
+      "depends_on": [
+        "B00/contracts",
+        "B06/command_structure"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/command_organization/roles/command_signals.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B06/command_structure",
+      "packet": "B06",
+      "owner": "command_structure",
+      "lego_ids": [
+        "command.organization",
+        "command.authority",
+        "command.orders"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/command_organization/roles/command_structure.md",
+      "model_profile": "RESEARCH",
+      "note_he": ""
+    },
+    {
+      "task_id": "B06/logistics_supply",
+      "packet": "B06",
+      "owner": "logistics_supply",
+      "lego_ids": [
+        "logistics.stock",
+        "logistics.transfer",
+        "logistics.resource_definition"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/logistics/roles/logistics_supply.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B07/assets_visual",
+      "packet": "B07",
+      "owner": "assets_visual",
+      "lego_ids": [
+        "asset.mesh",
+        "asset.material",
+        "asset.import_manifest",
+        "asset.visual_binding",
+        "asset.vfx",
+        "asset.environment_light",
+        "asset.decals",
+        "asset.catalog_preview"
+      ],
+      "depends_on": [
+        "B00/contracts",
+        "B07/inventory",
+        "B01/ground_platform",
+        "B02/weapons_ballistics"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_visual.md",
+      "model_profile": "VISUAL",
+      "note_he": ""
+    },
+    {
+      "task_id": "B07/assets_motion",
+      "packet": "B07",
+      "owner": "assets_motion",
+      "lego_ids": [
+        "asset.rig",
+        "asset.animation"
+      ],
+      "depends_on": [
+        "B00/contracts",
+        "B07/assets_visual",
+        "B06/infantry_actions"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_motion.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B07/assets_audio",
+      "packet": "B07",
+      "owner": "assets_audio",
+      "lego_ids": [
+        "asset.spatial_audio",
+        "asset.voice_subtitles"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/asset_pipeline/roles/assets_audio.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B08/experience_interface",
+      "packet": "B08",
+      "owner": "experience_interface",
+      "lego_ids": [
+        "player.desktop_input",
+        "player.vr_boundary",
+        "player.comfort",
+        "player.interface",
+        "player.body"
+      ],
+      "depends_on": [
+        "B00/contracts",
+        "B00/runtime_followup",
+        "B06/infantry_actions"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/experience_design/roles/experience_interface.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": ""
+    },
+    {
+      "task_id": "B00/runtime_followup",
+      "packet": "B00",
+      "owner": "runtime_core",
+      "lego_ids": [
+        "runtime.actor_projection",
+        "runtime.battle_evaluator"
+      ],
+      "depends_on": [
+        "B00/contracts",
+        "B05/experience_loop"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_core.md",
+      "model_profile": "DEEP",
+      "note_he": "משימת B05 התלויה היא עיצוב data/fixtures בלבד; היא אינה ממתינה ל־evaluator."
+    },
+    {
+      "task_id": "B09/continuity_seam",
+      "packet": "B09",
+      "owner": "runtime_continuity",
+      "lego_ids": [
+        "runtime.save",
+        "runtime.replay"
+      ],
+      "depends_on": [
+        "B00/contracts"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_continuity.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": "snapshot וחוזה שמירה מוקדם; רכיבים משתמשים ב־fixture לפני שילוב מלא."
+    },
+    {
+      "task_id": "B09/final_integration",
+      "packet": "B09",
+      "owner": "runtime_continuity",
+      "lego_ids": [
+        "runtime.save",
+        "runtime.replay"
+      ],
+      "depends_on": [
+        "B00/contracts",
+        "B07/inventory",
+        "B01/ground_platform",
+        "B01/ground_powertrain",
+        "B02/weapons_ballistics",
+        "B02/weapons_damage",
+        "B03/evidence_sources",
+        "B03/evidence_claims",
+        "B04/weather_system",
+        "B04/terrain_world",
+        "B05/experience_loop",
+        "B06/infantry_actions",
+        "B06/infantry_casualty",
+        "B06/character_identity",
+        "B06/character_memory",
+        "B06/character_social",
+        "B06/ai_perception",
+        "B06/ai_decision",
+        "B06/command_signals",
+        "B06/command_structure",
+        "B06/logistics_supply",
+        "B07/assets_visual",
+        "B07/assets_motion",
+        "B07/assets_audio",
+        "B08/experience_interface",
+        "B00/runtime_followup",
+        "B09/continuity_seam"
+      ],
+      "mode": "build",
+      "context_entry": "context/game/domains/simulation_runtime/roles/runtime_continuity.md",
+      "model_profile": "IMPLEMENT",
+      "note_he": "כותב רק continuity; מבקש תיקוני מודולים מבעליהם; reviewers עצמאיים ושער חוויה אנושי לפני promotion."
+    }
+  ],
+  "dispatch_policy": "Dependency graph is for bounded TaskSlices/design outputs, not all final packet acceptance gates. Interface stubs allow component work; final integration/experience/device gates remain separate. Root+3 workers maximum in current session; same-owner writes serialized. No launch performed."
+}

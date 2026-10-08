@@ -1,0 +1,2 @@
+# Official TypeSafe Python client used by the Jev routing and health-check path.
+typesafe-sdk==0.7.2

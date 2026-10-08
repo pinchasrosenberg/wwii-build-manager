@@ -1,0 +1,154 @@
+# WWII Build Manager — user config.
+# Copy to <repo>/.wwii-build/config.toml (`wwii-build config init`) and edit.
+# Anything omitted falls back to the built-in defaults (wwii_build/config.py).
+
+[scheduler]
+max_parallel = 3                # "root + 3 workers" from the dispatch policy
+escalation_threshold = 3        # failed attempts before ESCALATION_REQUIRED (asks you)
+retry_backoff_seconds = [60, 300, 900]
+task_timeout_minutes = 90
+
+[stop]
+graceful_timeout_seconds = 20   # SIGINT -> wait this long -> SIGTERM -> SIGKILL
+
+[billing]
+allow_api_billing = false       # NEVER switch to pay-as-you-go API keys unless you set this
+allow_claude_overage = false    # a run that reports isUsingOverage (paid extra usage) is stopped
+
+[approvals]
+astra = "required"              # premium Codex model: always asks you first
+opus = "optional"               # "required" to make every Opus run ask
+api_billing = "required"
+destructive_commands = "never"
+dependency_changes = "review"   # allow | review | block  (requirements/package/lock files)
+
+[deep]
+require_manual_approval = true  # DEEP tasks run only after you pick/approve Astra or Opus
+
+[fallback]
+enabled = true                  # try the next model in the chain when one is quota-blocked
+wait_when_exhausted = true
+
+[providers.codex]
+enabled = true                  # set false to disable Codex entirely
+command = ["codex"]
+sandbox = "workspace-write"
+ignore_user_config = true       # don't inherit ~/.codex/config.toml defaults (model/effort/MCP)
+quota_source = "app-server"     # account/rateLimits/read (no inference)
+near_limit_percent = 90
+stop_dispatch_at_percent = 100
+
+[providers.claude]
+enabled = true
+# Empty = auto-discover: PATH, ~/.claude/local/claude, then the Claude desktop app bundle.
+command = []
+safe_mode = true                # no CLAUDE.md/skills/plugins/hooks/MCP leak into worker context
+permission_mode = "acceptEdits"
+# authMethod values from `claude auth status --json` that count as a subscription login.
+subscription_auth_methods = ["claude.ai", "oauth", "oauth_token", "subscription", "claude_ai"]
+
+# Model profiles: names live here, not in code. `effort` is passed explicitly every run.
+[models.sol]
+provider = "codex"
+model = "gpt-5.6-sol"
+effort = "high"
+tier = "standard"
+
+[models.astra]
+provider = "codex"
+model = "gpt-6-astra"
+effort = "high"
+tier = "premium"
+automatic = false
+
+[models.luna]
+provider = "codex"
+model = "gpt-5.6-luna"
+effort = "low"
+tier = "cheap"
+
+[models.sonnet]
+provider = "claude"
+model = "claude-sonnet-5-5"
+effort = "high"
+tier = "standard"
+family = "sonnet"
+
+[models.opus]
+provider = "claude"
+model = "claude-opus-5-5"
+effort = "high"
+tier = "premium"
+family = "opus"
+
+[models.haiku]
+provider = "claude"
+model = "claude-haiku-4-5-20251001"
+tier = "cheap"
+family = "haiku"
+
+# Routing is by FIT only (see DEFAULTS["fit"] in wwii_build/config.py): each model has a 0-10 suitability score per
+# task profile and the chain is the models sorted by score, whatever the provider. Override a score like this:
+#   [fit.IMPLEMENT]
+#   sonnet = 9
+# Or pin one profile to an exact order (disables fit ranking for that profile only):
+#   [routing]
+#   REVIEW = ["opus", "sol"]
+
+[repair]
+enabled = true
+max_repairs_per_task = 3        # then BLOCKED (REPAIR_LIMIT_REACHED) and you decide
+effort = "medium"               # repairs run at lower effort than the original task
+escalate_from_repair = 3
+premium_requires_approval = true
+repair_malformed_handoff = true
+shared_contract_paths = ["game/contracts.py", "schemas/game/", "context/game/interfaces/"]
+
+[quota]
+unknown_backoff_minutes = [15, 30, 60, 120]   # when a limit gives no reset time
+reset_safety_margin_seconds = 120
+
+[acceptance]
+python = ""                     # empty = the venv documented in game/README.md, else python3
+
+[review]
+auto_pass_requires_task_commands = true   # no task tests => human review, never auto-pass
+llm_review_profiles = []                  # e.g. ["DEEP"] for cross-provider LLM review
+cross_provider = true
+
+[worktree]
+sparse = false                  # true = small worktrees; git then sets extensions.worktreeConfig
+
+[budget]
+max_attempts_per_task = 8
+
+[dashboard]
+host = "127.0.0.1"
+port = 8765
+language = "he"                 # he (RTL) | en — also switchable on the page
+
+[planner]
+max_tasks = 20
+
+[notifications]
+enabled = true                  # macOS notifications for approvals, all-blocked, repeated failure, milestones
+min_interval_seconds = 300
+
+[jev]
+enabled = true                  # external TypeSafe service; missing credentials fail closed
+model = "jev-latest"
+timeout_seconds = 8
+docs_ttl_hours = 24
+max_candidates = 64             # graph/deterministic search shortlists before Jev
+max_context_candidates = 24
+max_context_items = 1
+max_context_bundles_per_run = 4
+require_for_all_llm_context = true # fail closed: disabled/error/no_match means no LLM dispatch
+# A Deliver can propose many listeners; Jev explicitly selects at most this many per event.
+max_listener_activations_per_event = 2
+# TypeSafe's inspected live docs expose per-call token usage, not a balance API.
+# Optional local estimate; leave unset/absent for UNKNOWN. Never treat it as official balance.
+# local_budget = 1000000
+budget_unit = "tokens"
+warning_fraction = 0.25
+critical_fraction = 0.10

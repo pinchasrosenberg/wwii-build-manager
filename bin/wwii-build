@@ -1,0 +1,13 @@
+#!/bin/sh
+# WWII Build Manager launcher. Jev uses the official TypeSafe Python SDK.
+HERE="$(cd "$(dirname "$(readlink -f "$0" 2>/dev/null || echo "$0")")/.." && pwd)"
+REPO="$(cd "$HERE/../.." && pwd)"
+VENV_PY="$REPO/.wwii-build/venv/bin/python"
+if [ -n "${WWII_BUILD_PYTHON:-}" ]; then
+  PY="$WWII_BUILD_PYTHON"
+elif [ -x "$VENV_PY" ]; then
+  PY="$VENV_PY"
+else
+  PY="python3"
+fi
+PYTHONPATH="$HERE${PYTHONPATH:+:$PYTHONPATH}" exec "$PY" -m wwii_build "$@"

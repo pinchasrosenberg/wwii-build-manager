@@ -1,0 +1,121 @@
+{
+  "schema_version": "0.1.0",
+  "description": "Deliver-owned listener proposals. A proposal is never an activation: deterministic selectors form a shortlist and Jev must explicitly select it.",
+  "delivers": [
+    {
+      "deliver_id": "episode.context_scan",
+      "owner": "episode_composition_owner",
+      "domain": "episode",
+      "execution_kind": "deterministic",
+      "implementation_ref": "wwii_build.listeners:scan_episode_context",
+      "availability": "prototype",
+      "description": "Extract bounded weather, place, date, battle and graph signals from the current episode state.",
+      "proposed_listeners": [
+        {
+          "listener_id": "snow.signal_to_research",
+          "event_type": "CONTEXT_SCANNED",
+          "target_deliver_id": "weather.snow_research",
+          "when": {"any_of": [{"episode_any_truthy": ["possible_snow", "winter_conditions"]}, {"tags_any": ["snow", "winter", "freezing"]}]},
+          "reason": "Research snow only when the bounded episode context contains a plausible snow or winter signal."
+        }
+      ]
+    },
+    {
+      "deliver_id": "weather.snow_research",
+      "owner": "historical_weather_owner",
+      "domain": "historical_weather",
+      "execution_kind": "llm_research",
+      "implementation_ref": "planned:HistoricalWeatherResearchDeliver",
+      "availability": "planned",
+      "description": "Resolve snow type, depth/range, timing, surface condition and uncertainty from scoped historical evidence.",
+      "proposed_listeners": [
+        {
+          "listener_id": "snow.research_to_state",
+          "event_type": "WEATHER_RESEARCHED",
+          "target_deliver_id": "weather.snow_state_compile",
+          "when": {"build_status_in": {"weather.snow_research": ["PASSED", "PARTIAL"]}},
+          "reason": "Compile a typed SnowState only after research produced a reviewed result or explicit partial result."
+        }
+      ]
+    },
+    {
+      "deliver_id": "weather.snow_state_compile",
+      "owner": "historical_weather_owner",
+      "domain": "historical_weather",
+      "execution_kind": "deterministic",
+      "implementation_ref": "wwii_build.listeners:compile_snow_state",
+      "availability": "prototype",
+      "description": "Normalize evidence into SnowState without inventing unknown depth, timing or confidence.",
+      "proposed_listeners": [
+        {
+          "listener_id": "snow.state_to_surface",
+          "event_type": "SNOW_STATE_READY",
+          "target_deliver_id": "terrain.snow_surface_build",
+          "when": {"episode_field_equals": {"snow.present": true}},
+          "reason": "Build snow cover and ground surface from the typed snow state."
+        },
+        {
+          "listener_id": "snow.state_to_mobility",
+          "event_type": "SNOW_STATE_READY",
+          "target_deliver_id": "simulation.snow_mobility",
+          "when": {"episode_field_equals": {"snow.present": true}, "battle_any": ["vehicle_movement", "infantry_movement", "logistics"]},
+          "reason": "Apply mobility effects only when the battle state contains affected movement or logistics."
+        },
+        {
+          "listener_id": "snow.state_to_visibility",
+          "event_type": "SNOW_STATE_READY",
+          "target_deliver_id": "simulation.snow_visibility",
+          "when": {"episode_field_equals": {"snow.present": true}, "episode_any_truthy": ["active_snowfall", "blowing_snow"]},
+          "reason": "Apply visibility effects only for active or wind-blown snow, not merely snow on the ground."
+        },
+        {
+          "listener_id": "snow.state_to_presentation",
+          "event_type": "SNOW_STATE_READY",
+          "target_deliver_id": "presentation.snow_visual_audio",
+          "when": {"episode_field_equals": {"snow.present": true}},
+          "reason": "Present the selected snow state through material, particles, lighting and sound."
+        }
+      ]
+    },
+    {
+      "deliver_id": "terrain.snow_surface_build",
+      "owner": "terrain_runtime_owner",
+      "domain": "terrain",
+      "execution_kind": "deterministic",
+      "implementation_ref": "planned:SnowSurfaceBuilder",
+      "availability": "planned",
+      "description": "Create snow coverage, compaction, tracks, thaw/freeze and surface parameters from SnowState.",
+      "proposed_listeners": []
+    },
+    {
+      "deliver_id": "simulation.snow_mobility",
+      "owner": "ground_simulation_owner",
+      "domain": "simulation",
+      "execution_kind": "deterministic",
+      "implementation_ref": "planned:SnowMobilitySystem",
+      "availability": "planned",
+      "description": "Apply variant-aware traction, speed, fatigue and logistics effects without changing historical identities.",
+      "proposed_listeners": []
+    },
+    {
+      "deliver_id": "simulation.snow_visibility",
+      "owner": "combat_simulation_owner",
+      "domain": "simulation",
+      "execution_kind": "deterministic",
+      "implementation_ref": "planned:SnowVisibilitySystem",
+      "availability": "planned",
+      "description": "Apply bounded perception, spotting and engagement modifiers derived from active snow conditions.",
+      "proposed_listeners": []
+    },
+    {
+      "deliver_id": "presentation.snow_visual_audio",
+      "owner": "presentation_owner",
+      "domain": "presentation",
+      "execution_kind": "asset_pipeline",
+      "implementation_ref": "planned:SnowPresentationDeliver",
+      "availability": "planned",
+      "description": "Produce VR-ready snow visuals and audio from simulation state without making presentation authoritative.",
+      "proposed_listeners": []
+    }
+  ]
+}

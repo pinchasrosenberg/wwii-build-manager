@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>תצוגת רכיבי המשחק</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #051425; color: #f0f6ff; }
+    .shell { display: grid; grid-template-columns: minmax(0, 1fr) 300px; min-height: 660px; background: #07192b; }
+    .stage { position: relative; min-height: 660px; overflow: hidden; background: radial-gradient(circle at 55% 45%, #17354d, #051321 75%); }
+    #viewport { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; }
+    #viewport:active { cursor: grabbing; }
+    .stage-head { position: absolute; z-index: 2; top: 20px; right: 22px; pointer-events: none; }
+    .eyebrow { color: #ffd338; font-size: 12px; font-weight: 800; letter-spacing: .07em; }
+    h1 { margin: 5px 0 0; font-size: clamp(23px, 3vw, 37px); line-height: 1.15; }
+    .stage-foot { position: absolute; z-index: 2; bottom: 17px; right: 22px; left: 22px; display: flex; justify-content: space-between; gap: 12px; color: #b8d0e6; font-size: 12px; pointer-events: none; }
+    .hint { border: 1px solid #5b7890; border-radius: 99px; padding: 6px 10px; background: #061b30bf; }
+    aside { padding: 22px 20px; border-right: 1px solid #32618c; background: linear-gradient(150deg, #102d4d, #081b31); }
+    .badge { display: inline-flex; padding: 5px 9px; border: 1px solid #eec83f; color: #ffd338; border-radius: 99px; font-size: 11px; font-weight: 800; }
+    h2 { font-size: 21px; margin: 22px 0 9px; }
+    p { color: #b7cbe0; font-size: 13px; line-height: 1.65; margin: 0 0 14px; }
+    .divider { border-top: 1px solid #31597c; margin: 19px 0; }
+    label { display: block; color: #d7e6f5; font-size: 12px; font-weight: 700; margin: 15px 0 7px; }
+    input[type=range] { width: 100%; accent-color: #ffd338; }
+    button { width: 100%; padding: 11px 13px; border: 1px solid #527da4; border-radius: 10px; background: #0b2745; color: #f0f6ff; font: inherit; font-weight: 750; cursor: pointer; text-align: right; }
+    button:hover { border-color: #ffd338; background: #12365a; }
+    button + button { margin-top: 9px; }
+    .facts { display: grid; gap: 9px; margin-top: 20px; }
+    .facts div { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px solid #294b6d; padding-bottom: 8px; color: #9db7d0; font-size: 12px; }
+    .facts b { color: #f5f9ff; font-weight: 750; }
+    #status { color: #ffd338; }
+    [hidden] { display: none !important; }
+    .error { display: none; position: absolute; z-index: 4; inset: 25% 10%; padding: 20px; border: 1px solid #d27878; border-radius: 12px; background: #311824; }
+    @media (max-width: 850px) { .shell { grid-template-columns: 1fr; } .stage { min-height: 460px; } aside { border-right: 0; border-top: 1px solid #32618c; } }
+  </style>
+  <script type="importmap">{"imports":{"three":"/game-static/three.module.js","three/addons/":"/game-static/addons/"}}</script>
+</head>
+<body>
+  <div class="shell">
+    <section class="stage" aria-label="צופה תלת־ממד ברכיב המשחק">
+      <canvas id="viewport"></canvas>
+      <div class="stage-head"><div class="eyebrow">רכיב משחק בתלת־ממד</div><h1 id="title">טנק — מבנה ראשוני</h1></div>
+      <div class="stage-foot"><span class="hint">גררו לסיבוב · גללו להגדלה</span><span class="hint" id="frame-rate">תצוגה חיה</span></div>
+      <div class="error" id="error" role="alert"></div>
+    </section>
+    <aside>
+      <span class="badge">תצוגת רכיב בפיתוח</span>
+      <h2>רואים את מה שנבנה</h2>
+      <p id="description">גוף, זחלים, צריח ותותח כתצוגת תלת־ממד בסיסית. אפשר לסובב, להגדיל ולבדוק את החלקים.</p>
+      <div class="divider"></div>
+      <div id="basic-controls">
+        <label for="turret">כיוון הצריח</label><input id="turret" type="range" min="-150" max="150" value="0">
+        <button id="reset">אפס זווית ומצלמה</button>
+        <button id="explode">הצג חלקים בנפרד</button>
+      </div>
+      <div class="facts">
+        <div><span>רכיבי Lego</span><b id="parts">גוף · זחלים · צריח · תותח</b></div>
+        <div><span>מקור התצוגה</span><b id="source">מודל בסיסי מובנה</b></div>
+        <div><span>דגם היסטורי</span><b>טרם נקבע</b></div>
+        <div><span>מצב</span><b id="status">טוען תצוגה</b></div>
+      </div>
+      <p style="margin-top:18px">התצוגה היא רכיב משחק חזותי ראשון. המידות והצבע עדיין אינם אישור לדגם טנק היסטורי מסוים.</p>
+    </aside>
+  </div>
+  <script type="module" src="/game-static/main.js"></script>
+</body>
+</html>
