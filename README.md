@@ -184,7 +184,7 @@ docs/REFERENCE.he.md full operator reference (Hebrew)
 
 * [**wwii-atlas**](https://github.com/pinchasrosenberg/wwii-atlas) is the interactive WWII atlas, together with its
   public knowledge graph and read-only API.
-* [**roman-atlas**](https://github.com/pinchasrosenberg/roman-atlas) is a temporal atlas of the Roman Empire.
+* [**roman-atlas-route**](https://github.com/pinchasrosenberg/roman-atlas-route) is a temporal atlas of the Roman Empire.
 
 ## License
 
