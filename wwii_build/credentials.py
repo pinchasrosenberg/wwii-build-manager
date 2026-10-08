@@ -16,6 +16,7 @@ KEYCHAIN_SERVICE = "typesafe-delivers"
 KEYCHAIN_ACCOUNT = pwd.getpwuid(os.getuid()).pw_name
 LEGACY_KEYCHAIN_ENTRIES = (("wwii-build.typesafe.api-key", "typesafe-api"),)
 ERR_ITEM_NOT_FOUND = -25300
+ERR_INTERACTION_NOT_ALLOWED = -25308   # locked keychain in a headless session (CI, SSH)
 
 
 class CredentialError(RuntimeError):
@@ -69,11 +70,19 @@ class TypeSafeCredentialStore:
         if platform.system() != "Darwin":
             return None
         security, core = self._frameworks()
-        for service, account in ((KEYCHAIN_SERVICE, KEYCHAIN_ACCOUNT), *LEGACY_KEYCHAIN_ENTRIES):
-            value = self._keychain_get_entry(security, core, service, account)
-            if value:
-                return value
-        return None
+        # Never let a read raise an unlock dialog: without a screen (CI, SSH, launchd) nobody can answer it and
+        # the lookup blocks forever. A locked keychain simply reads as "no stored credential".
+        previous = ctypes.c_ubyte(1)
+        security.SecKeychainGetUserInteractionAllowed(ctypes.byref(previous))
+        security.SecKeychainSetUserInteractionAllowed(0)
+        try:
+            for service, account in ((KEYCHAIN_SERVICE, KEYCHAIN_ACCOUNT), *LEGACY_KEYCHAIN_ENTRIES):
+                value = self._keychain_get_entry(security, core, service, account)
+                if value:
+                    return value
+            return None
+        finally:
+            security.SecKeychainSetUserInteractionAllowed(previous.value)
 
     @staticmethod
     def _keychain_get_entry(security, core, service_name: str, account_name: str) -> str | None:
@@ -86,7 +95,7 @@ class TypeSafeCredentialStore:
         status = security.SecKeychainFindGenericPassword(
             None, len(service), service, len(account), account,
             ctypes.byref(length), ctypes.byref(data), ctypes.byref(item))
-        if status == ERR_ITEM_NOT_FOUND:
+        if status in (ERR_ITEM_NOT_FOUND, ERR_INTERACTION_NOT_ALLOWED):
             return None
         if status != 0:
             raise CredentialError(f"macOS Keychain lookup failed ({status})")
@@ -120,5 +129,9 @@ class TypeSafeCredentialStore:
             ctypes.c_void_p, ctypes.c_void_p, ctypes.c_uint32, ctypes.c_void_p]
         security.SecKeychainItemFreeContent.restype = ctypes.c_int32
         security.SecKeychainItemFreeContent.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+        security.SecKeychainSetUserInteractionAllowed.restype = ctypes.c_int32
+        security.SecKeychainSetUserInteractionAllowed.argtypes = [ctypes.c_ubyte]
+        security.SecKeychainGetUserInteractionAllowed.restype = ctypes.c_int32
+        security.SecKeychainGetUserInteractionAllowed.argtypes = [ctypes.POINTER(ctypes.c_ubyte)]
         core.CFRelease.argtypes = [ctypes.c_void_p]
         return security, core

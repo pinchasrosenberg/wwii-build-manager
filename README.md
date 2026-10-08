@@ -6,7 +6,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/runtime%20deps-stdlib%20only-success)
-![Tests](https://img.shields.io/badge/tests-342%20passing-success)
+[![CI](https://github.com/pinchasrosenberg/wwii-build-manager/actions/workflows/ci.yml/badge.svg)](https://github.com/pinchasrosenberg/wwii-build-manager/actions/workflows/ci.yml)
 ![Storage](https://img.shields.io/badge/state-SQLite-003B57?logo=sqlite&logoColor=white)
 ![MCP](https://img.shields.io/badge/MCP-38%20tools-8A2BE2)
 ![License](https://img.shields.io/badge/license-MIT-blue)
@@ -147,7 +147,7 @@ Graph context then flows into prompts **only** after the selector picks it, and 
   or a killed daemon resumes correctly.
 * **Secrets never touch disk.** Logs and events go through `sanitize.redact`. A key typed into the dashboard is stored
   only in the macOS Keychain and handed to the SDK in memory.
-* **Tests:** 342 Python tests (`unittest`) and JS tests for the SPA run against a fake CLI (`fakes/fake_cli.py`).
+* **Tests:** 347 Python tests (`unittest`) and JS tests for the SPA run against a fake CLI (`fakes/fake_cli.py`).
   They cover routing and fallback, quota parsing, context isolation, env scrubbing, crash recovery (the daemon is
   SIGKILLed mid-run), the WebSocket protocol and every dashboard page.
 

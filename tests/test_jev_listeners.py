@@ -127,11 +127,36 @@ class JevListenerTests(TmpTestCase):
 
     def test_keychain_read_prefers_stable_entry_then_legacy(self):
         store = TypeSafeCredentialStore(env={})
-        with mock.patch.object(store, "_frameworks", return_value=(object(), object())), \
+        with mock.patch.object(store, "_frameworks", return_value=(mock.Mock(), object())), \
+             mock.patch("wwii_build.credentials.platform.system", return_value="Darwin"), \
              mock.patch.object(store, "_keychain_get_entry", side_effect=[None, "legacy-secret"]) as lookup:
             self.assertEqual(store.get(), "legacy-secret")
         self.assertEqual(lookup.call_args_list[0].args[2:], (KEYCHAIN_SERVICE, KEYCHAIN_ACCOUNT))
         self.assertEqual(lookup.call_args_list[1].args[2:], LEGACY_KEYCHAIN_ENTRIES[0])
+
+    def test_keychain_lookup_never_prompts_and_restores_interaction(self):
+        """A locked keychain without a screen (CI, SSH) must read as missing, not block on an unlock dialog."""
+        store = TypeSafeCredentialStore(env={})
+        security = mock.Mock()
+        seen = []
+
+        def lookup(sec, core, service, account):
+            seen.append(sec.SecKeychainSetUserInteractionAllowed.call_args.args[0])
+            return None
+
+        with mock.patch.object(store, "_frameworks", return_value=(security, object())), \
+             mock.patch("wwii_build.credentials.platform.system", return_value="Darwin"), \
+             mock.patch.object(store, "_keychain_get_entry", side_effect=lookup):
+            self.assertIsNone(store.get())
+        self.assertTrue(seen and all(v == 0 for v in seen))            # interaction off during every lookup
+        last = security.SecKeychainSetUserInteractionAllowed.call_args.args[0]
+        self.assertEqual(security.SecKeychainSetUserInteractionAllowed.call_count, 2)   # off, then restored
+
+    def test_locked_keychain_reads_as_missing(self):
+        from wwii_build.credentials import ERR_INTERACTION_NOT_ALLOWED
+        security = mock.Mock()
+        security.SecKeychainFindGenericPassword.return_value = ERR_INTERACTION_NOT_ALLOWED
+        self.assertIsNone(TypeSafeCredentialStore._keychain_get_entry(security, mock.Mock(), "svc", "acct"))
 
     def test_rejected_dashboard_key_does_not_replace_saved_credential(self):
         dash = Dashboard(self.cfg())

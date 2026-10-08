@@ -5,9 +5,17 @@ on:
   pull_request:
 permissions:
   contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   test:
-    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -17,4 +25,20 @@ jobs:
         with:
           node-version: 24
       - name: Tests (Python + dashboard JS; fake CLIs, no network, no LLM)
-        run: python -m unittest discover -s tests -p 'test_*.py'
+        shell: bash
+        run: |
+          set -o pipefail
+          git config --global user.name ci && git config --global user.email ci@example.com
+          python -X faulthandler -u tests/run_ci.py 1200 2>&1 | tee test.log
+      - name: Test summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "### ${{ matrix.os }}"
+            echo '```'
+            grep -E "^(Ran |OK|FAILED|ERROR:|FAIL:)" test.log || true
+            echo '--- last lines ---'
+            tail -n 60 test.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
