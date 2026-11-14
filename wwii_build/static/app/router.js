@@ -14,6 +14,7 @@ export const PAGES = {
   new: () => import('./pages/new.js'),
   battle: () => import('./pages/battle.js'),
   subtasks: () => import('./pages/subtasks.js'),
+  fantasy: () => import('./pages/fantasy.js'),
 };
 
 /** [route, label, pages that keep this entry highlighted]. */
@@ -27,6 +28,7 @@ export const NAV = [
   ['battle', 'בקשת קרב', []],
   ['plan', 'פרומפט למשימות', []],
   ['events', 'יומן אירועים', []],
+  ['fantasy', 'Fantasy World Builder', []],
 ];
 
 export function parseHash(hash) {

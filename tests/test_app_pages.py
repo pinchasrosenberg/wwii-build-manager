@@ -369,11 +369,11 @@ class ClientSources(unittest.TestCase):
     def test_router_pages_exist_and_nav_points_at_pages(self):
         router = (APP_DIR / "router.js").read_text(encoding="utf-8")
         pages = dict(re.findall(r"(\w+): \(\) => import\('\./pages/(\w+)\.js'\)", router))
-        self.assertEqual(set(pages), {"overview", "tasks", "delivers", "deliver", "task", "events", "rag", "plan", "new", "battle", "subtasks"})
+        self.assertEqual(set(pages), {"overview", "tasks", "delivers", "deliver", "task", "events", "rag", "plan", "new", "battle", "subtasks", "fantasy"})
         for route, module in pages.items():
             self.assertTrue((APP_DIR / "pages" / f"{module}.js").is_file(), route)
         nav = re.findall(r"^\s*\['(\w+)', '[^']+', \[[^\]]*\]\],?$", router, flags=re.M)
-        self.assertEqual(nav, ["overview", "tasks", "delivers", "subtasks", "rag", "new", "battle", "plan", "events"])
+        self.assertEqual(nav, ["overview", "tasks", "delivers", "subtasks", "rag", "new", "battle", "plan", "events", "fantasy"])
         self.assertTrue(set(nav) <= set(pages))
 
     def test_only_the_pages_without_an_app_version_link_to_classic(self):

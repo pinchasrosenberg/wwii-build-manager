@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="fantasy-token" content="__FANTASY_TOKEN__">
+<title>Fantasy World Builder</title>
+<script type="importmap">{"imports":{"three":"/three/three.module.js","three/addons/":"/three/addons/"}}</script>
+<style>
+  :root { color-scheme: dark; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; --navy: #0b2745; --navy2: #12365a; --gold: #ffd338; --line: #32618c; --ink: #f0f6ff; --muted: #b7cbe0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #051425; color: var(--ink); overflow: hidden; }
+  #view { position: fixed; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; outline: none; }
+  #view:active { cursor: grabbing; }
+  .hud { position: fixed; z-index: 3; pointer-events: none; }
+  #loc { top: 14px; right: 18px; background: #061b30cc; border: 1px solid var(--line); border-radius: 12px; padding: 8px 14px; font-weight: 700; }
+  #loc small { display: block; color: var(--muted); font-weight: 500; margin-top: 2px; }
+  #hint { bottom: 14px; right: 18px; left: 18px; text-align: center; color: var(--muted); font-size: 12px; }
+  #hint span { background: #061b30bf; border: 1px solid #5b7890; border-radius: 99px; padding: 6px 12px; }
+  #cross { top: 50%; left: 50%; width: 6px; height: 6px; margin: -3px; border-radius: 50%; background: #ffffffaa; }
+  button { font: inherit; font-weight: 700; padding: 9px 14px; border-radius: 10px; border: 1px solid #527da4; background: var(--navy); color: var(--ink); cursor: pointer; }
+  button:hover:not(:disabled) { border-color: var(--gold); background: var(--navy2); }
+  button:disabled { opacity: .5; cursor: wait; }
+  button.primary { background: #1c5aa0; border-color: var(--gold); }
+  #design-open { position: fixed; z-index: 4; top: 14px; left: 18px; display: none; }
+  .overlay { position: fixed; inset: 0; z-index: 10; display: none; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 40%, #17354dee, #051321f2 78%); }
+  .overlay.on { display: flex; }
+  .card { width: min(720px, 94vw); max-height: 92vh; overflow: auto; background: linear-gradient(150deg, #102d4d, #081b31); border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px; }
+  h1 { margin: 0 0 4px; font-size: 26px; } h2 { font-size: 17px; margin: 18px 0 8px; }
+  p { color: var(--muted); line-height: 1.6; margin: 6px 0; font-size: 14px; }
+  label { display: block; font-size: 13px; font-weight: 700; margin: 12px 0 6px; }
+  textarea, input[type=text] { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #527da4; background: #061b30; color: var(--ink); font: inherit; }
+  textarea { min-height: 96px; resize: vertical; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+  .world { display: flex; justify-content: space-between; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; margin-top: 8px; }
+  .world b { display: block; } .world span { color: var(--muted); font-size: 12px; }
+  #status { color: var(--gold); font-size: 13px; margin-top: 10px; min-height: 18px; }
+  #designer { position: fixed; z-index: 8; top: 0; left: 0; bottom: 0; width: min(440px, 96vw); background: linear-gradient(160deg, #102d4df5, #081b31f7); border-right: 1px solid var(--line); padding: 18px 18px 26px; overflow: auto; display: none; }
+  #designer.on { display: block; }
+  #objpanel { position: fixed; z-index: 8; top: 0; left: 0; bottom: 0; width: min(420px, 96vw); background: linear-gradient(160deg, #102d4df5, #081b31f7); border-right: 1px solid var(--line); padding: 18px; overflow: auto; display: none; }
+  #objpanel.on { display: block; }
+  .sidepanel { position: fixed; z-index: 8; top: 0; left: 0; bottom: 0; width: min(440px, 96vw); background: linear-gradient(160deg, #102d4df5, #081b31f7); border-right: 1px solid var(--line); padding: 18px; overflow: auto; display: none; }
+  .sidepanel.on { display: block; }
+  .sidepanel .hist button { margin-inline-start: 6px; }
+  #objpanel ul { padding-inline-start: 18px; line-height: 1.7; }
+  .previews { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .previews figure { margin: 0; } .previews canvas { width: 100%; border-radius: 8px; border: 1px solid var(--line); background: #000; display: block; }
+  .previews figcaption { font-size: 12px; color: var(--muted); text-align: center; margin-top: 3px; }
+  .comp { display: flex; gap: 8px; align-items: flex-start; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; margin-top: 6px; font-size: 14px; }
+  .comp input { margin-top: 3px; accent-color: var(--gold); }
+  .comp small { color: var(--muted); display: block; }
+  .scopes label { font-weight: 500; margin: 6px 0; display: flex; gap: 8px; align-items: center; }
+  .hist { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--muted); border-bottom: 1px solid #234a70; padding: 5px 0; }
+  .hist button { padding: 3px 9px; font-size: 12px; }
+  .note { color: var(--muted); font-size: 12px; }
+  select { width: 100%; padding: 9px 12px; border-radius: 10px; border: 1px solid #527da4; background: #061b30; color: var(--ink); font: inherit; }
+  .swatch { display: inline-block; width: 22px; height: 22px; border-radius: 6px; margin-inline-end: 4px; border: 1px solid #ffffff55; }
+  .thumb { max-width: 100%; max-height: 180px; border-radius: 10px; border: 1px solid var(--line); margin-top: 8px; display: none; }
+  #map-open { position: fixed; z-index: 4; top: 62px; left: 18px; }
+  #projmap { position: fixed; inset: 0; z-index: 9; display: none; grid-template-columns: minmax(0, 1fr) 400px; background: #081b31; }
+  #projmap.on { display: grid; }
+  #pm-canvas { width: 100%; height: 100vh; display: block; cursor: grab; background: #efe6cf; }
+  #pm-side { overflow: auto; padding: 18px; border-right: 1px solid var(--line); background: linear-gradient(160deg, #102d4d, #081b31); }
+  #pm-side ul { margin: 6px 0; padding-inline-start: 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+  .maps2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .maps2 canvas { width: 100%; height: 190px; border-radius: 8px; border: 1px solid var(--line); background: #efe6cf; }
+  .maps2 figure { margin: 0; } .maps2 figcaption { font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<canvas id="view" tabindex="0"></canvas>
+<div class="hud" id="loc"><span id="loc-main"></span><small id="loc-sub"></small></div>
+<div class="hud" id="cross"></div>
+<div class="hud" id="interact" style="display:none;top:58%;left:50%;transform:translateX(-50%);background:#061b30dd;border:1px solid var(--gold);border-radius:10px;padding:6px 14px;font-weight:700"></div>
+<div class="hud" id="hint"><span>חצים / WASD לתנועה · גרירת עכבר להסתכלות · Shift לריצה · לחיצה על אובייקט — פירוט ותוספות ב־Blender · E כניסה · X יציאה · T עיצוב חדר · L ספרייה · M מפה</span></div>
+<button id="design-open">עיצוב החדר (T)</button>
+<button id="map-open">מפת הפרויקט (M)</button>
+<button id="exit-btn" style="display:none;position:fixed;z-index:4;top:158px;left:18px">יציאה החוצה (X)</button>
+<div id="projmap">
+  <canvas id="pm-canvas"></canvas>
+  <div id="pm-side">
+    <div class="row" style="justify-content:space-between;margin-top:0"><h1 id="pm-title" style="font-size:20px">מפת הפרויקט</h1><button id="pm-close">סגור (M)</button></div>
+    <p class="note">גלגלת לזום, גרירה להזזה, לחיצה כפולה כדי לעבור לשם בעולם.</p>
+    <div id="pm-stats" class="note"></div>
+    <h2>התוכנית</h2>
+    <ul id="pm-summary"></ul>
+    <h2>מקורות המפה</h2>
+    <ul id="pm-sources"></ul>
+    <h2>לשנות את העולם בפרומפט</h2>
+    <textarea id="pm-text" placeholder="למשל: הזז את הארמון לגבעת האוונטינוס, הוסף נהר שזורם ממזרח למערב בצפון העיר, ורובע של בתי עץ במערב"></textarea>
+    <label for="pm-image" style="font-weight:500">תמונת השראה (לא חובה)</label>
+    <input type="file" id="pm-image" accept="image/*">
+    <img id="pm-image-preview" class="thumb" alt="">
+    <label style="font-weight:500"><input type="checkbox" id="pm-llm" checked> לתכנן עם המודל המקומי</label>
+    <div class="row"><button class="primary" id="pm-propose">הצג הצעה</button></div>
+    <div id="pm-status" class="note"></div>
+    <div id="pm-proposal" style="display:none">
+      <div class="maps2"><figure><canvas id="pm-before"></canvas><figcaption>עכשיו</figcaption></figure><figure><canvas id="pm-after"></canvas><figcaption>אחרי השינוי</figcaption></figure></div>
+      <h2>מה ישתנה</h2>
+      <ul id="pm-changes"></ul>
+      <div class="row"><button class="primary" id="pm-apply">אשר ובנה</button><button id="pm-reject">דחה</button></div>
+    </div>
+    <h2>גרסאות העולם</h2>
+    <div id="pm-versions"></div>
+  </div>
+</div>
+
+<div class="overlay on" id="start">
+  <div class="card">
+    <h1>Fantasy World Builder</h1>
+    <p>מתארים עולם פנטזיה, והמערכת בונה אותו בתלת־ממד: נוף, אקלים, עיר, ארמון וחדרים שאפשר לעצב ולשמור.</p>
+    <div id="worlds"></div>
+    <h2>עולם חדש</h2>
+    <label for="wname">שם העולם</label>
+    <input type="text" id="wname" value="העולם שלי">
+    <label for="wdesc">תיאור הפנטזיה</label>
+    <textarea id="wdesc">עיר צפופה בין הרים גבוהים וחדים, עם בתים מאבן עם גגות מחודדים וחלונות קמורים, שבילים מפותלים, מדרגות וגשרים בין המבנים. שלג על הגגות, אווירה קסומה.</textarea>
+    <label for="wbase">מפת הפרויקט (הבסיס שעליו העיר נבנית)</label>
+    <select id="wbase"><option value="">אוטומטי — לפי התיאור</option><option value="rome_315">רומא בתפארתה, 315 לספירה — עיר חיה עם אנשים, שווקים, עגלות וסירות</option><option value="rome_476">רומא ההיסטורית, 476 לספירה (הטיבר, שבע הגבעות והמונומנטים במקומם האמיתי)</option></select>
+    <label for="wimage">תמונת השראה (לא חובה) — המודל יקרא ממנה סגנון, צבעים, מבנים ואווירה</label>
+    <input type="file" id="wimage" accept="image/*">
+    <img id="wimage-preview" class="thumb" alt="">
+    <div id="wpalette" style="margin-top:6px"></div>
+    <label style="font-weight:500"><input type="checkbox" id="wllm" checked> לתכנן עם מודל מקומי (Qwen3-VL לתמונה ולטקסט; Ollama כגיבוי)</label>
+    <p class="note"><span id="models-status"></span> <button id="models-start" style="display:none;padding:3px 10px">הפעל מודל ראייה</button></p>
+    <div class="row"><button class="primary" id="create">בנה את העולם</button></div>
+    <div id="status"></div>
+  </div>
+</div>
+
+<button id="lib-open" style="position:fixed;z-index:4;top:110px;left:18px">ספרייה (L)</button>
+<button id="clock-open" style="position:fixed;z-index:4;top:206px;left:18px;display:none">תאריך ושעה</button>
+<div id="clock-panel" class="sidepanel">
+  <div class="row" style="justify-content:space-between;margin-top:0"><h1 style="font-size:20px">תאריך ושעה</h1><button id="clock-close">סגור</button></div>
+  <p id="clock-year" class="note"></p>
+  <div class="row"><label>יום <input id="clock-day" type="number" min="1" max="31" style="width:70px"></label><label>חודש <select id="clock-month"></select></label></div>
+  <div class="row"><label>שעה <input id="clock-time" type="time" step="60"></label></div>
+  <div class="row"><button class="primary" id="clock-apply">החל</button></div>
+  <p id="clock-status" class="note"></p>
+</div>
+<div id="library" class="sidepanel">
+  <div class="row" style="justify-content:space-between;margin-top:0"><h1 style="font-size:20px">ספריית האובייקטים</h1><button id="lib-close">סגור</button></div>
+  <p class="note">כל אובייקט שנבנה וכל אבן דרך נשמרים כאן אוטומטית לשימוש חוזר.</p>
+  <p id="lib-target" class="note"></p>
+  <div id="lib-status" class="note"></div>
+  <div id="lib-list"></div>
+</div>
+<div id="objpanel">
+  <h1>פירוט לפי בקשה</h1>
+  <p id="o-target" class="note"></p>
+  <label for="o-text">מה לשנות או לפרט?</label>
+  <textarea id="o-text" placeholder="מה להוסיף או לפרט? למשל: בנה את הקולוסיאום בפירוט כפי שהיה ב־476 · הוסף לבית הזה מגדל פעמונים וגינה על הגג · איך נראה עץ האורן הזה באמת?"></textarea>
+  <label style="font-weight:500"><input type="checkbox" id="o-llm" checked> לבדוק עם המודל המקומי</label>
+  <div class="row"><button class="primary" id="o-propose">הצג הצעה</button><button id="o-library">מהספרייה</button><button id="o-close">סגור</button></div>
+  <div id="o-status" class="note"></div>
+  <div id="o-proposal" style="display:none">
+    <h2>מה ידוע</h2>
+    <p id="o-notes"></p>
+    <h2>הפרטים שייבנו</h2>
+    <ul id="o-params" class="note"></ul>
+    <div class="row"><button class="primary" id="o-apply">אשר ובנה</button><button id="o-reject">דחה</button></div>
+  </div>
+</div>
+<div id="designer">
+  <h1 id="d-title">עיצוב החדר</h1>
+  <p id="d-room"></p>
+  <label for="d-text">מה לשנות בחדר?</label>
+  <textarea id="d-text" placeholder="למשל: חדר מלכותי עם חלונות גדולים קמורים, רצפת שיש, שתי נברשות ושולחן עץ ארוך עם שמונה כיסאות"></textarea>
+  <label style="font-weight:500"><input type="checkbox" id="d-llm" checked> לפרש גם עם מודל מקומי</label>
+  <div class="row"><button class="primary" id="d-propose">הצג הצעה</button><button id="d-close">סגור</button></div>
+  <div id="d-status" class="note"></div>
+  <div id="d-proposal" style="display:none">
+    <div class="previews"><figure><canvas id="pv-before" width="400" height="250"></canvas><figcaption>עכשיו</figcaption></figure><figure><canvas id="pv-after" width="400" height="250"></canvas><figcaption>ההצעה</figcaption></figure></div>
+    <p class="note">התצוגה היא רינדור תלת־ממדי של השינוי המוצע על החדר עצמו — לא תמונת AI.</p>
+    <h2>רכיבים בהצעה</h2>
+    <div id="d-comps"></div>
+    <h2>איפה להחיל?</h2>
+    <div class="scopes">
+      <label><input type="checkbox" id="sc-room" checked disabled> בחדר הזה</label>
+      <label><input type="checkbox" id="sc-building"> בכל חדרי הארמון (קירות, רצפה, חלונות, תקרה, תאורה)</label>
+      <label><input type="checkbox" id="sc-houses"> חלונות בכל בתי העיר</label>
+      <label><input type="checkbox" id="sc-library"> לשמור את הרכיבים בספרייה לשימוש חוזר</label>
+    </div>
+    <div class="row"><button class="primary" id="d-apply">אשר ובנה</button><button id="d-reject">דחה</button></div>
+  </div>
+  <h2>היסטוריית החדר</h2>
+  <div id="d-history"></div>
+  <h2>ספריית נכסים</h2>
+  <div id="d-library" class="note"></div>
+</div>
+<script type="module" src="/static/app.js"></script>
+</body>
+</html>
